@@ -1,38 +1,29 @@
-# 🌤️ Automated Weather Analysis & Email Reporting Process
+# 🚀 Nurul's Data Science & Analytics Portfolio
 
-An end-to-end Python data science and engineering project that automates data ingestion, exploratory data analysis (EDA), statistical distribution profiling, time-series trend calculation, and scheduled email report generation.
+Hey there! 👋 Welcome to my personal data science portfolio. I'm **Nurul Dalia**, a Data Analyst and Digital Operations professional[cite: 3] who loves bridging the gap between raw, messy data and practical, automated solutions. 
 
----
-
-## 🚀 Project Overview
-The goal of this project is to bridge raw time-series data and actionable insights without manual intervention. It simulates a complete automated workflow:
-1. **Data Ingestion & Cleaning:** Processes local weather records, handling missing values and date-time indexing.
-2. **Exploratory Data Analysis (EDA):** Computes descriptive statistics (mean, median, standard deviation, and skewness) to understand temperature distributions and volatility.
-3. **Time-Series Analysis:** Calculates 7-day and 30-day moving averages to smooth out daily noise and reveal seasonal trends.
-4. **Automated Reporting:** Generates a high-resolution trend chart using Matplotlib and automatically emails a statistical summary report with the chart attached using Python's `smtplib`.
+Beyond crunching numbers for multi-market B2B retailers[cite: 3], I built this repository to explore heavy theoretical concepts—like statistical distributions, multivariate analysis, machine learning, and time-series forecasting—by turning them into real, working Python code. When I'm not writing pipelines or analyzing datasets, you'll usually find me reading non-fiction books, exploring scholar articles, or listening to podcasts.
 
 ---
 
-## 🛠️ Tech Stack & Libraries
-* **Programming Language:** Python
-* **Data Manipulation & Analysis:** Pandas, NumPy
-* **Data Visualization:** Matplotlib, Seaborn
-* **Automation & Networking:** `smtplib`, `email.mime`
-* **Environment:** Jupyter Notebook / Anaconda
+## 📂 Featured Projects
+
+| Project Folder | Core Focus & Tech Stack | Description |
+| :--- | :--- | :--- |
+| **[01_weather_pipeline](./01_weather_pipeline)** | Python, Pandas, Matplotlib, Smtplib | **Weather & Time-Series Pipeline:** Ingests local weather data, computes 7/30-day moving averages, and automatically emails scheduled trend reports with generated charts. |
+| **[02_machine_learning](./02_machine_learning)** | Scikit-Learn, Pandas, Seaborn | **Predictive & Unsupervised ML:** Implements Supervised Linear Regression ($R^2$ evaluation) and Unsupervised K-Means Clustering for behavioral customer segmentation. |
 
 ---
 
-## 📊 Key Visualizations & Insights
-
-### Time-Series Moving Averages
-<img width="1298" height="542" alt="image" src="https://github.com/user-attachments/assets/14281abd-a545-4829-9f07-07604d02639e" />
-
-* **Observation:** The 7-day moving average captures short-term fluctuations, while the 30-day moving average highlights broader seasonal shifts in local weather patterns.
+## 🛠️ Global Tech Stack
+* **Languages:** Python, SQL
+* **Data & Analytics:** Pandas, NumPy, Advanced Excel (Power Query)[cite: 3]
+* **Machine Learning & Stats:** Scikit-Learn, Seaborn, Matplotlib, Statistical Profiling
+* **Automation & Tools:** Git/GitHub, Smtplib (Email automation), Jupyter Notebooks
 
 ---
 
-## ⚙️ How to Run This Project
+## 📫 Let's Connect
+* **LinkedIn:** www.linkedin.com/in/nurul-dalia-zulkifli[cite: 3]
+* **Email:** nurulzkf@gmail.com[cite: 3]
 
-1. **Clone the repository:**
-   ```bash
-   git clone [https://github.com/nrldalia/weather-analysis-automate.git](https://github.com/your-username/your-repo-name.git)
