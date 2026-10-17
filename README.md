@@ -25,7 +25,8 @@ The goal of this project is to bridge raw time-series data and actionable insigh
 ## 📊 Key Visualizations & Insights
 
 ### Time-Series Moving Averages
-*(Insert a screenshot of your generated weather trend chart here!)*
+<img width="1298" height="542" alt="image" src="https://github.com/user-attachments/assets/14281abd-a545-4829-9f07-07604d02639e" />
+
 * **Observation:** The 7-day moving average captures short-term fluctuations, while the 30-day moving average highlights broader seasonal shifts in local weather patterns.
 
 ---
@@ -34,4 +35,4 @@ The goal of this project is to bridge raw time-series data and actionable insigh
 
 1. **Clone the repository:**
    ```bash
-   git clone [https://github.com/your-username/your-repo-name.git](https://github.com/your-username/your-repo-name.git)
+   git clone [https://github.com/nrldalia/weather-analysis-automate.git](https://github.com/your-username/your-repo-name.git)
