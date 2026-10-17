@@ -1,8 +1,8 @@
 # 🚀 Nurul's Data Science & Analytics Portfolio
 
-Hey there! 👋 Welcome to my personal data science portfolio. I'm **Nurul Dalia**, a Data Analyst and Digital Operations professional[cite: 3] who loves bridging the gap between raw, messy data and practical, automated solutions. 
+Hey there! 👋 Welcome to my personal data science portfolio. I'm **Nurul Dalia**, a Data Analyst and Digital Operations professional who loves bridging the gap between raw, messy data and practical, automated solutions. 
 
-Beyond crunching numbers for multi-market B2B retailers[cite: 3], I built this repository to explore heavy theoretical concepts—like statistical distributions, multivariate analysis, machine learning, and time-series forecasting—by turning them into real, working Python code. When I'm not writing pipelines or analyzing datasets, you'll usually find me reading non-fiction books, exploring scholar articles, or listening to podcasts.
+Beyond crunching numbers for multi-market B2B retailers, I built this repository to explore heavy theoretical concepts—like statistical distributions, multivariate analysis, machine learning, and time-series forecasting—by turning them into real, working Python code. When I'm not writing pipelines or analyzing datasets, you'll usually find me reading non-fiction books, exploring scholar articles, or listening to podcasts.
 
 ---
 
@@ -17,13 +17,13 @@ Beyond crunching numbers for multi-market B2B retailers[cite: 3], I built this r
 
 ## 🛠️ Global Tech Stack
 * **Languages:** Python, SQL
-* **Data & Analytics:** Pandas, NumPy, Advanced Excel (Power Query)[cite: 3]
+* **Data & Analytics:** Pandas, NumPy, Advanced Excel (Power Query)
 * **Machine Learning & Stats:** Scikit-Learn, Seaborn, Matplotlib, Statistical Profiling
 * **Automation & Tools:** Git/GitHub, Smtplib (Email automation), Jupyter Notebooks
 
 ---
 
 ## 📫 Let's Connect
-* **LinkedIn:** www.linkedin.com/in/nurul-dalia-zulkifli[cite: 3]
-* **Email:** nurulzkf@gmail.com[cite: 3]
+* **LinkedIn:** www.linkedin.com/in/nurul-dalia-zulkifli
+* **Email:** nurulzkf@gmail.com
 
