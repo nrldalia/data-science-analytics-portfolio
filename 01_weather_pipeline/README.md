@@ -6,6 +6,5 @@ Instead of just calculating mean, variance, and skewness on paper, this script p
 smooths out daily volatility using 7-day and 30-day moving averages, and packages the results into an automated email report.
 
 ## What's Inside
-* `weather_analysis.ipynb`: Handles data cleaning, statistical distribution profiling, and trend visualization.
-* `automated_email_report.py`: Programmatically generates chart images and sends secure email updates using Python's `smtplib`.
+* `weather_analysis.ipynb`: Handles data ingestion, cleaning, statistical distribution profiling, moving averages, chart generation, and the email automation script.
 * `image.png` : A screenshot of the successful email update in Gmail.
