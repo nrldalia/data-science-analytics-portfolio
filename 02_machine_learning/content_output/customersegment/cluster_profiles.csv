@@ -1,0 +1,5 @@
+Cluster,Customer_Count,Average_Income,Average_Spending,Customer_Percentage,Segment_Description
+0,60,30.587333333333333,23.139833333333335,25.0,Lower Income / Lower Spending
+1,59,29.10169491525424,74.84457627118644,24.583333333333332,Lower Income / Higher Spending
+2,61,79.4983606557377,74.85262295081968,25.416666666666664,Higher Income / Higher Spending
+3,60,79.84366666666666,31.499666666666666,25.0,Higher Income / Lower Spending
