@@ -85,6 +85,24 @@ and set SEND_EMAIL = True in the notebook.
 
 Do not store passwords or app passwords in GitHub.
 
+
+## Email Automation Testing
+
+This project includes optional Gmail SMTP email delivery.
+
+To test this feature, users must configure their own
+Gmail App Password and Google Colab Secrets.
+
+For step-by-step instructions, see:
+
+[Email Setup Guide](EMAIL_SETUP_GUIDE.md)
+
+Email delivery is disabled by default to prevent
+unintentional sending.
+
+No email credentials are stored in this repository.
+
+
 ## Analytical Findings
 
 The project examines historical temperature
