@@ -32,6 +32,8 @@ The second workflow represents an extension of the original project from explora
 ├── requirements.txt
 ├── .gitignore
 ├── email_success.png
+├── email_success_MET.png
+├── MET_output
 └── output_content/
 ```
 
