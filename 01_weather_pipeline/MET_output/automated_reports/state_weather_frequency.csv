@@ -1,0 +1,57 @@
+state_name,FSIGW,forecast_count
+JOHOR,Thunderstorms,120
+JOHOR,Haze,26
+JOHOR,Isolated thunderstorms,8
+JOHOR,Isolated thunderstorms over inland areas,1
+JOHOR,Rain,1
+KEDAH,Thunderstorms,232
+KEDAH,Isolated thunderstorms,7
+KEDAH,Scattered thunderstorms,6
+KEDAH,Widespread thunderstorms,3
+KELANTAN,Thunderstorms,315
+KELANTAN,Isolated thunderstorms,10
+KELANTAN,Isolated thunderstorms over inland areas,1
+KELANTAN,No Rain,1
+KELANTAN,Rain,1
+KUALA LUMPUR,Thunderstorms,27
+KUALA LUMPUR,Isolated thunderstorms,1
+LABUAN,Isolated thunderstorms,2
+MELAKA,Rain,115
+MELAKA,Isolated rain,4
+NEGERI SEMBILAN,Thunderstorms,133
+NEGERI SEMBILAN,Haze,36
+NEGERI SEMBILAN,Isolated thunderstorms,5
+NEGERI SEMBILAN,Rain,2
+NEGERI SEMBILAN,Isolated thunderstorms over inland areas,1
+PAHANG,Thunderstorms,146
+PAHANG,Isolated thunderstorms,11
+PAHANG,Haze,1
+PAHANG,Isolated thunderstorms over inland areas,1
+PERAK,Thunderstorms,179
+PERAK,Isolated thunderstorms,13
+PERAK,Haze,2
+PERAK,Isolated thunderstorms over inland areas,1
+PERLIS,No Rain,24
+PERLIS,Thunderstorms,2
+PERLIS,Scattered thunderstorms,1
+PERLIS,Scattered thunderstorms over inland areas,1
+PULAU PINANG,Thunderstorms,67
+PULAU PINANG,Isolated thunderstorms,3
+PUTRAJAYA,Thunderstorms,4
+PUTRAJAYA,Scattered thunderstorms,2
+SABAH,Scattered thunderstorms,16
+SABAH,Thunderstorms,7
+SABAH,Isolated thunderstorms,6
+SABAH,Isolated rain,2
+SABAH,Isolated thunderstorms over inland areas,1
+SARAWAK,Isolated thunderstorms,39
+SARAWAK,Thunderstorms,9
+SARAWAK,Isolated thunderstorms over inland areas,1
+SELANGOR,Thunderstorms,244
+SELANGOR,Isolated thunderstorms,10
+TERENGGANU,Thunderstorms,120
+TERENGGANU,Isolated thunderstorms,8
+TERENGGANU,Isolated thunderstorms over inland areas,1
+Unmapped,Thunderstorms,54
+Unmapped,Isolated thunderstorms,24
+Unmapped,Scattered thunderstorms,7

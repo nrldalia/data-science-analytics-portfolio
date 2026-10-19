@@ -1,0 +1,57 @@
+METMALAYSIA AUTOMATED WEATHER FORECAST REPORT
+=============================================
+
+Generated: 2026-10-19 16:53:35 MYT
+Forecast dates: 2026-10-18
+
+DATASET OVERVIEW
+----------------
+Forecast records: 12,390
+Forecast locations: 2,065
+Mapped locations: 1,980
+Geographic mapping coverage: 95.88%
+
+NATIONAL TEMPERATURE SUMMARY
+----------------------------
+      FMAXT  FMINT  temperature_spread_c
+min   24.00  12.00                  6.00
+mean  32.92  23.73                  9.19
+max   34.00  25.00                 18.00
+
+STATE TEMPERATURE SUMMARY
+-------------------------
+     state_name  locations  avg_max_temp_c  avg_min_temp_c  avg_temp_spread_c
+          JOHOR        156           33.24           24.19               9.05
+          KEDAH        248           31.67           23.80               7.86
+       KELANTAN        328           33.85           23.00              10.85
+   KUALA LUMPUR         28           33.00           24.00               9.00
+         LABUAN          2           32.00           25.00               7.00
+         MELAKA        119           33.03           23.98               9.04
+NEGERI SEMBILAN        177           32.72           23.96               8.76
+         PAHANG        159           32.29           23.47               8.82
+          PERAK        195           34.00           23.98              10.02
+         PERLIS         28           31.18           24.00               7.18
+   PULAU PINANG         70           31.26           24.00               7.26
+      PUTRAJAYA          6           33.17           24.50               8.67
+          SABAH         32           32.88           24.41               8.47
+        SARAWAK         49           34.00           24.00              10.00
+       SELANGOR        254           32.53           24.06               8.47
+     TERENGGANU        129           32.99           23.00               9.99
+       Unmapped         85           33.62           23.78               9.85
+
+METHODOLOGY AND LIMITATIONS
+---------------------------
+Data source: METMalaysia general forecast API.
+
+Temperatures represent published forecasts,
+not observed measurements.
+
+National statistics are unweighted averages
+of forecast locations.
+
+State assignments use the METMalaysia location
+hierarchy. Unresolved locations are retained
+under "Unmapped".
+
+Report generation is automated; recurring
+execution and email delivery are not yet enabled.
