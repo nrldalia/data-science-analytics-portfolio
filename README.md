@@ -1,4 +1,4 @@
-# 🚀 Nurul's Data Science & Analytics Portfolio
+# 🚀 Dalia's Data Science & Analytics Portfolio
 
 Hey there! 👋 Welcome to my personal data science portfolio. I'm **Nurul Dalia**, a Data Analyst and Digital Operations professional who loves bridging the gap between raw, messy data and practical, automated solutions. 
 
