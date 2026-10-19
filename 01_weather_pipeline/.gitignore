@@ -1,0 +1,18 @@
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Credentials
+.env
+.env.*
+!.env.example
+
+# Operating system
+.DS_Store
+Thumbs.db
