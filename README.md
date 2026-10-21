@@ -53,7 +53,7 @@ The synthetic dataset includes **600 shipments** across **Air, Road, and Sea** t
 - Conditional formatting for comparative profit margins
 - Consistent earthy dashboard styling 🌿
 
-Explore the project folder: **[03_visualisation](./03_visualisation)**.
+Explore the full project documentation: **[FlowTrade Logistic](./03_visualisation/FlowTrade%20Logistic)**.
 
 ---
 
