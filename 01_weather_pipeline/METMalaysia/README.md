@@ -182,7 +182,7 @@ These challenges highlighted the importance of validating assumptions, preservin
 
 ### Instructions
 
-1. Open [METMalaysia_Weather.ipynb](../METMalaysia_Weather.ipynb) in Google Colab.
+1. Open [METMalaysia_Weather.ipynb](./METMalaysia_Weather.ipynb) in Google Colab.
 2. Obtain your own METMalaysia API token through the [METMalaysia API documentation](https://metapi2.met.gov.my/docs).
 3. Configure the notebook's API authentication using your own credentials.
 4. Execute the collection and validation stages in sequence.
