@@ -8,8 +8,8 @@ This folder brings together **two independent weather-data workflows** that demo
 
 | Project | Focus | Notebook |
 | :--- | :--- | :--- |
-| [🌏 Melbourne Historical Weather Analytics](./Melbourne/README.md) | Historical temperature analysis, descriptive statistics, moving averages and seasonality | [WeatherAnalysis.ipynb](./WeatherAnalysis.ipynb) |
-| [🇲🇾 METMalaysia API & Automated Reporting](./METMalaysia/README.md) | Authenticated API ingestion, pagination, data validation, geographic mapping, CSV/charts/PDF reports and optional SMTP delivery | [METMalaysia_Weather.ipynb](./METMalaysia_Weather.ipynb) |
+| [🌏 Melbourne Historical Weather Analytics](./Melbourne/README.md) | Historical temperature analysis, descriptive statistics, moving averages and seasonality | [WeatherAnalysis.ipynb](./Melbourne/WeatherAnalysis.ipynb) |
+| [🇲🇾 METMalaysia API & Automated Reporting](./METMalaysia/README.md) | Authenticated API ingestion, pagination, data validation, geographic mapping, CSV/charts/PDF reports and optional SMTP delivery | [METMalaysia_Weather.ipynb](./METMalaysia/METMalaysia_Weather.ipynb) |
 
 ## 🧠 Skills Demonstrated
 
