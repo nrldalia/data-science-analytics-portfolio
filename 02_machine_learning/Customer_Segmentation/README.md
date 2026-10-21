@@ -1,6 +1,6 @@
 # 🛍️ Customer Segmentation
 
-**File:** [CustomerRetailAnalysis.ipynb](../CustomerRetailAnalysis.ipynb)
+**File:** [CustomerRetailAnalysis.ipynb](./CustomerRetailAnalysis.ipynb)
 
 ### 🧠 Learning Type
 Unsupervised Learning — Clustering
@@ -40,6 +40,6 @@ The resulting clusters do not represent verified customer behavior or validated 
 ---
 
 ## ▶️ Run the notebook
-Open [CustomerRetailAnalysis.ipynb](../CustomerRetailAnalysis.ipynb) in Google Colab or Jupyter. Install dependencies from [requirements.txt](../requirements.txt) if running locally.
+Open [CustomerRetailAnalysis.ipynb](./CustomerRetailAnalysis.ipynb) in Google Colab or Jupyter. Install dependencies from [requirements.txt](../requirements.txt) if running locally.
 
 [← Back to Machine Learning & Multivariate Analysis](../README.md)
