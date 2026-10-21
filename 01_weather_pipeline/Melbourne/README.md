@@ -2,7 +2,7 @@
 
 ## 📌 Overview
 
-**Notebook:** [WeatherAnalysis.ipynb](../WeatherAnalysis.ipynb)
+**Notebook:** [WeatherAnalysis.ipynb](./WeatherAnalysis.ipynb)
 
 
 The original workflow analyses historical daily minimum temperatures in Melbourne, Australia, from 1981 to 1990.
