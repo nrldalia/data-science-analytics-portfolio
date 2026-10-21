@@ -11,7 +11,9 @@
 
 ## 🎯 Project Overview
 
-FlowTrade Logistics is an independent Power BI project motivated by an interest in how data can support freight-forwarding and logistics decisions.
+FlowTrade Logistics is an independent Power BI project **inspired by my professional exposure to operational workflows and data-driven processes at work**. That experience motivated me to explore how data visualisation can support freight-forwarding and logistics decisions through a self-directed portfolio project.
+
+The scenarios, data, and reporting design were developed independently for learning and demonstration; they do not reproduce any employer systems, internal reports, or confidential information.
 
 The goal is to connect **shipment operations** with **financial performance**: Which transport modes deliver reliably? Which carriers have higher recorded delay incidence? How do revenue, freight costs, surcharges, and profit compare?
 
