@@ -82,7 +82,19 @@ A financial view connecting revenue, freight costs, surcharges, and profit.
 
 ### 🖼️ Dashboard Screenshots
 
-Screenshots can be added to this section once image files are committed to the repository. The Power BI report contains all three pages listed above.
+The screenshots below preview the three Power BI report pages using the full, unfiltered synthetic dataset.
+
+**01 · Executive Overview**
+
+![FlowTrade Logistics — Executive Overview](./01_executive_overview.png)
+
+**02 · Operational Performance**
+
+![FlowTrade Logistics — Operational Performance](./02_operational_performance.png)
+
+**03 · Freight Financial Performance**
+
+![FlowTrade Logistics — Freight Financial Performance](./03_freight_financial_performance.png)
 
 ---
 
