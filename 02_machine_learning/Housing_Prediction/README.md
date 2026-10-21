@@ -1,6 +1,6 @@
 # 🏠 Housing Value Prediction
 
-**File:** [HousingAnalysis.ipynb](../HousingAnalysis.ipynb)
+**File:** [HousingAnalysis.ipynb](./HousingAnalysis.ipynb)
 
 ### 🧠 Learning Type
 Supervised Learning — Regression
@@ -37,6 +37,6 @@ The model uses median income as its only predictor and is intended for education
 ---
 
 ## ▶️ Run the notebook
-Open [HousingAnalysis.ipynb](../HousingAnalysis.ipynb) in Google Colab or Jupyter. Install dependencies from [requirements.txt](../requirements.txt) if running locally.
+Open [HousingAnalysis.ipynb](./HousingAnalysis.ipynb) in Google Colab or Jupyter. Install dependencies from [requirements.txt](../requirements.txt) if running locally.
 
 [← Back to Machine Learning & Multivariate Analysis](../README.md)
