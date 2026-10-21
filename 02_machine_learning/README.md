@@ -8,8 +8,8 @@ This folder contains two introductory machine-learning projects designed to demo
 
 | Project | Approach | Notebook |
 | :--- | :--- | :--- |
-| [🏠 Housing Value Prediction](./Housing_Prediction/README.md) | Supervised learning using Linear Regression on California Housing data | [HousingAnalysis.ipynb](./HousingAnalysis.ipynb) |
-| [🛍️ Customer Segmentation](./Customer_Segmentation/README.md) | Unsupervised learning using K-Means on synthetic retail customer data | [CustomerRetailAnalysis.ipynb](./CustomerRetailAnalysis.ipynb) |
+| [🏠 Housing Value Prediction](./Housing_Prediction/README.md) | Supervised learning using Linear Regression on California Housing data | [HousingAnalysis.ipynb](./Housing_Prediction/HousingAnalysis.ipynb) |
+| [🛍️ Customer Segmentation](./Customer_Segmentation/README.md) | Unsupervised learning using K-Means on synthetic retail customer data | [CustomerRetailAnalysis.ipynb](./Customer_Segmentation/CustomerRetailAnalysis.ipynb) |
 
 ## 🎯 Learning Objectives
 
