@@ -1,0 +1,5 @@
+from release_tools import clone
+root=clone('V1.9.A1','V1.10.0','1.10.0')
+p=root/'script/batch_jobs.py';s=p.read_text(encoding='utf-8');s='from compare_runs import register_compare_routes\n'+s;s=s.replace('    register_store_review_routes(app,error)','    register_compare_routes(app,error)\n    register_store_review_routes(app,error)');p.write_text(s,encoding='utf-8')
+p=root/'frontend-github/src/BatchLogs.jsx';s=p.read_text(encoding='utf-8');s="import CompareRuns from './CompareRuns';\n"+s;s=s.replace('[page,setPage]=useState(0)',"[compareJob,setCompareJob]=useState(null),[page,setPage]=useState(0)");s=s.replace('<button className={button} onClick={()=>refresh()',"<button className={button} disabled={jobs.length<2} onClick={()=>setCompareJob(jobs[0].id)}>Compare Runs</button><button className={button} onClick={()=>refresh()",1);s=s.replace(' {configurationJob&&'," {compareJob&&<CompareRuns jobs={jobs} initialId={compareJob} onClose={()=>setCompareJob(null)}/>}\n {configurationJob&&");p.write_text(s,encoding='utf-8')
+print('V1.10.0 prepared')

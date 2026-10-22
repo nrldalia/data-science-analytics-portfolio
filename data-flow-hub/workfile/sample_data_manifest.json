@@ -1,0 +1,32 @@
+[
+  {
+    "name": "V1.5.0_Store_Table_Reference.csv",
+    "rows": 3,
+    "bytes": 249
+  },
+  {
+    "name": "V1.5.0_Rules_Sample.csv",
+    "rows": 8,
+    "bytes": 808
+  },
+  {
+    "name": "V1.5.0_Batch_2026-W40.csv",
+    "rows": 20,
+    "bytes": 1877
+  },
+  {
+    "name": "V1.5.0_Batch_2026-W41.csv",
+    "rows": 30,
+    "bytes": 2756
+  },
+  {
+    "name": "V1.5.0_Batch_2026-W42.csv",
+    "rows": 10,
+    "bytes": 985
+  },
+  {
+    "name": "V1.5.0_Failure_Test_2026-W41.csv",
+    "rows": 6,
+    "bytes": 631
+  }
+]

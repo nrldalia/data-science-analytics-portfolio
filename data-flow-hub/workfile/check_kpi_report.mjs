@@ -1,0 +1,16 @@
+import assert from 'node:assert/strict';
+import {reportSummary} from '../outputs/V1.14.A2/frontend-github/src/kpiReportSummary.js';
+const snapshot={flagged:true,storePercent:0,stores:[{storeId:'A',percent:50,flagged:true},{storeId:'B',percent:-50,flagged:true}],flags:['One or more stores are outside the allowed sales range or have a zero baseline.']};
+const before=JSON.stringify(snapshot),s=reportSummary(snapshot);
+assert.equal(s.worstStore.storeId,'A');assert.equal(s.worstStore.percent,50);assert.equal(s.flaggedStores,2);assert.deepEqual(s.reasons,['Store sales']);assert.equal(JSON.stringify(snapshot),before);
+assert.equal(reportSummary({...snapshot,stores:[...snapshot.stores,{storeId:'C',percent:-80,flagged:true}]}).worstStore.percent,-80);
+const unavailable=reportSummary({...snapshot,stores:[{storeId:'new',percent:null,flagged:true},{storeId:'other',percent:0,flagged:false}]});
+assert.equal(unavailable.flaggedStores,1);assert.equal(unavailable.unavailableStores,1);assert.equal(unavailable.worstStore.percent,0);
+assert.equal(reportSummary({...snapshot,stores:[{storeId:'new',percent:null,flagged:true}]}).worstStore,null);
+const flags=['Retailer sales are outside the allowed range.','Rows Count is outside the allowed range.','No eligible previous-week baseline. Check this first KPI run manually.','Select Sales, Quantity and Store ID fields in Transaction input settings.','1 rows have missing or invalid KPI fields. Totals are unavailable until these are corrected.'];
+assert.deepEqual(reportSummary({...snapshot,flags}).reasons,['Retailer sales','Row count','Insufficient history','KPI fields']);
+assert.deepEqual(reportSummary({...snapshot,flags:['Retailer sales percentage is unavailable against a zero baseline.','Row-count percentage is unavailable against a zero baseline.']}).reasons,['Retailer sales','Row count']);
+assert.deepEqual(reportSummary({...snapshot,flags:['Unknown historical finding']}).reasons,['Other KPI check']);
+assert.deepEqual(reportSummary({...snapshot,flagged:false}).reasons,[]);
+assert.deepEqual(reportSummary(null).reasons,[]);assert.equal(reportSummary(null).worstStore,null);
+console.log('KPI report summary checks passed: balanced changes, signed worst change, ties, unavailable percentages, reason categories, historical fallback and snapshot immutability.');

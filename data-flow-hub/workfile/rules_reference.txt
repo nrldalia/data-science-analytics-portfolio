@@ -1,0 +1,304 @@
+Data Cleaning, Transformation & Validation Reference
+A complete checklist of cleaning, transformation, and validation rules, plus hash and other algorithms used in data quality work.
+1. Data Cleaning
+Missing values
+Detect: NULL, NaN, empty string, whitespace-only, placeholders ("N/A", "NA", "-", "?", "unknown", "null", "none", 9999, -1, 1900-01-01)
+Handle: drop row/column, flag, or impute (see Section 5)
+Duplicates
+Exact duplicate rows
+Duplicates on key columns (primary/business key)
+Near or fuzzy duplicates (typos, abbreviations, word order)
+Keep policy: first, last, most complete, or most recent
+Whitespace & characters
+Trim leading/trailing spaces
+Collapse multiple internal spaces
+Remove non-printable/control characters (tabs, \n, \r, zero-width spaces, BOM)
+Remove or replace special characters and emojis
+Normalize Unicode (NFC/NFD/NFKC/NFKD)
+Fix encoding errors (mojibake such as Ã© → é; UTF-8 vs Latin-1/Windows-1252)
+Fix HTML entities (&amp; → &) and strip HTML tags
+Text standardization
+Case normalization (lower, upper, title)
+Remove accents/diacritics
+Standardize abbreviations (St./Street, Sdn Bhd/SDN. BHD.)
+Spelling correction
+Standardize synonyms or categories (M/Male/male → Male)
+Remove stop words, punctuation, or numbers where needed
+Type and format errors
+Wrong data type (number stored as text, date stored as text)
+Mixed types in one column
+Inconsistent date formats (DD/MM/YYYY vs MM/DD/YYYY vs ISO)
+Inconsistent decimal and thousand separators (1,234.56 vs 1.234,56)
+Currency symbols and units mixed into values
+Leading zeros lost (zip codes, IDs, phone numbers)
+Scientific notation corruption (e.g., 1.23E+10 in IDs)
+Outliers and invalid values
+Impossible values (age = -5, 250)
+Statistical outliers (see Section 5)
+Future dates where not allowed
+Sentinel/dummy values
+Structural issues
+Misaligned or shifted columns
+Merged cells, multi-line headers, header rows repeated inside data
+Inconsistent column names (rename to snake_case, remove spaces)
+Unpivot or reshape needs
+Trailing summary/total rows
+Delimiter issues (commas inside quoted fields, wrong escape characters)
+Consistency and integrity
+Cross-field conflicts (end date < start date, state doesn't match postcode)
+Referential integrity (orphan foreign keys)
+Conflicting records across sources
+2. Data Transformation
+Type conversion: cast to int, float, decimal, boolean, date, timestamp, string; parse with explicit format strings
+Date/time
+Parse and standardize to ISO 8601 (YYYY-MM-DD, YYYY-MM-DDTHH:MM:SSZ)
+Timezone conversion and UTC normalization
+Extract year, month, day, weekday, quarter, week number, hour
+Date difference/age calculation, fiscal period mapping
+String operations
+Split and concatenate columns (full name → first/last)
+Substring, regex extract, regex replace
+Padding (zero-fill), truncation
+Parsing addresses, phone numbers, emails (domain extraction)
+Tokenization
+Numeric
+Rounding, floor/ceiling
+Unit conversion (kg/lb, MYR/USD)
+Percent ↔ decimal
+Log, square root, Box-Cox, Yeo-Johnson transforms
+Binning/discretization (equal-width, equal-frequency, custom)
+Scaling and normalization
+Min-Max: (x − min) / (max − min)
+Z-score standardization: (x − μ) / σ
+Robust scaling: (x − median) / IQR
+Max-abs scaling, L1/L2 normalization, decimal scaling
+Categorical encoding
+Label/ordinal encoding
+One-hot, dummy encoding
+Binary encoding
+Frequency/count encoding
+Target/mean encoding, Weight of Evidence (WoE)
+Hashing trick (feature hashing)
+Leave-one-out, CatBoost encoding
+Structural
+Pivot/unpivot (melt), transpose
+Join, merge, union, append
+Group by and aggregate (sum, avg, count, min, max, median, mode)
+Window functions (running total, rank, lag/lead)
+Filtering, sorting, sampling
+Flatten nested JSON/XML
+Explode arrays
+Derived fields: flags, ratios, concatenated keys, surrogate keys, bucketed categories, lookups/mapping tables
+Data masking and privacy: hashing, tokenization, encryption, redaction, partial masking (e.g., ****1234), generalization, k-anonymity, pseudonymization
+3. Data Validation (Rules & Conditions)
+Presence and uniqueness
+NOT NULL / required
+UNIQUE / primary key
+Composite key uniqueness
+Type, range, and length
+Data type check
+Min/max range (0 ≤ age ≤ 120)
+String length (min, max, exact)
+Precision and scale for decimals
+Allowed values (enum/domain list)
+Positive/non-negative checks
+Format (pattern/regex) checks
+Field
+Typical rule
+Email
+^[\w.+-]+@[\w-]+\.[\w.-]+$
+Phone
+E.164 ^\+?[1-9]\d{1,14}$ (Malaysia: +60 followed by 9–10 digits)
+Date
+ISO ^\d{4}-\d{2}-\d{2}$ plus a calendar validity check (no Feb 30)
+Time
+^([01]\d|2[0-3]):[0-5]\d(:[0-5]\d)?$
+URL
+scheme + domain pattern
+IPv4 / IPv6
+octet range 0–255 / hex groups
+MAC address
+^([0-9A-Fa-f]{2}[:-]){5}[0-9A-Fa-f]{2}$
+UUID
+8-4-4-4-12 hex
+Postal code
+country-specific (Malaysia: 5 digits)
+National ID
+Malaysia NRIC: 12 digits YYMMDD-PB-###G, with a valid date and place code
+Credit card
+digits only, valid length, passes Luhn check
+IBAN
+country prefix, length, mod-97 check
+ISBN-10/13
+checksum validation
+Currency
+numeric with 2 decimals, ISO 4217 code
+Country/language
+ISO 3166 / ISO 639 codes
+Hex color
+^#([0-9A-Fa-f]{3}|[0-9A-Fa-f]{6})$
+Base64
+valid alphabet and padding
+Username/password
+length, allowed characters, complexity rules
+Business and logic rules
+Cross-field: end_date ≥ start_date, discount ≤ price, total = sum(line_items)
+Conditional: if status = 'Shipped' then ship_date is not null
+Mutually exclusive or dependent fields
+Date not in the future / not before a minimum date
+Age consistent with date of birth
+Sum of percentages = 100
+Balance checks (debit = credit)
+Referential integrity
+Foreign key exists in the parent table
+Lookup/reference table match
+Cardinality (one-to-one, one-to-many)
+Statistical and dataset-level
+Row count and column count match expected
+Row count reconciliation between source and target
+Schema match (names, order, types)
+Distribution drift, null-percentage thresholds
+Freshness/timeliness (latest record not older than X)
+Completeness %, uniqueness %, validity %, accuracy %, consistency % (data quality dimensions)
+Integrity and reconciliation
+Checksums/hashes compared between source and target
+Control totals (sum, count, min, max)
+4. Hash Algorithms
+Cryptographic hashes
+MD5 (128-bit): broken for security; still used for quick dedup/checksums
+SHA-1 (160-bit): deprecated for security
+SHA-2 family: SHA-224, SHA-256, SHA-384, SHA-512, SHA-512/256 (current standard)
+SHA-3 family: SHA3-224/256/384/512, SHAKE128/256
+BLAKE2 (BLAKE2b, BLAKE2s) and BLAKE3: very fast and secure
+RIPEMD-160
+Whirlpool
+SM3 (Chinese standard), GOST R 34.11
+Keccak
+Password hashing / key derivation (slow by design)
+bcrypt
+scrypt
+Argon2 (Argon2id recommended; also Argon2i, Argon2d)
+PBKDF2
+HKDF
+Keyed hashes / message authentication
+HMAC (HMAC-SHA256, etc.)
+CMAC, Poly1305
+SipHash (hash-table DoS protection)
+Non-cryptographic hashes (fast, for dedup, partitioning, hash tables)
+MurmurHash (Murmur2, Murmur3)
+xxHash (XXH32, XXH64, XXH3, XXH128)
+CityHash, FarmHash
+FNV-1 / FNV-1a
+Jenkins hash (lookup3, one-at-a-time)
+SpookyHash
+wyhash
+MetroHash
+HighwayHash
+DJB2 / SDBM
+Checksums & error detection
+CRC-8, CRC-16, CRC-32, CRC-32C, CRC-64
+Adler-32
+Fletcher checksum
+Parity bit, LRC
+Check-digit algorithms (validation)
+Luhn (credit cards, IMEI)
+Verhoeff, Damm
+ISBN / EAN / UPC checksums
+Mod-97 (IBAN)
+Mod-11 (various national IDs)
+Similarity/locality hashes
+MinHash, SimHash
+Locality-Sensitive Hashing (LSH)
+Bloom filter, Count-Min Sketch, HyperLogLog (approximate membership/cardinality)
+Perceptual hashes (pHash, aHash, dHash) for images
+ssdeep / TLSH (fuzzy file hashing)
+Consistent hashing / Rendezvous hashing (partitioning)
+Typical data-cleaning uses of hashing
+Row fingerprint for duplicate detection and change data capture (CDC)
+Surrogate key generation (hash of business keys, e.g., SHA-256 or MD5 in Data Vault hash_key/hash_diff)
+PII pseudonymization (use salted SHA-256 or HMAC, never plain MD5 for sensitive data)
+File integrity verification
+Partitioning/bucketing
+5. Other Algorithms
+Fuzzy matching / string similarity
+Levenshtein distance, Damerau-Levenshtein
+Hamming distance
+Jaro, Jaro-Winkler
+Longest Common Subsequence/Substring
+N-gram / q-gram similarity
+Jaccard, Dice (Sørensen–Dice), Overlap coefficient
+Cosine similarity (TF-IDF vectors)
+Token sort/set ratio (FuzzyWuzzy/RapidFuzz)
+Monge-Elkan, Smith-Waterman, Needleman-Wunsch
+Soft TF-IDF
+Phonetic algorithms
+Soundex, Refined Soundex
+Metaphone, Double Metaphone, NYSIIS
+Match Rating Approach, Caverphone, Daitch-Mokotoff
+Record linkage / entity resolution
+Blocking (standard, sorted neighborhood, canopy clustering)
+Fellegi-Sunter probabilistic model
+Rule-based and ML-based matching
+Union-Find for clustering matches
+Golden record survivorship rules
+Outlier / anomaly detection
+Z-score (|z| > 3)
+Modified Z-score (MAD-based, > 3.5)
+IQR rule (< Q1 − 1.5·IQR or > Q3 + 1.5·IQR)
+Percentile/winsorization/trimming
+Grubbs' test, Dixon's Q test, Generalized ESD, Chauvenet's criterion
+Mahalanobis distance
+DBSCAN, LOF (Local Outlier Factor), Isolation Forest
+One-Class SVM, k-means distance, Elliptic Envelope
+Autoencoders, Moving average / seasonal decomposition (time series)
+Imputation
+Mean, median, mode, constant
+Forward fill / backward fill, interpolation (linear, spline)
+KNN imputation
+Regression imputation
+MICE (multiple imputation by chained equations)
+Hot-deck / cold-deck
+Expectation-Maximization (EM)
+MissForest, matrix factorization
+Model-based / deep learning imputation
+Dimensionality reduction & feature selection
+PCA, SVD, LDA, t-SNE, UMAP
+Variance threshold, correlation filter
+Chi-square, ANOVA F-test, mutual information
+RFE, LASSO, tree-based importance
+Class imbalance
+SMOTE, ADASYN, random over/under-sampling, Tomek links
+Text processing
+Tokenization, stemming (Porter, Snowball, Lancaster), lemmatization
+TF-IDF, Bag of Words, word embeddings
+Regex matching, Named Entity Recognition
+Language detection
+Address parsing/geocoding (libpostal)
+Parsing & normalization standards
+Unicode normalization forms, ISO 8601, E.164, RFC 5322 (email)
+Punycode (IDN domains)
+Deduplication and sorting/search
+Sort-and-compare, hash-based dedup, Bloom filter prefilter
+Merge sort / external sort, binary search
+Trie / prefix tree, BK-tree (fuzzy lookup)
+Compression & encoding
+Base64, Base32, hex, URL encoding
+Run-length, Huffman, LZ77/LZ78, DEFLATE, gzip, bzip2, LZ4, Snappy, Zstandard
+Dictionary encoding, delta encoding
+Statistical tests used in validation
+Kolmogorov-Smirnov, Chi-square, Shapiro-Wilk (normality)
+PSI (Population Stability Index), KL divergence, Jensen-Shannon divergence (drift)
+Benford's Law (fraud/anomaly detection in numbers)
+Time-series cleaning: resampling, gap filling, smoothing (moving average, exponential smoothing), Kalman filter, change-point detection
+Geospatial: coordinate validation (lat −90 to 90, lon −180 to 180), Haversine distance, CRS reprojection, geohash
+Quick Reference: Typical Pipeline Order
+Profile the data (types, nulls, distinct counts, distributions)
+Standardize encoding and structure
+Trim, normalize, and fix types and formats
+Handle missing values and invalid values
+Deduplicate (exact, then fuzzy)
+Detect and treat outliers
+Transform (derive, encode, scale, aggregate)
+Validate (schema, format, business, referential rules)
+Hash/fingerprint and reconcile source vs. target
+Log rejected rows and monitor quality metrics
