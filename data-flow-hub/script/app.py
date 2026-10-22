@@ -12,7 +12,7 @@ app.config['MAX_CONTENT_LENGTH']=50*1024*1024
 CORS(app,origins=['http://localhost:5173','http://127.0.0.1:5173'])
 init_db();seed_db()
 with get_db_connection() as c:
- c.execute('CREATE TABLE IF NOT EXISTS run_evidence(run_id TEXT PRIMARY KEY,payload_id INTEGER,source BLOB,trace TEXT)')
+ c.execute('CREATE TABLE IF NOT EXISTS run_evidence(run_id TEXT PRIMARY KEY,payload_id BIGINT,source BYTEA,trace TEXT)')
  c.execute('CREATE TABLE IF NOT EXISTS processing_runs(id TEXT PRIMARY KEY,created_at TEXT,filename TEXT,file_type TEXT,input_rows INTEGER,result TEXT,source_hash TEXT,rules TEXT,output TEXT,raw_preview TEXT,issues TEXT)')
 
 def error(message,status=400): return jsonify(success=False,error=message),status
@@ -99,9 +99,9 @@ def upload_and_clean():
   if not isinstance(rules,dict): raise ValueError('Invalid rules.')
   output,trace,issues=clean(records,rules);rid='RUN-'+uuid.uuid4().hex[:10];created=datetime.now(timezone.utc).isoformat()
   with get_db_connection() as c:
-   c.execute("INSERT OR IGNORE INTO stores(id,store_name,status) VALUES('FILE_UPLOAD','Uploaded Files Directory','Pending')")
-   cursor=c.execute('INSERT INTO raw_data_payloads(store_id,raw_json_payload,missing_fields_count) VALUES(?,?,?)',('FILE_UPLOAD',json.dumps(records),sum(i['issue']=='Missing required value' for i in issues)))
-   payload_id=cursor.lastrowid
+   c.execute("INSERT INTO stores(id,store_name,status) VALUES('FILE_UPLOAD','Uploaded Files Directory','Pending') ON CONFLICT DO NOTHING")
+   cursor=c.execute('INSERT INTO raw_data_payloads(store_id,raw_json_payload,missing_fields_count) VALUES(?,?,?) RETURNING id',('FILE_UPLOAD',json.dumps(records),sum(i['issue']=='Missing required value' for i in issues)))
+   payload_id=cursor.fetchone()[0]
    for t in trace: c.execute('INSERT INTO transformation_traces(payload_id,step_number,field_name,action_taken,cleaned_json_payload) VALUES(?,?,?,?,?)',(payload_id,t['step'],t['field'],json.dumps(t),None))
    c.execute('INSERT INTO run_evidence VALUES(?,?,?,?)',(rid,payload_id,content,json.dumps(trace)))
    c.execute('INSERT INTO processing_runs VALUES(?,?,?,?,?,?,?,?,?,?,?)',(rid,created,file.filename,kind,len(records),'Completed',hashlib.sha256(content).hexdigest(),json.dumps(rules),json.dumps(output),json.dumps(records[:25]),json.dumps(issues)))

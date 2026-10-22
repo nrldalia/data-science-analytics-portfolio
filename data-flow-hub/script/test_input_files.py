@@ -81,7 +81,7 @@ class InputFileTests(unittest.TestCase):
         self.finish(retry.get_json()['attemptId']);self.assertEqual(len(self.jobs()),2)
 
     def test_path_manual_and_watcher_stability_dedup_and_archive(self):
-        with tempfile.TemporaryDirectory() as td:
+        with tempfile.TemporaryDirectory() as td, patch('input_files.CODEx_ROOT', Path(td)):
             path=Path(td)/'sales.txt';path.write_bytes(b'note\nsku|name\nx|y\n')
             p=self.save(self.profile(filePath=str(path.parent),readMode='Automatic'))
             poll=fixtures.app.app.extensions['input_poll_once']
@@ -103,7 +103,7 @@ class InputFileTests(unittest.TestCase):
     def test_path_scope_and_bad_settings(self):
         from input_files import scoped_files
         p=self.profile(id='INPUT-probe',filePath=str(CODEx_ROOT.parent/'outside-inputs'))
-        with self.assertRaisesRegex(ValueError,'inside the Codex'):scoped_files(p)
+        with self.assertRaisesRegex(ValueError,'inside the configured input root'):scoped_files(p)
         for key,value in [('maxColumns',0),('headerRow',0),('encoding','bad-codec')]:
             response=self.client.post(f'/api/v1/retailers/{self.retailer}/input-files',json={'profile':self.profile(**{key:value})});self.assertEqual(response.status_code,400)
         p=self.save(self.profile());self.sample(p)
@@ -128,5 +128,37 @@ class InputFileTests(unittest.TestCase):
         run(a,'2026-W40',first);run(b,'2026-W40',b'note\nsku|name\nb|much longer master product text\n')
         job=run(a,'2026-W41',b'note\nsku|name\na|changed\n')
         self.assertEqual(job['metrics']['previousFileSizeBytes'],len(first))
+
+
+class InputRootTests(unittest.TestCase):
+    def test_default_and_legacy_roots(self):
+        import input_files
+        for source, expected in [
+            ('/tmp/portfolio/data-flow-hub/script/input_files.py', '/tmp/portfolio/data-flow-hub'),
+            ('/tmp/Codex/portfolio/data-flow-hub/script/input_files.py', '/tmp/Codex'),
+        ]:
+            with self.subTest(source=source), patch.dict('os.environ', {}, clear=True), patch('input_files.__file__', source):
+                self.assertEqual(input_files.resolve_input_root(), Path(expected))
+
+    def test_explicit_root_and_symlink_escape(self):
+        import input_files
+        with tempfile.TemporaryDirectory() as folder, tempfile.TemporaryDirectory() as outside:
+            root = Path(folder).resolve()
+            with patch.dict('os.environ', {'DATAFLOW_INPUT_ROOT': str(root)}):
+                self.assertEqual(input_files.resolve_input_root(), root)
+            (root/'escape').symlink_to(outside, target_is_directory=True)
+            with patch('input_files.CODEx_ROOT', root):
+                with self.assertRaisesRegex(ValueError, 'configured input root'):
+                    input_files.scoped_files({'filePath': str(root/'escape')})
+
+    def test_invalid_explicit_root(self):
+        import input_files
+        with patch.dict('os.environ', {'DATAFLOW_INPUT_ROOT': 'relative/incoming'}):
+            with self.assertRaisesRegex(ValueError, 'absolute'):
+                input_files.resolve_input_root()
+        with tempfile.TemporaryDirectory() as folder:
+            with patch.dict('os.environ', {'DATAFLOW_INPUT_ROOT': str(Path(folder)/'missing')}):
+                with self.assertRaisesRegex(ValueError, 'existing directory'):
+                    input_files.resolve_input_root()
 
 if __name__=='__main__':unittest.main()

@@ -1,77 +1,176 @@
-import sqlite3
+"""PostgreSQL runtime, with explicit SQLite support for legacy migration/tests."""
 import json
 import os
+import re
+import sqlite3
+from pathlib import Path
 
-# Dynamically locate the directory where database.py lives
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-DB_FILE = os.getenv("DATAFLOW_DB", os.path.join(BASE_DIR, "dataflow.db"))
-SCHEMA_FILE = os.path.join(BASE_DIR, "schema.sql")
+import psycopg
+from dotenv import dotenv_values
+from psycopg.rows import dict_row
 
-class ClosingConnection(sqlite3.Connection):
-    def __exit__(self, exc_type, exc_value, traceback):
+BASE_DIR = Path(__file__).resolve().parent
+DB_FILE = os.getenv("DATAFLOW_DB", str(BASE_DIR / "dataflow.db"))
+SCHEMA_FILE = BASE_DIR / "schema.sql"
+IntegrityError = (sqlite3.IntegrityError, psycopg.IntegrityError)
+
+
+class Record(dict):
+    """Preserve the app's named and positional row access."""
+    def __getitem__(self, key):
+        if isinstance(key, int):
+            return tuple(self.values())[key]
+        return super().__getitem__(key)
+
+
+def record_row(cursor):
+    make = dict_row(cursor)
+    return lambda values: Record(make(values))
+
+
+def bind_parameters(statement):
+    """Convert qmark binds, leaving quoted SQL literals and identifiers intact."""
+    tokens = re.split(r"('(?:[^']|'')*'|\"(?:[^\"]|\"\")*\")", statement)
+    return ''.join(token.replace('%', '%%') if i % 2 else token.replace('%', '%%').replace('?', '%s')
+                   for i, token in enumerate(tokens))
+
+
+class PostgresConnection:
+    dialect = "postgresql"
+
+    def __init__(self, url):
+        self.connection = psycopg.connect(url, row_factory=record_row,
+                                          connect_timeout=10)
+
+    def execute(self, statement, parameters=None):
+        if parameters is None:
+            return self.connection.execute(statement)
+        return self.connection.execute(bind_parameters(statement), parameters)
+
+    def executemany(self, statement, rows):
+        cursor = self.connection.cursor()
+        cursor.executemany(bind_parameters(statement), rows)
+        return cursor
+
+    def commit(self):
+        self.connection.commit()
+
+    def rollback(self):
+        self.connection.rollback()
+
+    def close(self):
+        self.connection.close()
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, kind, value, traceback):
         try:
-            return super().__exit__(exc_type, exc_value, traceback)
+            if kind is None:
+                self.commit()
+            else:
+                self.rollback()
         finally:
             self.close()
 
+
+class ClosingConnection(sqlite3.Connection):
+    dialect = "sqlite"
+
+    def __exit__(self, kind, value, traceback):
+        try:
+            return super().__exit__(kind, value, traceback)
+        finally:
+            self.close()
+
+
+def database_url():
+    url = os.getenv("DATABASE_URL")
+    if url:
+        return url
+    # Existing tests and explicit legacy tools opt into SQLite.
+    if os.getenv("DATAFLOW_DB"):
+        return None
+    url = dotenv_values(BASE_DIR.parent / ".env").get("DATABASE_URL")
+    if not url:
+        raise RuntimeError("Configure DATABASE_URL or run python script/dev_database.py first.")
+    return url
+
+
 def get_db_connection():
-    """Establishes connection to the SQLite database with row factory and timeout enabled."""
-    conn = sqlite3.connect(DB_FILE, timeout=10.0, factory=ClosingConnection)
-    conn.row_factory = sqlite3.Row  # Returns dict-like rows instead of tuples
-    conn.execute("PRAGMA foreign_keys = ON;")
+    url = database_url()
+    if url:
+        if not url.startswith(("postgresql://", "postgres://")):
+            raise ValueError("DATABASE_URL must use PostgreSQL.")
+        return PostgresConnection(url)
+    conn = sqlite3.connect(os.getenv("DATAFLOW_DB", DB_FILE), timeout=10,
+                           factory=ClosingConnection)
+    conn.row_factory = sqlite3.Row
+    conn.execute("PRAGMA foreign_keys = ON")
     return conn
 
-def init_db():
-    """Reads schema.sql using its absolute path and initializes tables."""
-    if not os.path.exists(SCHEMA_FILE):
-        raise FileNotFoundError(f"Could not find schema.sql at: {SCHEMA_FILE}")
-        
-    with open(SCHEMA_FILE, "r") as f:
-        schema_sql = f.read()
 
-    conn = get_db_connection()
-    conn.executescript(schema_sql)
-    conn.commit()
-    conn.close()
-    print("Database schema initialized successfully.")
+def is_postgres(db):
+    return getattr(db, "dialect", "sqlite") == "postgresql"
+
+
+def begin_write(db):
+    if is_postgres(db):
+        # Preserve SQLite's serialized write sections, including global store codes.
+        # Transaction-scoped: released automatically on commit or rollback.
+        db.execute("SELECT pg_advisory_xact_lock(71423001)")
+    else:
+        db.execute("BEGIN IMMEDIATE")
+
+
+def identity_column(db):
+    return "BIGINT GENERATED BY DEFAULT AS IDENTITY PRIMARY KEY" if is_postgres(db) else "INTEGER PRIMARY KEY AUTOINCREMENT"
+
+
+def order_identity(db):
+    return ",rowid BIGINT GENERATED BY DEFAULT AS IDENTITY" if is_postgres(db) else ""
+
+
+def column_names(db, table):
+    if is_postgres(db):
+        return [r['column_name'] for r in db.execute(
+            "SELECT column_name FROM information_schema.columns WHERE table_schema=current_schema() AND table_name=? ORDER BY ordinal_position",
+            (table,))]
+    if table not in {'batch_jobs', 'batch_attempts'}:
+        raise ValueError("Unsupported table inspection.")
+    return [r['name'] for r in db.execute(f"PRAGMA table_info({table})")]
+
+
+def init_db():
+    with get_db_connection() as db:
+        if not is_postgres(db):
+            db.executescript(SCHEMA_FILE.read_text())
+            return
+        begin_write(db)
+        db.execute("CREATE TABLE IF NOT EXISTS schema_migrations(version TEXT PRIMARY KEY, applied_at TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP)")
+        for path in sorted((BASE_DIR / "migrations").glob("*.sql")):
+            if not db.execute("SELECT version FROM schema_migrations WHERE version=?", (path.name,)).fetchone():
+                db.execute(path.read_text())
+                db.execute("INSERT INTO schema_migrations(version) VALUES(?)", (path.name,))
+
 
 def seed_db():
-    """Seeds default stores and sample dirty payloads for testing."""
-    conn = get_db_connection()
-    cursor = conn.cursor()
-
-    # Check if data already exists
-    cursor.execute("SELECT COUNT(*) FROM stores;")
-    if cursor.fetchone()[0] > 0:
-        conn.close()
+    if os.getenv("DATAFLOW_SEED_DEMO") == "0":
         return
+    with get_db_connection() as db:
+        begin_write(db)
+        if db.execute("SELECT COUNT(*) FROM stores").fetchone()[0]:
+            return
+        db.executemany("INSERT INTO stores(id,store_name,region,status) VALUES(?,?,?,?)", [
+            ("ST-101", "Metro Retail Alpha", "North America", "Error"),
+            ("ST-102", "Urban Mart West", "Europe", "Clean"),
+            ("ST-103", "Metro Retail Bipte", "Asia Pacific", "Error"),
+        ])
+        dirty = {"store_name": "metro retail alpha", "region": None,
+                 "revenue": " 25000 ", "invalid_metric": ""}
+        db.execute("INSERT INTO raw_data_payloads(store_id,raw_json_payload,missing_fields_count) VALUES(?,?,?)",
+                   ("ST-101", json.dumps(dirty), 2))
 
-    # Seed Stores (Using 'id' column)
-    stores_data = [
-        ("ST-101", "Metro Retail Alpha", "North America", "Error"),
-        ("ST-102", "Urban Mart West", "Europe", "Clean"),
-        ("ST-103", "Metro Retail Bipte", "Asia Pacific", "Error")
-    ]
-    cursor.executemany(
-        "INSERT INTO stores (id, store_name, region, status) VALUES (?, ?, ?, ?);",
-        stores_data
-    )
-
-    # Seed Raw Dirty Payloads
-    dirty_payload = {
-        "store_name": "metro retail alpha",
-        "region": None,
-        "revenue": " 25000 ",
-        "invalid_metric": ""
-    }
-    cursor.execute(
-        "INSERT INTO raw_data_payloads (store_id, raw_json_payload, missing_fields_count) VALUES (?, ?, ?);",
-        ("ST-101", json.dumps(dirty_payload), 2)
-    )
-
-    conn.commit()
-    conn.close()
-    print("Database seeded with sample data.")
 
 if __name__ == "__main__":
     init_db()

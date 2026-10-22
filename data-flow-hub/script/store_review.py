@@ -3,7 +3,7 @@ from retailer_archive import archive_state
 import json
 from datetime import datetime,timezone
 from flask import jsonify,request
-from database import get_db_connection
+from database import get_db_connection, begin_write
 from retailer_setup import validate_retailer,assign_store_codes
 from configuration_history import record_version,version_summary
 
@@ -11,7 +11,7 @@ def register_store_review_routes(app,error):
     @app.route('/api/v1/batches/<jid>/stores/review',methods=['GET','POST'])
     def review_stores(jid):
         with get_db_connection() as db:
-            if request.method=='POST':db.execute('BEGIN IMMEDIATE')
+            if request.method=='POST':begin_write(db)
             job=db.execute('SELECT * FROM batch_jobs WHERE id=?',(jid,)).fetchone()
             if not job:return error('Job not found.',404)
             if job['status'] not in ['Completed','Completed with Interruption','Approved Job']:return error('Only completed jobs support New Store review.',409)

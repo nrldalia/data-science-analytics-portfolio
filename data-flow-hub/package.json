@@ -16,7 +16,8 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build --outDir frontend-github/dist",
-    "test:backend": "cd script && python -m unittest test_app -v"
+    "test:backend": "cd script && python -m unittest test_app -v",
+    "test:postgres": "python script/check_postgres.py"
   },
   "engines": {
     "node": ">=20.19.0"

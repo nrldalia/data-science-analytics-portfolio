@@ -1,3 +1,11 @@
+# Unreleased
+
+- Use local PostgreSQL through Docker Compose for normal development.
+- Add verified, read-only SQLite import with destination protection.
+- Preserve generated IDs, store codes, audit evidence and processing history.
+- Add isolated PostgreSQL test runner, backup guidance and private local setup.
+- Make input-file scope configurable so startup works outside a Codex directory.
+
 # Improved original v1.0
 
 Restored the original React + Vite + Tailwind / Flask + Pandas / SQLite stack and navigation. Improved the existing code rather than replacing the interface with a different framework. Reworked sample-only AI cleaning into full deterministic processing with optional Gemini assistance. Added explicit cleaning configuration, source-preserving previews, run-specific audits, full exports, saved history, persistent edits, genuine metrics, visible connectivity failures, Excel support and corrected setup instructions.

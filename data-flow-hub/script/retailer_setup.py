@@ -6,13 +6,12 @@ import io
 import json
 import math
 import re
-import sqlite3
 import uuid
 from pathlib import Path
 from fnmatch import fnmatchcase
 from datetime import datetime
 from flask import request, jsonify, send_file
-from database import get_db_connection
+from database import get_db_connection, begin_write, order_identity, IntegrityError
 
 CATEGORIES = ['Cleaning', 'Transformation', 'Validation']
 OPERATIONS = {
@@ -232,8 +231,8 @@ def next_store_code(db, identity, legacy_code=None):
 def initialize_store_sequence(db):
     db.execute('CREATE TABLE IF NOT EXISTS store_code_sequence(id INTEGER PRIMARY KEY CHECK(id=1),last_value INTEGER NOT NULL CHECK(last_value BETWEEN 0 AND 9999999))')
     db.execute('CREATE TABLE IF NOT EXISTS store_code_registry(store_id TEXT PRIMARY KEY,code TEXT UNIQUE NOT NULL,sequence INTEGER UNIQUE NOT NULL,legacy_code TEXT)')
-    db.execute('BEGIN IMMEDIATE')
-    db.execute('INSERT OR IGNORE INTO store_code_sequence VALUES(1,0)')
+    begin_write(db)
+    db.execute('INSERT INTO store_code_sequence VALUES(1,0) ON CONFLICT DO NOTHING')
     rows=db.execute('SELECT id,payload FROM retailer_configs ORDER BY rowid').fetchall()
     payloads=[(row['id'],json.loads(row['payload'])) for row in rows]
     # Register existing MY6 codes first, so imported higher numbers are never reused.
@@ -246,7 +245,7 @@ def initialize_store_sequence(db):
                 if registered and registered['code']!=code: raise ValueError('A store has conflicting registered storecodes.')
                 if not registered:db.execute('INSERT INTO store_code_registry VALUES(?,?,?,NULL)',(store['id'],code,int(code[3:])))
     highest=db.execute('SELECT COALESCE(MAX(sequence),0) AS highest FROM store_code_registry').fetchone()['highest']
-    db.execute('UPDATE store_code_sequence SET last_value=MAX(last_value,?) WHERE id=1',(highest,))
+    db.execute('UPDATE store_code_sequence SET last_value=CASE WHEN last_value<? THEN ? ELSE last_value END WHERE id=1',(highest,highest))
     for rid,payload in payloads:
         for store in payload.get('stores',[]):
             store['suiteCode']=next_store_code(db,store['id'],store.get('suiteCode') or None)
@@ -271,9 +270,10 @@ def assign_store_codes(stores, previous, db):
 
 def register_retailer_routes(app, parse_upload, error):
     with get_db_connection() as db:
-        db.execute('CREATE TABLE IF NOT EXISTS retailer_configs(id TEXT PRIMARY KEY, retailer_key TEXT UNIQUE COLLATE NOCASE, payload TEXT NOT NULL)')
+        db.execute(f'CREATE TABLE IF NOT EXISTS retailer_configs(id TEXT PRIMARY KEY, retailer_key TEXT UNIQUE, payload TEXT NOT NULL{order_identity(db)})')
         db.execute('CREATE TABLE IF NOT EXISTS retailer_samples(retailer_id TEXT PRIMARY KEY, filename TEXT, records TEXT, byte_size INTEGER)')
         db.execute('CREATE TABLE IF NOT EXISTS rule_definitions(id TEXT PRIMARY KEY, payload TEXT NOT NULL)')
+        db.execute('CREATE UNIQUE INDEX IF NOT EXISTS retailer_key_casefold ON retailer_configs(lower(retailer_key))')
         initialize_store_sequence(db)
         initialize_history(db)
 
@@ -295,7 +295,7 @@ def register_retailer_routes(app, parse_upload, error):
         try:
             body=validate_retailer(request.get_json(silent=True))
             with get_db_connection() as db:
-                db.execute('BEGIN IMMEDIATE')
+                begin_write(db)
                 if rid:
                     if archive_state(db,rid)['archived']:return error('Restore this retailer before editing setup.',409)
                     previous=db.execute('SELECT payload FROM retailer_configs WHERE id=?',(rid,)).fetchone()
@@ -312,7 +312,7 @@ def register_retailer_routes(app, parse_upload, error):
                 saved['processingReadiness']=readiness(db,rid,saved)
             return jsonify(success=True,retailer=saved,configurationVersion=version_summary(version))
         except (ValueError,TypeError) as exc: return error(str(exc))
-        except sqlite3.IntegrityError: return error('Retailer key already exists.',409)
+        except IntegrityError: return error('Retailer key already exists.',409)
 
     @app.route('/api/v1/retailers/<rid>/configuration-history')
     def configuration_history(rid):
@@ -327,7 +327,7 @@ def register_retailer_routes(app, parse_upload, error):
         if not isinstance(ids,list) or not ids or len(ids)>1000 or any(not isinstance(rid,str) or not rid for rid in ids):return error('Select one or more retailers to delete.')
         ids=list(dict.fromkeys(ids));marks=','.join('?' for _ in ids)
         with get_db_connection() as db:
-            db.execute('BEGIN IMMEDIATE')
+            begin_write(db)
             if db.execute(f'SELECT COUNT(*) FROM retailer_configs WHERE id IN ({marks})',ids).fetchone()[0]!=len(ids):return error('A selected retailer no longer exists. Refresh Client.',404)
             if db.execute(f'SELECT id FROM batch_attempts WHERE retailer_id IN ({marks}) LIMIT 1',ids).fetchone():return error('Wait for or cancel running jobs before deleting these retailers.',409)
             for table in ['input_file_samples','input_file_secrets']:
@@ -380,7 +380,7 @@ def register_retailer_routes(app, parse_upload, error):
             records,kind,_=parse_upload(file)
             if len(records)>10000 or len({k for r in records for k in r})>100: return error('Sample supports at most 10,000 rows and 100 columns.')
             with get_db_connection() as db:
-                db.execute('INSERT OR REPLACE INTO retailer_samples VALUES(?,?,?,?)',(rid,file.filename,json.dumps(records),len(content)))
+                db.execute('INSERT INTO retailer_samples VALUES(?,?,?,?) ON CONFLICT(retailer_id) DO UPDATE SET filename=excluded.filename,records=excluded.records,byte_size=excluded.byte_size',(rid,file.filename,json.dumps(records),len(content)))
             return jsonify(success=True,sample={'filename':file.filename,'totalRows':len(records),'rows':records[:25],'columns':list(dict.fromkeys(k for r in records for k in r)),'byteSize':len(content)})
         except (ValueError,TypeError,UnicodeDecodeError) as exc: return error(str(exc))
         except Exception: app.logger.exception('Sample parsing failed');return error('Could not parse the sample file.')

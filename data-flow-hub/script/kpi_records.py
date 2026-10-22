@@ -3,7 +3,7 @@ import json,math
 from datetime import datetime,timedelta
 from decimal import Decimal,DecimalException
 from flask import request,jsonify
-from database import get_db_connection
+from database import get_db_connection, begin_write
 DEFAULTS={'weeks':8,'storeLimit':30,'retailerLimit':30,'countLimit':40,'salesField':'','quantityField':'','storeField':''}
 def validate_kpi(value):
     if value is None:value={}
@@ -105,7 +105,7 @@ def register_kpi_routes(app,error):
         body=request.get_json(silent=True)
         if not isinstance(body,dict) or body.get('checked') is not True or not isinstance(body.get('note'),str) or not body['note'].strip() or len(body['note'])>1000:return error('Confirm the manual check and enter a review note (up to 1,000 characters).')
         with get_db_connection() as db:
-            db.execute('BEGIN IMMEDIATE');job=db.execute('SELECT * FROM batch_jobs WHERE id=?',(jid,)).fetchone()
+            begin_write(db);job=db.execute('SELECT * FROM batch_jobs WHERE id=?',(jid,)).fetchone()
             if not job:return error('Job not found.',404)
             metrics=json.loads(job['metrics'] or '{}');kpi=metrics.get('kpi')
             if job['status'] not in ['Completed','Completed with Interruption'] or not kpi or not kpi['flagged']:return error('Only a completed, flagged KPI run can be reviewed.',409)

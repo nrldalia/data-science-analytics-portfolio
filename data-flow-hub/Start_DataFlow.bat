@@ -5,5 +5,11 @@ if not exist .venv\Scripts\python.exe (
   pause
   exit /b 1
 )
+docker compose up -d --wait
+if errorlevel 1 (
+  echo PostgreSQL did not start. Check Docker Desktop.
+  pause
+  exit /b 1
+)
 .venv\Scripts\python.exe script\app.py
 pause

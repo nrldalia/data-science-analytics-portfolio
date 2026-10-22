@@ -3,11 +3,25 @@ import copy,fnmatch,hashlib,json,threading,time,uuid
 from datetime import datetime,timezone,timedelta
 from pathlib import Path
 from flask import request,jsonify
-from database import get_db_connection
+from database import get_db_connection, begin_write, identity_column
 from input_file_io import validate_profiles,read_records,parse_hash,protect_password,reveal_password,LIMIT
 from retailer_archive import archive_state
 SAMPLE_LIMIT=1000000
-CODEx_ROOT=next(p for p in Path(__file__).resolve().parents if p.name.lower()=='codex')
+def resolve_input_root():
+    from os import environ
+    configured = environ.get('DATAFLOW_INPUT_ROOT')
+    if configured:
+        root = Path(configured).expanduser()
+        if not root.is_absolute():
+            raise ValueError('DATAFLOW_INPUT_ROOT must be an absolute directory path.')
+        if not root.is_dir():
+            raise ValueError('DATAFLOW_INPUT_ROOT must name an existing directory.')
+        return root.resolve()
+    project = Path(__file__).resolve().parents[1]
+    return next((p for p in project.parents if p.name.lower() == 'codex'), project)
+
+# Retain this name for callers that already import the input scope.
+CODEx_ROOT=resolve_input_root()
 def now():return datetime.now(timezone.utc).isoformat()
 def current_week():
     d=datetime.now(timezone(timedelta(hours=8))).isocalendar();return f'{d.year:04d}-W{d.week:02d}'
@@ -30,7 +44,7 @@ def scoped_files(profile):
     if not profile['filePath'].strip():raise ValueError('Save a file path before reading it.')
     path=Path(profile['filePath']).resolve()
     root=CODEx_ROOT.resolve()
-    if not path.is_relative_to(root):raise ValueError('File path must stay inside the Codex folder.')
+    if not path.is_relative_to(root):raise ValueError('File path must stay inside the configured input root.')
     pattern=profile.get('zipFolderName') if profile['isZipFolder'] and profile.get('settingsVersion')==2 else profile['filename']
     if path.is_file():
         if not fnmatch.fnmatch(path.name,pattern):raise ValueError('File path name does not match Filename.')
@@ -63,13 +77,13 @@ def register_input_routes(app,error):
     from configuration_history import record_version,version_summary
     with get_db_connection() as db:
         db.execute('CREATE TABLE IF NOT EXISTS input_file_samples(retailer_id TEXT,input_id TEXT,filename TEXT,records TEXT,byte_size INTEGER,settings_hash TEXT,PRIMARY KEY(retailer_id,input_id))')
-        db.execute('CREATE TABLE IF NOT EXISTS input_file_secrets(retailer_id TEXT,input_id TEXT,protected BLOB,PRIMARY KEY(retailer_id,input_id))')
+        db.execute('CREATE TABLE IF NOT EXISTS input_file_secrets(retailer_id TEXT,input_id TEXT,protected BYTEA,PRIMARY KEY(retailer_id,input_id))')
         db.execute('CREATE TABLE IF NOT EXISTS batch_input_records(id TEXT PRIMARY KEY,records TEXT NOT NULL)')
-        db.execute('CREATE TABLE IF NOT EXISTS input_deliveries(id INTEGER PRIMARY KEY AUTOINCREMENT,retailer_id TEXT,input_id TEXT,fingerprint TEXT,status TEXT,message TEXT,job_id TEXT,created_at TEXT,UNIQUE(retailer_id,input_id,fingerprint))')
+        db.execute(f'CREATE TABLE IF NOT EXISTS input_deliveries(id {identity_column(db)},retailer_id TEXT,input_id TEXT,fingerprint TEXT,status TEXT,message TEXT,job_id TEXT,created_at TEXT,UNIQUE(retailer_id,input_id,fingerprint))')
     @app.route('/api/v1/retailers/<rid>/input-files',methods=['GET','POST'])
     def profiles(rid):
         with get_db_connection() as db:
-            if request.method=='POST':db.execute('BEGIN IMMEDIATE')
+            if request.method=='POST':begin_write(db)
             row=db.execute('SELECT payload FROM retailer_configs WHERE id=?',(rid,)).fetchone()
             if not row:return error('Save the retailer before adding input files.',404)
             config=json.loads(row['payload'])
@@ -106,7 +120,7 @@ def register_input_routes(app,error):
                 if not isinstance(password,str) or not password or len(password)>500:return error('Enter a sheet password of at most 500 characters.')
                 try:protected=protect_password(password)
                 except ValueError as exc:return error(str(exc))
-                db.execute('INSERT OR REPLACE INTO input_file_secrets VALUES(?,?,?)',(rid,pid,protected))
+                db.execute('INSERT INTO input_file_secrets VALUES(?,?,?) ON CONFLICT(retailer_id,input_id) DO UPDATE SET protected=excluded.protected',(rid,pid,protected))
             elif mode=='clear':db.execute('DELETE FROM input_file_secrets WHERE retailer_id=? AND input_id=?',(rid,pid))
             db.execute('UPDATE retailer_configs SET payload=? WHERE id=?',(json.dumps(config),rid))
             version=record_version(db,rid,config,'Input file settings saved')
@@ -115,7 +129,7 @@ def register_input_routes(app,error):
     @app.route('/api/v1/retailers/<rid>/input-files/<pid>',methods=['DELETE'])
     def remove_profile(rid,pid):
         with get_db_connection() as db:
-            db.execute('BEGIN IMMEDIATE');row=db.execute('SELECT payload FROM retailer_configs WHERE id=?',(rid,)).fetchone()
+            begin_write(db);row=db.execute('SELECT payload FROM retailer_configs WHERE id=?',(rid,)).fetchone()
             if not row:return error('Retailer not found.',404)
             if archive_state(db,rid)['archived']:return error('Restore before removing input files.',409)
             config=json.loads(row['payload']);profiles=config.get('inputFiles',[])
@@ -142,9 +156,9 @@ def register_input_routes(app,error):
             records=read_records(source,file.filename,profile,password,limit=SAMPLE_LIMIT-1)
             if len(records)>10000:return error('Samples support at most 10,000 data rows.')
             with get_db_connection() as db:
-                db.execute('BEGIN IMMEDIATE');_,latest,_=load_profile(db,rid,pid)
+                begin_write(db);_,latest,_=load_profile(db,rid,pid)
                 if archive_state(db,rid)['archived'] or parse_hash(latest)!=parse_hash(profile):return error('Input settings changed. Refresh and upload again.',409)
-                db.execute('INSERT OR REPLACE INTO input_file_samples VALUES(?,?,?,?,?,?)',(rid,pid,file.filename,json.dumps(records),len(source),parse_hash(profile)))
+                db.execute('INSERT INTO input_file_samples VALUES(?,?,?,?,?,?) ON CONFLICT(retailer_id,input_id) DO UPDATE SET filename=excluded.filename,records=excluded.records,byte_size=excluded.byte_size,settings_hash=excluded.settings_hash',(rid,pid,file.filename,json.dumps(records),len(source),parse_hash(profile)))
                 result=sample_public(db.execute('SELECT * FROM input_file_samples WHERE retailer_id=? AND input_id=?',(rid,pid)).fetchone(),profile)
             return jsonify(success=True,sample=result)
         except (ValueError,OSError) as exc:return error(str(exc))
@@ -211,4 +225,4 @@ def register_input_routes(app,error):
         threading.Thread(target=watch,daemon=True).start()
 
 def record_delivery(rid,pid,fingerprint,status,message,job_id=None):
-    with get_db_connection() as db:db.execute('INSERT OR IGNORE INTO input_deliveries(retailer_id,input_id,fingerprint,status,message,job_id,created_at) VALUES(?,?,?,?,?,?,?)',(rid,pid,fingerprint,status,message[:1000],job_id,now()))
+    with get_db_connection() as db:db.execute('INSERT INTO input_deliveries(retailer_id,input_id,fingerprint,status,message,job_id,created_at) VALUES(?,?,?,?,?,?,?) ON CONFLICT DO NOTHING',(rid,pid,fingerprint,status,message[:1000],job_id,now()))

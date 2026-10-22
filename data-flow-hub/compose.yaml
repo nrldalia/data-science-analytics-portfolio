@@ -1,0 +1,20 @@
+services:
+  postgres:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_DB: dataflow
+      POSTGRES_USER: dataflow
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Run python script/dev_database.py first}
+    ports:
+      - "127.0.0.1:${DATAFLOW_POSTGRES_PORT:-55432}:5432"
+    volumes:
+      - dataflow-postgres:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U dataflow -d dataflow"]
+      interval: 2s
+      timeout: 3s
+      retries: 30
+    restart: unless-stopped
+
+volumes:
+  dataflow-postgres:

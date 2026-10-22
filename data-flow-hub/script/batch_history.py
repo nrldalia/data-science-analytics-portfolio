@@ -1,20 +1,22 @@
 """Remove old retailer/week uniqueness without losing job history."""
 import json
+from database import begin_write, is_postgres
 
 def migrate_run_history(db):
-    db.execute('BEGIN IMMEDIATE')
-    for table in ['batch_jobs','batch_attempts']:
-        indexes=db.execute(f'PRAGMA index_list({table})').fetchall()
-        unique=any(r['unique'] and [c['name'] for c in db.execute(f"PRAGMA index_info('{r['name']}')")] == ['retailer_id','period'] for r in indexes)
-        if not unique:continue
-        sql=db.execute('SELECT sql FROM sqlite_master WHERE type=? AND name=?',('table',table)).fetchone()[0]
-        import re
-        sql=re.sub(r',\s*UNIQUE\s*\(retailer_id\s*,\s*period\)', '', sql, flags=re.I)
-        sql=sql.replace(table,table+'_history_migration',1)
-        db.execute(sql)
-        db.execute(f'INSERT INTO {table}_history_migration SELECT * FROM {table}')
-        db.execute(f'DROP TABLE {table}')
-        db.execute(f'ALTER TABLE {table}_history_migration RENAME TO {table}')
+    begin_write(db)
+    if not is_postgres(db):
+        for table in ['batch_jobs','batch_attempts']:
+            indexes=db.execute(f'PRAGMA index_list({table})').fetchall()
+            unique=any(r['unique'] and [c['name'] for c in db.execute(f"PRAGMA index_info('{r['name']}')")] == ['retailer_id','period'] for r in indexes)
+            if not unique:continue
+            sql=db.execute('SELECT sql FROM sqlite_master WHERE type=? AND name=?',('table',table)).fetchone()[0]
+            import re
+            sql=re.sub(r',\s*UNIQUE\s*\(retailer_id\s*,\s*period\)', '', sql, flags=re.I)
+            sql=sql.replace(table,table+'_history_migration',1)
+            db.execute(sql)
+            db.execute(f'INSERT INTO {table}_history_migration SELECT * FROM {table}')
+            db.execute(f'DROP TABLE {table}')
+            db.execute(f'ALTER TABLE {table}_history_migration RENAME TO {table}')
     db.execute('CREATE INDEX IF NOT EXISTS batch_job_period_history ON batch_jobs(retailer_id,period,end_time)')
     # Earlier releases retained only the most recent cancelled attempt as nested metadata.
     for job in db.execute('SELECT * FROM batch_jobs WHERE last_attempt IS NOT NULL').fetchall():
