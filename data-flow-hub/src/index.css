@@ -1,0 +1,91 @@
+@import "tailwindcss";
+
+/* Theme tokens also cover the existing tables, forms and modal components. */
+:root {
+  color-scheme: dark;
+  --app-background: #211f38;
+  --sidebar-background: #28263f;
+  --panel-background: #302d4c;
+  --accent-solid: #7c24ee;
+  --accent-hover: #6920cc;
+  --color-slate-950: #1c1a30;
+  --color-slate-900: #24223d;
+  --color-slate-800: #302d4c;
+  --color-slate-700: #484361;
+  --color-slate-600: #655d80;
+  --color-slate-500: #a69abc;
+  --color-slate-400: #b4aacb;
+  --color-slate-300: #d0c7e5;
+  --color-slate-200: #e5ddf5;
+  --color-slate-100: #f6f2ff;
+  --color-cyan-300: #c4a6ff;
+  --color-cyan-400: #b994ff;
+  --color-cyan-500: #8d35f7;
+  --color-cyan-600: #7c24ee;
+  --color-cyan-700: #7130c5;
+  --color-indigo-400: #aaa6ff;
+  --color-indigo-500: #6856df;
+  --color-indigo-600: #5945ce;
+  --color-emerald-300: #75dab5;
+  --color-emerald-500: #14916b;
+  --color-emerald-600: #087654;
+  --color-amber-300: #ffd087;
+  --color-amber-700: #ad7632;
+  --color-rose-200: #ffc0d0;
+  --color-rose-300: #ffa0b7;
+  --color-rose-500: #e14774;
+}
+
+:root[data-theme="light"] {
+  color-scheme: light;
+  --app-background: #f2effa;
+  --sidebar-background: #faf8ff;
+  --panel-background: #ffffff;
+  --color-slate-950: #fbfaff;
+  --color-slate-900: #eeeaf7;
+  --color-slate-800: #ffffff;
+  --color-slate-700: #dcd5eb;
+  --color-slate-600: #bcb0d2;
+  --color-slate-500: #756a8a;
+  --color-slate-400: #6f6384;
+  --color-slate-300: #554764;
+  --color-slate-200: #3b2e50;
+  --color-slate-100: #281d3b;
+  --color-cyan-300: #7130c5;
+  --color-cyan-400: #6d21d4;
+  --color-cyan-700: #6d21d4;
+  --color-indigo-400: #5443b9;
+  --color-emerald-300: #08734e;
+  --color-amber-300: #8d5605;
+  --color-amber-700: #b98741;
+  --color-rose-200: #a81e49;
+  --color-rose-300: #b3204e;
+}
+
+body { margin: 0; background: var(--app-background); color: var(--color-slate-100); }
+input, select, textarea { accent-color: var(--accent-solid); }
+::selection { background: #9c5aff55; }
+:where(button, a, input, select, textarea):focus-visible { outline: 2px solid var(--color-cyan-400); outline-offset: 3px; }
+
+.theme-switch { display: inline-flex; gap: 3px; padding: 4px; border: 1px solid var(--color-slate-700); border-radius: 999px; background: var(--color-slate-900); }
+.theme-switch button { display: inline-flex; align-items: center; gap: 6px; padding: 6px 10px; border-radius: 999px; color: var(--color-slate-400); font-size: 12px; cursor: pointer; }
+.theme-switch button[aria-pressed="true"] { background: var(--accent-solid); color: white; }
+.theme-switch button:not([aria-pressed="true"]):hover { color: var(--color-slate-100); }
+.nav-active { background: var(--accent-solid); color: white; border: 1px solid transparent; box-shadow: 0 3px 12px #7c24ee33; }
+.nav-inactive { color: var(--color-slate-400); border: 1px solid transparent; }
+.nav-inactive:hover { background: var(--color-slate-900); color: var(--color-slate-100); }
+
+/* Solid action buttons retain white labels in both palettes. */
+:is(button,label)[class~="bg-cyan-500"],
+:is(button,label)[class~="bg-cyan-600"],
+:is(button,label)[class~="bg-cyan-700"] { background: var(--accent-solid); color: #fff; border-color: var(--accent-solid); }
+:is(button,label)[class~="bg-cyan-500"]:hover,
+:is(button,label)[class~="bg-cyan-600"]:hover,
+:is(button,label)[class~="bg-cyan-700"]:hover { background: var(--accent-hover); border-color: var(--accent-hover); }
+:root[data-theme="light"] [class~="hover:bg-slate-800"]:hover { background-color: var(--color-slate-900); }
+:root[data-theme="light"] :is([class~="border-slate-800"],[class~="border-slate-800/80"]) { border-color: var(--color-slate-700); }
+:is(button,label)[class~="bg-emerald-600"], :is(button,label)[class~="bg-indigo-600"] { color: #fff; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .theme-switch button, .nav-active, .nav-inactive { transition: background-color 140ms ease, color 140ms ease; }
+}
