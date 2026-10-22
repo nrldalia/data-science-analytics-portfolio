@@ -1,6 +1,6 @@
 # 🚀 Dalia's Data Science & Analytics Portfolio
 
-Hey there! 👋 Welcome to my personal data science portfolio. I'm **Nurul Dalia**, a Data Analyst and Digital Operations professional who loves bridging the gap between raw, messy data and practical, automated solutions.
+Hey there! 👋 Welcome to my personal data science portfolio. I'm **Nurul Dalia**, from Malaysia, a Data Analyst and Digital Operations professional who loves bridging the gap between raw, messy data and practical, automated solutions.
 
 This portfolio brings together my work in data analysis, machine learning, data visualisation, and workflow automation. Through Python notebooks, an interactive data application, and business intelligence reporting, I explore how data can support practical operational decisions. When I'm not writing pipelines or analysing datasets, you'll usually find me reading non-fiction books, exploring scholarly articles, or listening to podcasts.
 
