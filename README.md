@@ -13,7 +13,7 @@ This portfolio brings together my work in data analysis, machine learning, data 
 | **[01_weather_pipeline](./01_weather_pipeline)** | Python, Pandas, Matplotlib, SMTP | **🌤️ Automated Weather Intelligence Pipeline:** Two workflows covering Melbourne historical temperature analytics and METMalaysia API ingestion, validation, PDF reporting, and optional email delivery. |
 | **[02_machine_learning](./02_machine_learning)** | Scikit-Learn, Pandas, Seaborn | **🤖 Predictive & Unsupervised ML:** Explores supervised linear regression and unsupervised K-Means clustering, including model evaluation and interpretation. |
 | **[03_visualisation](./03_visualisation)** | Power BI, DAX, Data Modelling, Data Visualisation | **🚚 FlowTrade Logistics:** An interactive, three-page freight-forwarding analytics report covering shipment delivery performance, recorded delays, freight revenue, costs, and profit margins. |
-| **[data-flow-hub](./data-flow-hub)** | Python, Flask, Pandas, SQLite, React, Vite, Tailwind CSS | **🧹 DataFlow Hub:** An interactive application for data cleaning, quality checks, processing history, and downloadable audit evidence. |
+| **[data-flow-hub](./data-flow-hub)** | Python, Flask, Pandas, SQLite, React, Vite, Tailwind CSS | **🧹 DataFlow Hub:** An interactive application for data cleaning, quality checks, processing history, and downloadable audit evidence - Ongoing. |
 
 ---
 
