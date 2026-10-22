@@ -1,0 +1,17 @@
+from pathlib import Path
+p=Path('outputs/V1.9.0/frontend-github/src/BatchLogs.jsx');s=p.read_text(encoding='utf-8')
+s="import PreprocessingReport from './PreprocessingReport';\n"+s
+s=s.replace('useEffect,useState','useEffect,useState,useRef')
+s=s.replace("[storeReviewJob,setStoreReviewJob]=useState(null)","[storeReviewJob,setStoreReviewJob]=useState(null),[preprocessing,setPreprocessing]=useState(null)")
+s=s.replace("throw new Error(data.error||'Request failed.');", "{const failure=new Error(data.error||'Request failed.');failure.report=data.report;failure.status=response.status;throw failure;}")
+s=s.replace(" const filtered=", " const checkRequest=useRef(0);\n useEffect(()=>{checkRequest.current++;setPreprocessing(null);},[file,retailerId,period,storeIdField,reprocessJob,reprocessPeriod]);\n const filtered=",1)
+s=s.replace("try{await api('/batches',{method:'POST',body:form});", "try{if(!preprocessing?.ready){const checked=await api('/batches/preprocessing',{method:'POST',body:form});setPreprocessing(checked.report);return;}form.append('expectedConfigurationHash',preprocessing.configurationHash);await api('/batches',{method:'POST',body:form});setPreprocessing(null);")
+s=s.replace("catch(e){setError(e.message);}finally{setBusy(false);}}", "catch(e){setError(e.message);if(e.report)setPreprocessing(e.status===409?null:e.report);}finally{setBusy(false);}}")
+s=s.replace("try{await api(`/batches/${reprocessJob.id}/reprocess`,", "try{if(!preprocessing?.ready){const checked=await api(`/batches/${reprocessJob.id}/preprocessing`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({period:reprocessPeriod})});setPreprocessing(checked.report);return;}await api(`/batches/${reprocessJob.id}/reprocess`,")
+s=s.replace("body:JSON.stringify({period:reprocessPeriod})});setNotice", "body:JSON.stringify({period:reprocessPeriod,expectedConfigurationHash:preprocessing.configurationHash})});setPreprocessing(null);setNotice")
+s=s.replace("{busy?'Starting…':'Start Job'}", "{busy?'Working…':preprocessing?.ready?'Start Job':'Check Preprocessing'}")
+s=s.replace("{busy?'Starting…':'Start Reprocessing'}", "{busy?'Working…':preprocessing?.ready?'Start Reprocessing':'Check Preprocessing'}")
+s=s.replace('<button type="submit" disabled={busy||!retailerId||!file}', '<PreprocessingReport report={preprocessing}/>{preprocessing&&<button type="button" className={button} disabled={busy} onClick={()=>setPreprocessing(null)}>Reset Check</button>}<button type="submit" disabled={busy||!retailerId||!file}')
+s=s.replace('<div className="flex justify-end gap-3"><button type="button" className={button} disabled={busy} onClick={()=>setReprocessJob(null)}>', '<PreprocessingReport report={preprocessing}/>{preprocessing&&<button type="button" className={button} disabled={busy} onClick={()=>setPreprocessing(null)}>Reset Check</button>}<div className="flex justify-end gap-3"><button type="button" className={button} disabled={busy} onClick={()=>setReprocessJob(null)}>')
+p.write_text(s,encoding='utf-8')
+print('Preprocessing UI ready')

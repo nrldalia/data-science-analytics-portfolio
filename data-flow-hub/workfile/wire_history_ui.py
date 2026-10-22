@@ -1,0 +1,17 @@
+from pathlib import Path
+root=Path('outputs/V1.7.0/frontend-github/src')
+p=root/'RetailerSetup.jsx';s=p.read_text(encoding='utf-8').replace("import React,", "import ConfigurationHistory from './ConfigurationHistory';\nimport React,",1)
+s=s.replace("const [storeDraft,setStoreDraft]=useState(null);","const [storeDraft,setStoreDraft]=useState(null),[historyOpen,setHistoryOpen]=useState(false);")
+s=s.replace('<div className="flex gap-2"><button disabled={busy}', '<div className="flex gap-2">{config.id&&<button className={button} onClick={()=>setHistoryOpen(true)}>Configuration History</button>}<button disabled={busy}',1)
+s=s.replace(' return <div className="space-y-6" data-testid="retailer-setup">',' return <div className="space-y-6" data-testid="retailer-setup">\n  {historyOpen&&<ConfigurationHistory retailerId={config.id} onClose={()=>setHistoryOpen(false)}/>}')
+p.write_text(s,encoding='utf-8')
+p=root/'BatchLogs.jsx';s=p.read_text(encoding='utf-8').replace("import React,", "import ConfigurationHistory from './ConfigurationHistory';\nimport React,",1)
+s=s.replace("[audit,setAudit]=useState(null)","[audit,setAudit]=useState(null),[configurationJob,setConfigurationJob]=useState(null)")
+s=s.replace(' return <div className="space-y-6" data-testid="batch-logs">',' return <div className="space-y-6" data-testid="batch-logs">\n  {configurationJob&&<ConfigurationHistory jobId={configurationJob} onClose={()=>setConfigurationJob(null)}/>}')
+s=s.replace("{job.filename}</div>","{job.filename}</div><div className=\"mt-1 text-xs text-slate-400\">{job.metrics?.configurationVersion?<button className=\"text-cyan-300 underline\" onClick={()=>setConfigurationJob(job.id)}>Configuration v{job.metrics.configurationVersion.version}</button>:'Configuration version not captured'}</div>")
+s=s.replace('<AuditMetrics metrics={audit.job.metrics}/>', '<p className="mb-4 text-sm text-cyan-300">Configuration: {audit.job.metrics?.configurationVersion?`Version ${audit.job.metrics.configurationVersion.version}`:\'Not captured for this historical run\'}</p><AuditMetrics metrics={audit.job.metrics}/>')
+s=s.replace('  {configurationJob&&<ConfigurationHistory jobId={configurationJob} onClose={()=>setConfigurationJob(null)}/>}','')
+# Render after other dialogs so the snapshot viewer appears above an audit dialog.
+s=s.replace(' </div>;\n}', ' {configurationJob&&<ConfigurationHistory jobId={configurationJob} onClose={()=>setConfigurationJob(null)}/>}\n </div>;\n}')
+p.write_text(s,encoding='utf-8')
+print('Configuration history UI ready')

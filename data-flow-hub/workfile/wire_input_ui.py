@@ -1,0 +1,37 @@
+from pathlib import Path
+root=Path('outputs/V1.12.0')
+p=root/'frontend-github/src/RetailerSetup.jsx';s=p.read_text(encoding='utf-8')
+s=s.replace("[sample,setSample]=useState(null)","[sampleInputId,setSampleInputId]=useState(''),[sample,setSample]=useState(null)")
+s=s.replace("if(!id)return;try{", "setSampleInputId('');if(!id)return;try{",1)
+s=s.replace('json({pipeline})','json({pipeline,inputFileId:sampleInputId||undefined})')
+s=s.replace("sample:sample,pipeline", "sample:sample,inputFileId:sampleInputId,pipeline")
+s=s.replace('setSample(result.sample);setNotice(',"setSampleInputId('');setSample(result.sample);setNotice(",1)
+s=s.replace('<InputFiles retailerId={config.id}',"<InputFiles retailerId={config.id} onUseSample={p=>{setSampleInputId(p.id);setSample(p.sample);setPreviewState(null);setView('rules');}}")
+s=s.replace('<h3 className="font-semibold">Upload Sample Data</h3>', '<h3 className="font-semibold">{sampleInputId?`Input File Sample · ${config.inputFiles?.find(p=>p.id===sampleInputId)?.purpose||\'\'}`:\'Upload Sample Data\'}</h3>')
+s=s.replace('sample is saved per retailer.', 'legacy sample is saved per retailer. Choose an input-specific sample from the Input Files tab.')
+p.write_text(s,encoding='utf-8')
+p=root/'script/retailer_setup.py';s=p.read_text(encoding='utf-8')
+s=s.replace("    def preview_data(rid, pipeline):\n        with get_db_connection() as db: sample=db.execute('SELECT * FROM retailer_samples WHERE retailer_id=?',(rid,)).fetchone()", """    def preview_data(rid, pipeline, input_file_id=None):
+        with get_db_connection() as db:
+            if input_file_id:
+                from input_files import load_profile
+                from input_file_io import parse_hash
+                _,profile,_=load_profile(db,rid,input_file_id)
+                sample=db.execute('SELECT * FROM input_file_samples WHERE retailer_id=? AND input_id=?',(rid,input_file_id)).fetchone()
+                if sample and sample['settings_hash']!=parse_hash(profile):raise ValueError('Input parsing settings changed. Upload a new sample first.')
+            else:sample=db.execute('SELECT * FROM retailer_samples WHERE retailer_id=?',(rid,)).fetchone()""")
+s=s.replace("preview_data(rid,body.get('pipeline',[]))", "preview_data(rid,body.get('pipeline',[]),body.get('inputFileId'))")
+p.write_text(s,encoding='utf-8')
+p=root/'frontend-github/src/BatchLogs.jsx';s=p.read_text(encoding='utf-8');s=s.replace("[storeIdField,setStoreIdField]=useState('');", "[storeIdField,setStoreIdField]=useState(''),[inputFileId,setInputFileId]=useState('');")
+s=s.replace("[file,retailerId,period,storeIdField,reprocessJob,reprocessPeriod]", "[file,retailerId,period,storeIdField,inputFileId,reprocessJob,reprocessPeriod]")
+s=s.replace(" const filtered=jobs.filter", " useEffect(()=>setInputFileId(''),[retailerId]);\n const inputs=retailers.find(r=>r.id===retailerId)?.inputFiles||[];\n const filtered=jobs.filter")
+s=s.replace("form.append('storeIdField',storeIdField);try", "form.append('storeIdField',storeIdField);if(inputFileId)form.append('inputFileId',inputFileId);try")
+s=s.replace('<label className="block text-sm space-y-2">Batch Data File', '<label className="block text-sm space-y-2">Input File Settings<select className={input} value={inputFileId} onChange={e=>setInputFileId(e.target.value)}><option value="">Legacy CSV / Excel / JSON defaults</option>{inputs.map(p=><option key={p.id} value={p.id}>{p.purpose} · {p.filename} · {p.fileType}</option>)}</select></label><label className="block text-sm space-y-2">Batch Data File',1)
+s=s.replace('accept=".csv,.xlsx,.json"', 'accept=".csv,.tsv,.txt,.xlsx,.json,.zip"')
+s=s.replace('<AuditMetrics metrics={audit.job.metrics}/>', '<p className="text-xs text-slate-400 mb-3">Input file: {audit.job.metrics?.inputFile?`${audit.job.metrics.inputFile.purpose} · ${audit.job.metrics.inputFile.filename}`:\'Legacy defaults\'}</p><AuditMetrics metrics={audit.job.metrics}/>')
+p.write_text(s,encoding='utf-8')
+p=root/'script/input_files.py';s=p.read_text(encoding='utf-8');s=s.replace("                    for path in files:\n                        try:", "                    for path in files:\n                        signature=None\n                        try:")
+s=s.replace("(str(path)+period+digest).encode()", "(str(path)+digest).encode()")
+s=s.replace("    threading.Thread(target=watch,daemon=True).start()", "    import multiprocessing,os\n    if multiprocessing.current_process().name=='MainProcess' and not os.getenv('DATAFLOW_DB'):\n        threading.Thread(target=watch,daemon=True).start()")
+p.write_text(s,encoding='utf-8')
+print('Input file UI and previews connected')

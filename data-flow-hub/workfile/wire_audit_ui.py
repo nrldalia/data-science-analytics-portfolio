@@ -1,0 +1,17 @@
+from pathlib import Path
+p=Path('outputs/V1.5.0/frontend-github/src/BatchLogs.jsx');s=Path('outputs/V1.4.A3/frontend-github/src/BatchLogs.jsx').read_text(encoding='utf-8')
+s=s.replace("[file,setFile]=useState(null)","[file,setFile]=useState(null),[storeIdField,setStoreIdField]=useState('')")
+s=s.replace("form.append('period',period);","form.append('period',period);form.append('storeIdField',storeIdField);")
+s=s.replace("{file&&<p className=\"text-sm text-cyan-300\">", "<label className=\"block text-sm space-y-2\">Store ID field (optional override)<input className={input} value={storeIdField} onChange={e=>setStoreIdField(e.target.value)} placeholder=\"Auto-detect Store ID from file\"/></label>{file&&<p className=\"text-sm text-cyan-300\">")
+s=s.replace('<div className="p-5 overflow-auto"><table', '<div className="p-5 overflow-auto"><AuditMetrics metrics={audit.job.metrics}/><table')
+component='''
+function AuditMetrics({metrics:m={}}){
+ const count=value=>value==null?'Unavailable':value.toLocaleString();
+ const bytes=value=>value==null?'Unavailable':`${value.toLocaleString()} bytes`;
+ const deviation=m.fileSizeDeviationBytes==null?'Unavailable — no completed previous-week batch':`${m.fileSizeDirection}: ${m.fileSizeDeviationBytes>0?'+':''}${m.fileSizeDeviationBytes.toLocaleString()} bytes${m.fileSizeDeviationPercent==null?' (percentage unavailable: previous size is zero)':` (${m.fileSizeDeviationPercent>0?'+':''}${m.fileSizeDeviationPercent}%)`}`;
+ return <section aria-label="Batch receipt metrics" className="mb-6 space-y-4"><div className="grid grid-cols-2 md:grid-cols-3 gap-3">{[['Rows Received',count(m.rowsReceived)],['Rows Count (after data cleaning)',count(m.rowsAfterCleaning)],['Stores Received',count(m.storesReceived)],['Store Table + New Stores',count(m.storeTotalIncludingNew)],['File Size',bytes(m.fileSizeBytes)],['Deviated File Size',deviation]].map(([label,value])=><div key={label} className="rounded border border-slate-700 bg-slate-900 p-3"><p className="text-xs text-slate-400">{label}</p><p className="mt-2 text-sm font-semibold">{value}</p></div>)}</div><p className="text-xs text-slate-400">File size compared with {m.previousPeriod||'previous ISO week'}: {bytes(m.previousFileSizeBytes)}. Counts use the input Store IDs and the store table at job start. {m.storeComparisonNote}</p>{m.rowsWithoutStoreId>0&&<p className="text-xs text-amber-300">{m.rowsWithoutStoreId} rows have no Store ID.</p>}<div className="grid md:grid-cols-2 gap-4">{[['New Stores',m.newStores,'text-amber-300'],['Missing Stores',m.missingStores,'text-rose-300']].map(([label,stores,color])=><div key={label} className="rounded border border-slate-700 p-3"><h4 className={`text-sm font-semibold ${color}`}>{label}: {stores==null?'Unavailable':stores.length}</h4>{stores?.length>0&&<ul className="mt-2 text-xs space-y-1 max-h-40 overflow-auto">{stores.map(store=><li key={store.key}>{store.key} · {store.name}</li>)}</ul>}{stores?.length===0&&<p className="mt-2 text-xs text-slate-400">None flagged.</p>}</div>)}</div><p className="text-xs text-slate-400">New stores are added to Store Table Management when the job is approved. Missing stores remain in the store table.{m.newStoresAddedOnApproval!=null&&` Added on approval: ${m.newStoresAddedOnApproval}.`}</p></section>;
+}
+'''
+s=s.replace('export default function BatchLogs',component+'\nexport default function BatchLogs')
+p.write_text(s,encoding='utf-8')
+print('Audit metrics UI ready')
