@@ -158,3 +158,7 @@ codes or configuration versions. Each retailer import is atomic, but the four
 retailers are not a single global transaction. If an operation fails midway,
 previously completed retailers remain saved; correct the problem and rerun to
 add only what is still missing. The loader never deletes records to reset a demo.
+
+Fixture fingerprints use the generator's LF line endings. The loader also accepts
+Git for Windows CRLF checkouts by normalizing line endings before verification;
+all other bytes remain checked. Real content edits still fail verification.

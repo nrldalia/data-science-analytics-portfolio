@@ -23,7 +23,9 @@ def load_plan():
         if path.parent != FIXTURES.resolve() or not path.is_file():
             raise ValueError('Demo CSV must be an existing file inside the fixture folder.')
         content = path.read_bytes()
-        if hashlib.sha256(content).hexdigest() != manifest['sha256'][entry['storesFile']]:
+        # Git for Windows can check out text fixtures with CRLF endings.
+        # The manifest hashes the generator's LF form; all other bytes remain checked.
+        if hashlib.sha256(content.replace(b'\r\n', b'\n')).hexdigest() != manifest['sha256'][entry['storesFile']]:
             raise ValueError('Demo fixture fingerprint does not match its manifest.')
         reader = csv.DictReader(io.StringIO(content.decode('utf-8-sig')))
         rows = list(reader)

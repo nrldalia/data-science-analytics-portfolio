@@ -103,7 +103,7 @@ def generate(output):
         target = output / name
         if target.is_symlink():
             raise ValueError(f"Refusing symlink destination: {name}")
-        if target.exists() and (not target.is_file() or target.read_bytes() != data):
+        if target.exists() and (not target.is_file() or target.read_bytes().replace(b'\r\n', b'\n') != data):
             raise ValueError(f"Refusing to overwrite changed file: {name}. Choose a new output folder.")
     output.mkdir(parents=True, exist_ok=True)
     for name, data in files.items():

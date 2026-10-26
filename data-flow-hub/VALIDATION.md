@@ -57,3 +57,9 @@ published cloud task were not tested.
   not proof that a native Windows PostgreSQL service has been installed or tested.
 - Windows launchers no longer invoke Docker and use the native connection helper.
   Windows batch execution and the pgAdmin installation steps remain untested here.
+
+## Windows demo fixture line endings
+
+Three regression tests pass for equivalent CRLF checkouts, rejection of edited
+content with either line ending, and non-overwriting generator reruns. The
+manifest remains the authoritative LF fingerprint; no checksums were replaced.

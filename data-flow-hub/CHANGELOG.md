@@ -1,5 +1,7 @@
 # Unreleased
 
+- Fix demo fingerprint verification for Windows CRLF checkouts while retaining content verification and changed-file protection.
+
 - Support native PostgreSQL on Windows without Docker Desktop; add connection setup and a step-by-step pgAdmin guide.
 
 - Add preview/confirm CSV and XLSX store imports with templates, validation reports, and identity-preserving updates.

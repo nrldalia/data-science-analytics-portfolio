@@ -1,0 +1,3 @@
+# Keep reproducible demo fixtures consistent on Windows and Unix.
+sample_data/store_import/*.csv text eol=lf
+sample_data/store_import/*.json text eol=lf
