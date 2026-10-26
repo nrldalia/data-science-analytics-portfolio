@@ -16,3 +16,5 @@ frontend-github/dist/
 .DS_Store
 
 backups/
+
+.artifacts/

@@ -6,7 +6,7 @@ import React, { useState, useEffect } from 'react';
 import { 
   Building2, Database, BarChart3, Settings, Search, 
   Filter, Download, X, Play, RefreshCw, CheckCircle2,
-  Mail, Edit2, ShieldAlert, Cpu, Check, FileText, Sun, Moon
+  Mail, Edit2, ShieldAlert, Cpu, Check, FileText, Sun, Moon, Menu
 } from 'lucide-react';
 
 const API = import.meta.env.VITE_API_URL || '/api/v1';
@@ -14,6 +14,7 @@ export default function App() {
   const [theme, setTheme] = useState(preferredTheme);
   const chooseTheme = value => { applyTheme(value, true); setTheme(value); };
   const [activeTab, setActiveTab] = useState('Client');
+  const [mobileNavigationOpen, setMobileNavigationOpen] = useState(false);
   const [batchFile, setBatchFile] = useState(null);
   const [stores, setStores] = useState([]);
   const [connectionError, setConnectionError] = useState('');
@@ -144,18 +145,18 @@ export default function App() {
   });
 
   return (
-    <div className="flex h-screen bg-[var(--app-background)] text-slate-100 font-sans overflow-hidden">
+    <div className="flex flex-col md:flex-row h-dvh bg-[var(--app-background)] text-slate-100 font-sans overflow-hidden">
       
       {/* Sidebar Navigation */}
-      <aside className="w-64 bg-[var(--sidebar-background)] border-r border-slate-700/50 flex flex-col justify-between p-4 shrink-0">
+      <aside className="w-full md:w-64 bg-[var(--sidebar-background)] border-b md:border-b-0 md:border-r border-slate-700/50 flex flex-col justify-between p-3 md:p-4 shrink-0">
         <div>
-          <div className="flex items-center gap-2 mb-8 px-2">
-            <Database className="text-cyan-400 w-6 h-6" />
-            <span className="font-bold text-lg tracking-wide text-cyan-400">DataFlow Hub</span>
+          <div className="flex items-center justify-between gap-2 md:mb-8 px-2">
+            <div className="flex items-center gap-2"><Database className="text-cyan-400 w-6 h-6" /><span className="font-bold text-lg tracking-wide text-cyan-400">DataFlow Hub</span></div>
+            <button type="button" className="md:hidden inline-flex items-center gap-2 rounded-lg border border-slate-700 px-3 py-2 text-sm" aria-controls="module-navigation" aria-expanded={mobileNavigationOpen} onClick={() => setMobileNavigationOpen(open => !open)}>{mobileNavigationOpen ? <X size={18}/> : <Menu size={18}/>}<span>Menu</span></button>
           </div>
 
-          <div className="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2 px-2">Modules</div>
-          <nav className="space-y-1">
+          <div className="hidden md:block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2 px-2">Modules</div>
+          <nav id="module-navigation" aria-label="Application modules" className={`${mobileNavigationOpen ? 'grid' : 'hidden'} grid-cols-2 gap-1 mt-3 md:mt-0 md:block md:space-y-1`}>
             {[
               { name: 'Client', icon: Building2 },
               { name: 'Data Streams', icon: Database },
@@ -168,7 +169,7 @@ export default function App() {
               return (
                 <button
                   key={item.name}
-                  onClick={() => setActiveTab(item.name)}
+                  onClick={() => { setActiveTab(item.name); setMobileNavigationOpen(false); }}
                   className={`flex items-center gap-3 w-full px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${
                     isActive ? 'nav-active' : 'nav-inactive'
                   }`}
@@ -181,7 +182,7 @@ export default function App() {
           </nav>
         </div>
 
-        <div className="p-3 bg-slate-800/50 rounded-lg border border-slate-700/50">
+        <div className={`${mobileNavigationOpen ? 'block' : 'hidden'} md:block p-3 mt-3 md:mt-0 bg-slate-800/50 rounded-lg border border-slate-700/50`}>
           <label className="flex items-center justify-center gap-2 cursor-pointer bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-semibold py-2 px-4 rounded-md text-xs transition-colors">
             <Download className="w-4 h-4" />
             Upload Data File
@@ -191,13 +192,13 @@ export default function App() {
       </aside>
 
       {/* Main Workspace */}
-      <main className="flex-1 flex flex-col overflow-y-auto">
-        <header className="h-16 border-b border-slate-800 flex items-center justify-between px-8 bg-[var(--app-background)] shrink-0">
-          <h1 className="text-xl font-bold text-slate-100">DataFlow Hub — Data Operations Suite</h1>
-          <div className="flex items-center gap-3 shrink-0"><div className="theme-switch" role="group" aria-label="Colour theme"><button type="button" aria-pressed={theme==='light'} onClick={()=>chooseTheme('light')}><Sun size={14} aria-hidden="true"/>Light</button><button type="button" aria-pressed={theme==='dark'} onClick={()=>chooseTheme('dark')}><Moon size={14} aria-hidden="true"/>Dark</button></div><span className="text-xs bg-slate-900 text-cyan-400 px-2.5 py-1 rounded-full border border-slate-700">V1.14.A2</span></div>
+      <main className="flex-1 min-w-0 min-h-0 flex flex-col overflow-y-auto">
+        <header className="min-h-16 border-b border-slate-800 flex flex-wrap items-center justify-between gap-3 px-4 py-3 md:px-8 bg-[var(--app-background)] shrink-0">
+          <h1 className="text-sm sm:text-lg xl:text-xl font-bold text-slate-100"><span className="md:hidden">Data Operations Suite</span><span className="hidden md:inline">DataFlow Hub — Data Operations Suite</span></h1>
+          <div className="flex items-center gap-3 shrink-0"><div className="theme-switch" role="group" aria-label="Colour theme"><button type="button" aria-pressed={theme==='light'} onClick={()=>chooseTheme('light')}><Sun size={14} aria-hidden="true"/>Light</button><button type="button" aria-pressed={theme==='dark'} onClick={()=>chooseTheme('dark')}><Moon size={14} aria-hidden="true"/>Dark</button></div><span className="hidden sm:inline text-xs bg-slate-900 text-cyan-400 px-2.5 py-1 rounded-full border border-slate-700">V1.14.A2</span></div>
         </header>
 
-        <div className="p-8 space-y-6 flex-1">
+        <div className="min-w-0 p-3 sm:p-5 lg:p-8 space-y-6 flex-1">
           {connectionError && <div role="alert" className="rounded-lg border border-rose-500/30 bg-rose-500/10 p-3 text-sm text-rose-300">{connectionError}</div>}
           
           {activeTab === 'KPI Records' && <KPIRecords />}

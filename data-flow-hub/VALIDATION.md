@@ -3,7 +3,7 @@
 Validated on Linux with Python 3.12, Node.js 24.19.0 and local PostgreSQL 17.11.
 
 - React production build passes.
-- PostgreSQL backend run: 136 tests executed, 134 passed, 2 failed.
+- PostgreSQL backend run: 153 tests executed, 151 passed, 2 failed.
 - The two failures are existing spreadsheet password tests:
   - `test_sheet_secret_is_encrypted_and_not_in_history`
   - `test_password_yes_requires_secret_and_no_hides_and_clears`
@@ -25,5 +25,23 @@ Run `npm run test:postgres` with the Python virtual environment active.
 The runner isolates each module in a temporary PostgreSQL schema. Some legacy
 migration unit tests intentionally exercise in-memory SQLite fixtures.
 
-Live AI calls, Windows launchers, browser interaction, production deployment and
-restoration in a newly published cloud task were not tested.
+## Bulk store import and store management
+
+- Ten backend regression tests pass for CSV/XLSX templates and imports,
+  validation, preview expiry/staleness/replay, atomic rollback, identity/code
+  preservation, history, search, filtering, sorting, and pagination.
+- Seven independent acceptance tests pass, including four retailers with
+  exactly 300 stores each (1,200 distinct internal IDs/codes), update preservation,
+  invalid-row blocking, cross-retailer isolation, leading-zero IDs, and loader
+  idempotence/conflict preflight.
+- Chromium browser checks exercise template download, a 300-store preview and
+  confirmation, pagination, editing the correct store from page 2, status
+  filtering, search/empty state, invalid-import blocking, error-report download,
+  and mobile rendering. No JavaScript page errors were reported.
+- Upload review checks cover formula-safe error CSV output, bounded CSV/XLSX
+  parsing, compressed/expanded/member/worksheet-dimension limits and XLSX formula rejection.
+- Four synthetic demo retailers were loaded additively in the local development
+  database, with 300 stores each. Repeating the loader changed no records.
+
+Live AI calls, Windows launchers, production deployment and restoration in a newly
+published cloud task were not tested.

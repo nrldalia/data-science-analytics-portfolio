@@ -1,0 +1,301 @@
+store_id,store_name,address,status,exception
+DEMO_CEMPAKA-001,Cempaka Demo Kuala Lumpur 001,"Fictional Lot 001, Jalan Demo 1, Kuala Lumpur, Wilayah Persekutuan, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-002,Cempaka Demo Petaling Jaya 002,"Fictional Lot 002, Jalan Demo 2, Petaling Jaya, Selangor, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-003,Cempaka Demo Shah Alam 003,"Fictional Lot 003, Jalan Demo 3, Shah Alam, Selangor, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-004,Cempaka Demo George Town 004,"Fictional Lot 004, Jalan Demo 4, George Town, Pulau Pinang, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-005,Cempaka Demo Ipoh 005,"Fictional Lot 005, Jalan Demo 5, Ipoh, Perak, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-006,Cempaka Demo Johor Bahru 006,"Fictional Lot 006, Jalan Demo 6, Johor Bahru, Johor, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-007,Cempaka Demo Melaka 007,"Fictional Lot 007, Jalan Demo 7, Melaka, Melaka, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-008,Cempaka Demo Seremban 008,"Fictional Lot 008, Jalan Demo 8, Seremban, Negeri Sembilan, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-009,Cempaka Demo Kuantan 009,"Fictional Lot 009, Jalan Demo 9, Kuantan, Pahang, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-010,Cempaka Demo Kota Bharu 010,"Fictional Lot 010, Jalan Demo 10, Kota Bharu, Kelantan, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-011,Cempaka Demo Kuching 011,"Fictional Lot 011, Jalan Demo 11, Kuching, Sarawak, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-012,Cempaka Demo Kota Kinabalu 012,"Fictional Lot 012, Jalan Demo 12, Kota Kinabalu, Sabah, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-013,Cempaka Demo Kuala Lumpur 013,"Fictional Lot 013, Jalan Demo 13, Kuala Lumpur, Wilayah Persekutuan, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-014,Cempaka Demo Petaling Jaya 014,"Fictional Lot 014, Jalan Demo 14, Petaling Jaya, Selangor, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-015,Cempaka Demo Shah Alam 015,"Fictional Lot 015, Jalan Demo 15, Shah Alam, Selangor, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-016,Cempaka Demo George Town 016,"Fictional Lot 016, Jalan Demo 16, George Town, Pulau Pinang, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-017,Cempaka Demo Ipoh 017,"Fictional Lot 017, Jalan Demo 17, Ipoh, Perak, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-018,Cempaka Demo Johor Bahru 018,"Fictional Lot 018, Jalan Demo 18, Johor Bahru, Johor, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-019,Cempaka Demo Melaka 019,"Fictional Lot 019, Jalan Demo 19, Melaka, Melaka, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-020,Cempaka Demo Seremban 020,"Fictional Lot 020, Jalan Demo 20, Seremban, Negeri Sembilan, Malaysia (synthetic)",Inactive,false
+DEMO_CEMPAKA-021,Cempaka Demo Kuantan 021,"Fictional Lot 021, Jalan Demo 1, Kuantan, Pahang, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-022,Cempaka Demo Kota Bharu 022,"Fictional Lot 022, Jalan Demo 2, Kota Bharu, Kelantan, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-023,Cempaka Demo Kuching 023,"Fictional Lot 023, Jalan Demo 3, Kuching, Sarawak, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-024,Cempaka Demo Kota Kinabalu 024,"Fictional Lot 024, Jalan Demo 4, Kota Kinabalu, Sabah, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-025,Cempaka Demo Kuala Lumpur 025,"Fictional Lot 025, Jalan Demo 5, Kuala Lumpur, Wilayah Persekutuan, Malaysia (synthetic)",Active,true
+DEMO_CEMPAKA-026,Cempaka Demo Petaling Jaya 026,"Fictional Lot 026, Jalan Demo 6, Petaling Jaya, Selangor, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-027,Cempaka Demo Shah Alam 027,"Fictional Lot 027, Jalan Demo 7, Shah Alam, Selangor, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-028,Cempaka Demo George Town 028,"Fictional Lot 028, Jalan Demo 8, George Town, Pulau Pinang, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-029,Cempaka Demo Ipoh 029,"Fictional Lot 029, Jalan Demo 9, Ipoh, Perak, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-030,Cempaka Demo Johor Bahru 030,"Fictional Lot 030, Jalan Demo 10, Johor Bahru, Johor, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-031,Cempaka Demo Melaka 031,"Fictional Lot 031, Jalan Demo 11, Melaka, Melaka, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-032,Cempaka Demo Seremban 032,"Fictional Lot 032, Jalan Demo 12, Seremban, Negeri Sembilan, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-033,Cempaka Demo Kuantan 033,"Fictional Lot 033, Jalan Demo 13, Kuantan, Pahang, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-034,Cempaka Demo Kota Bharu 034,"Fictional Lot 034, Jalan Demo 14, Kota Bharu, Kelantan, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-035,Cempaka Demo Kuching 035,"Fictional Lot 035, Jalan Demo 15, Kuching, Sarawak, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-036,Cempaka Demo Kota Kinabalu 036,"Fictional Lot 036, Jalan Demo 16, Kota Kinabalu, Sabah, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-037,Cempaka Demo Kuala Lumpur 037,"Fictional Lot 037, Jalan Demo 17, Kuala Lumpur, Wilayah Persekutuan, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-038,Cempaka Demo Petaling Jaya 038,"Fictional Lot 038, Jalan Demo 18, Petaling Jaya, Selangor, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-039,Cempaka Demo Shah Alam 039,"Fictional Lot 039, Jalan Demo 19, Shah Alam, Selangor, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-040,Cempaka Demo George Town 040,"Fictional Lot 040, Jalan Demo 20, George Town, Pulau Pinang, Malaysia (synthetic)",Inactive,false
+DEMO_CEMPAKA-041,Cempaka Demo Ipoh 041,"Fictional Lot 041, Jalan Demo 1, Ipoh, Perak, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-042,Cempaka Demo Johor Bahru 042,"Fictional Lot 042, Jalan Demo 2, Johor Bahru, Johor, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-043,Cempaka Demo Melaka 043,"Fictional Lot 043, Jalan Demo 3, Melaka, Melaka, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-044,Cempaka Demo Seremban 044,"Fictional Lot 044, Jalan Demo 4, Seremban, Negeri Sembilan, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-045,Cempaka Demo Kuantan 045,"Fictional Lot 045, Jalan Demo 5, Kuantan, Pahang, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-046,Cempaka Demo Kota Bharu 046,"Fictional Lot 046, Jalan Demo 6, Kota Bharu, Kelantan, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-047,Cempaka Demo Kuching 047,"Fictional Lot 047, Jalan Demo 7, Kuching, Sarawak, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-048,Cempaka Demo Kota Kinabalu 048,"Fictional Lot 048, Jalan Demo 8, Kota Kinabalu, Sabah, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-049,Cempaka Demo Kuala Lumpur 049,"Fictional Lot 049, Jalan Demo 9, Kuala Lumpur, Wilayah Persekutuan, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-050,Cempaka Demo Petaling Jaya 050,"Fictional Lot 050, Jalan Demo 10, Petaling Jaya, Selangor, Malaysia (synthetic)",Active,true
+DEMO_CEMPAKA-051,Cempaka Demo Shah Alam 051,"Fictional Lot 051, Jalan Demo 11, Shah Alam, Selangor, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-052,Cempaka Demo George Town 052,"Fictional Lot 052, Jalan Demo 12, George Town, Pulau Pinang, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-053,Cempaka Demo Ipoh 053,"Fictional Lot 053, Jalan Demo 13, Ipoh, Perak, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-054,Cempaka Demo Johor Bahru 054,"Fictional Lot 054, Jalan Demo 14, Johor Bahru, Johor, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-055,Cempaka Demo Melaka 055,"Fictional Lot 055, Jalan Demo 15, Melaka, Melaka, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-056,Cempaka Demo Seremban 056,"Fictional Lot 056, Jalan Demo 16, Seremban, Negeri Sembilan, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-057,Cempaka Demo Kuantan 057,"Fictional Lot 057, Jalan Demo 17, Kuantan, Pahang, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-058,Cempaka Demo Kota Bharu 058,"Fictional Lot 058, Jalan Demo 18, Kota Bharu, Kelantan, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-059,Cempaka Demo Kuching 059,"Fictional Lot 059, Jalan Demo 19, Kuching, Sarawak, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-060,Cempaka Demo Kota Kinabalu 060,"Fictional Lot 060, Jalan Demo 20, Kota Kinabalu, Sabah, Malaysia (synthetic)",Inactive,false
+DEMO_CEMPAKA-061,Cempaka Demo Kuala Lumpur 061,"Fictional Lot 061, Jalan Demo 1, Kuala Lumpur, Wilayah Persekutuan, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-062,Cempaka Demo Petaling Jaya 062,"Fictional Lot 062, Jalan Demo 2, Petaling Jaya, Selangor, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-063,Cempaka Demo Shah Alam 063,"Fictional Lot 063, Jalan Demo 3, Shah Alam, Selangor, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-064,Cempaka Demo George Town 064,"Fictional Lot 064, Jalan Demo 4, George Town, Pulau Pinang, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-065,Cempaka Demo Ipoh 065,"Fictional Lot 065, Jalan Demo 5, Ipoh, Perak, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-066,Cempaka Demo Johor Bahru 066,"Fictional Lot 066, Jalan Demo 6, Johor Bahru, Johor, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-067,Cempaka Demo Melaka 067,"Fictional Lot 067, Jalan Demo 7, Melaka, Melaka, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-068,Cempaka Demo Seremban 068,"Fictional Lot 068, Jalan Demo 8, Seremban, Negeri Sembilan, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-069,Cempaka Demo Kuantan 069,"Fictional Lot 069, Jalan Demo 9, Kuantan, Pahang, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-070,Cempaka Demo Kota Bharu 070,"Fictional Lot 070, Jalan Demo 10, Kota Bharu, Kelantan, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-071,Cempaka Demo Kuching 071,"Fictional Lot 071, Jalan Demo 11, Kuching, Sarawak, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-072,Cempaka Demo Kota Kinabalu 072,"Fictional Lot 072, Jalan Demo 12, Kota Kinabalu, Sabah, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-073,Cempaka Demo Kuala Lumpur 073,"Fictional Lot 073, Jalan Demo 13, Kuala Lumpur, Wilayah Persekutuan, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-074,Cempaka Demo Petaling Jaya 074,"Fictional Lot 074, Jalan Demo 14, Petaling Jaya, Selangor, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-075,Cempaka Demo Shah Alam 075,"Fictional Lot 075, Jalan Demo 15, Shah Alam, Selangor, Malaysia (synthetic)",Active,true
+DEMO_CEMPAKA-076,Cempaka Demo George Town 076,"Fictional Lot 076, Jalan Demo 16, George Town, Pulau Pinang, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-077,Cempaka Demo Ipoh 077,"Fictional Lot 077, Jalan Demo 17, Ipoh, Perak, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-078,Cempaka Demo Johor Bahru 078,"Fictional Lot 078, Jalan Demo 18, Johor Bahru, Johor, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-079,Cempaka Demo Melaka 079,"Fictional Lot 079, Jalan Demo 19, Melaka, Melaka, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-080,Cempaka Demo Seremban 080,"Fictional Lot 080, Jalan Demo 20, Seremban, Negeri Sembilan, Malaysia (synthetic)",Inactive,false
+DEMO_CEMPAKA-081,Cempaka Demo Kuantan 081,"Fictional Lot 081, Jalan Demo 1, Kuantan, Pahang, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-082,Cempaka Demo Kota Bharu 082,"Fictional Lot 082, Jalan Demo 2, Kota Bharu, Kelantan, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-083,Cempaka Demo Kuching 083,"Fictional Lot 083, Jalan Demo 3, Kuching, Sarawak, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-084,Cempaka Demo Kota Kinabalu 084,"Fictional Lot 084, Jalan Demo 4, Kota Kinabalu, Sabah, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-085,Cempaka Demo Kuala Lumpur 085,"Fictional Lot 085, Jalan Demo 5, Kuala Lumpur, Wilayah Persekutuan, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-086,Cempaka Demo Petaling Jaya 086,"Fictional Lot 086, Jalan Demo 6, Petaling Jaya, Selangor, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-087,Cempaka Demo Shah Alam 087,"Fictional Lot 087, Jalan Demo 7, Shah Alam, Selangor, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-088,Cempaka Demo George Town 088,"Fictional Lot 088, Jalan Demo 8, George Town, Pulau Pinang, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-089,Cempaka Demo Ipoh 089,"Fictional Lot 089, Jalan Demo 9, Ipoh, Perak, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-090,Cempaka Demo Johor Bahru 090,"Fictional Lot 090, Jalan Demo 10, Johor Bahru, Johor, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-091,Cempaka Demo Melaka 091,"Fictional Lot 091, Jalan Demo 11, Melaka, Melaka, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-092,Cempaka Demo Seremban 092,"Fictional Lot 092, Jalan Demo 12, Seremban, Negeri Sembilan, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-093,Cempaka Demo Kuantan 093,"Fictional Lot 093, Jalan Demo 13, Kuantan, Pahang, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-094,Cempaka Demo Kota Bharu 094,"Fictional Lot 094, Jalan Demo 14, Kota Bharu, Kelantan, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-095,Cempaka Demo Kuching 095,"Fictional Lot 095, Jalan Demo 15, Kuching, Sarawak, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-096,Cempaka Demo Kota Kinabalu 096,"Fictional Lot 096, Jalan Demo 16, Kota Kinabalu, Sabah, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-097,Cempaka Demo Kuala Lumpur 097,"Fictional Lot 097, Jalan Demo 17, Kuala Lumpur, Wilayah Persekutuan, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-098,Cempaka Demo Petaling Jaya 098,"Fictional Lot 098, Jalan Demo 18, Petaling Jaya, Selangor, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-099,Cempaka Demo Shah Alam 099,"Fictional Lot 099, Jalan Demo 19, Shah Alam, Selangor, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-100,Cempaka Demo George Town 100,"Fictional Lot 100, Jalan Demo 20, George Town, Pulau Pinang, Malaysia (synthetic)",Inactive,true
+DEMO_CEMPAKA-101,Cempaka Demo Ipoh 101,"Fictional Lot 101, Jalan Demo 1, Ipoh, Perak, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-102,Cempaka Demo Johor Bahru 102,"Fictional Lot 102, Jalan Demo 2, Johor Bahru, Johor, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-103,Cempaka Demo Melaka 103,"Fictional Lot 103, Jalan Demo 3, Melaka, Melaka, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-104,Cempaka Demo Seremban 104,"Fictional Lot 104, Jalan Demo 4, Seremban, Negeri Sembilan, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-105,Cempaka Demo Kuantan 105,"Fictional Lot 105, Jalan Demo 5, Kuantan, Pahang, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-106,Cempaka Demo Kota Bharu 106,"Fictional Lot 106, Jalan Demo 6, Kota Bharu, Kelantan, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-107,Cempaka Demo Kuching 107,"Fictional Lot 107, Jalan Demo 7, Kuching, Sarawak, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-108,Cempaka Demo Kota Kinabalu 108,"Fictional Lot 108, Jalan Demo 8, Kota Kinabalu, Sabah, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-109,Cempaka Demo Kuala Lumpur 109,"Fictional Lot 109, Jalan Demo 9, Kuala Lumpur, Wilayah Persekutuan, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-110,Cempaka Demo Petaling Jaya 110,"Fictional Lot 110, Jalan Demo 10, Petaling Jaya, Selangor, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-111,Cempaka Demo Shah Alam 111,"Fictional Lot 111, Jalan Demo 11, Shah Alam, Selangor, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-112,Cempaka Demo George Town 112,"Fictional Lot 112, Jalan Demo 12, George Town, Pulau Pinang, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-113,Cempaka Demo Ipoh 113,"Fictional Lot 113, Jalan Demo 13, Ipoh, Perak, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-114,Cempaka Demo Johor Bahru 114,"Fictional Lot 114, Jalan Demo 14, Johor Bahru, Johor, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-115,Cempaka Demo Melaka 115,"Fictional Lot 115, Jalan Demo 15, Melaka, Melaka, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-116,Cempaka Demo Seremban 116,"Fictional Lot 116, Jalan Demo 16, Seremban, Negeri Sembilan, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-117,Cempaka Demo Kuantan 117,"Fictional Lot 117, Jalan Demo 17, Kuantan, Pahang, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-118,Cempaka Demo Kota Bharu 118,"Fictional Lot 118, Jalan Demo 18, Kota Bharu, Kelantan, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-119,Cempaka Demo Kuching 119,"Fictional Lot 119, Jalan Demo 19, Kuching, Sarawak, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-120,Cempaka Demo Kota Kinabalu 120,"Fictional Lot 120, Jalan Demo 20, Kota Kinabalu, Sabah, Malaysia (synthetic)",Inactive,false
+DEMO_CEMPAKA-121,Cempaka Demo Kuala Lumpur 121,"Fictional Lot 121, Jalan Demo 1, Kuala Lumpur, Wilayah Persekutuan, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-122,Cempaka Demo Petaling Jaya 122,"Fictional Lot 122, Jalan Demo 2, Petaling Jaya, Selangor, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-123,Cempaka Demo Shah Alam 123,"Fictional Lot 123, Jalan Demo 3, Shah Alam, Selangor, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-124,Cempaka Demo George Town 124,"Fictional Lot 124, Jalan Demo 4, George Town, Pulau Pinang, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-125,Cempaka Demo Ipoh 125,"Fictional Lot 125, Jalan Demo 5, Ipoh, Perak, Malaysia (synthetic)",Active,true
+DEMO_CEMPAKA-126,Cempaka Demo Johor Bahru 126,"Fictional Lot 126, Jalan Demo 6, Johor Bahru, Johor, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-127,Cempaka Demo Melaka 127,"Fictional Lot 127, Jalan Demo 7, Melaka, Melaka, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-128,Cempaka Demo Seremban 128,"Fictional Lot 128, Jalan Demo 8, Seremban, Negeri Sembilan, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-129,Cempaka Demo Kuantan 129,"Fictional Lot 129, Jalan Demo 9, Kuantan, Pahang, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-130,Cempaka Demo Kota Bharu 130,"Fictional Lot 130, Jalan Demo 10, Kota Bharu, Kelantan, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-131,Cempaka Demo Kuching 131,"Fictional Lot 131, Jalan Demo 11, Kuching, Sarawak, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-132,Cempaka Demo Kota Kinabalu 132,"Fictional Lot 132, Jalan Demo 12, Kota Kinabalu, Sabah, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-133,Cempaka Demo Kuala Lumpur 133,"Fictional Lot 133, Jalan Demo 13, Kuala Lumpur, Wilayah Persekutuan, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-134,Cempaka Demo Petaling Jaya 134,"Fictional Lot 134, Jalan Demo 14, Petaling Jaya, Selangor, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-135,Cempaka Demo Shah Alam 135,"Fictional Lot 135, Jalan Demo 15, Shah Alam, Selangor, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-136,Cempaka Demo George Town 136,"Fictional Lot 136, Jalan Demo 16, George Town, Pulau Pinang, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-137,Cempaka Demo Ipoh 137,"Fictional Lot 137, Jalan Demo 17, Ipoh, Perak, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-138,Cempaka Demo Johor Bahru 138,"Fictional Lot 138, Jalan Demo 18, Johor Bahru, Johor, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-139,Cempaka Demo Melaka 139,"Fictional Lot 139, Jalan Demo 19, Melaka, Melaka, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-140,Cempaka Demo Seremban 140,"Fictional Lot 140, Jalan Demo 20, Seremban, Negeri Sembilan, Malaysia (synthetic)",Inactive,false
+DEMO_CEMPAKA-141,Cempaka Demo Kuantan 141,"Fictional Lot 141, Jalan Demo 1, Kuantan, Pahang, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-142,Cempaka Demo Kota Bharu 142,"Fictional Lot 142, Jalan Demo 2, Kota Bharu, Kelantan, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-143,Cempaka Demo Kuching 143,"Fictional Lot 143, Jalan Demo 3, Kuching, Sarawak, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-144,Cempaka Demo Kota Kinabalu 144,"Fictional Lot 144, Jalan Demo 4, Kota Kinabalu, Sabah, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-145,Cempaka Demo Kuala Lumpur 145,"Fictional Lot 145, Jalan Demo 5, Kuala Lumpur, Wilayah Persekutuan, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-146,Cempaka Demo Petaling Jaya 146,"Fictional Lot 146, Jalan Demo 6, Petaling Jaya, Selangor, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-147,Cempaka Demo Shah Alam 147,"Fictional Lot 147, Jalan Demo 7, Shah Alam, Selangor, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-148,Cempaka Demo George Town 148,"Fictional Lot 148, Jalan Demo 8, George Town, Pulau Pinang, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-149,Cempaka Demo Ipoh 149,"Fictional Lot 149, Jalan Demo 9, Ipoh, Perak, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-150,Cempaka Demo Johor Bahru 150,"Fictional Lot 150, Jalan Demo 10, Johor Bahru, Johor, Malaysia (synthetic)",Active,true
+DEMO_CEMPAKA-151,Cempaka Demo Melaka 151,"Fictional Lot 151, Jalan Demo 11, Melaka, Melaka, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-152,Cempaka Demo Seremban 152,"Fictional Lot 152, Jalan Demo 12, Seremban, Negeri Sembilan, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-153,Cempaka Demo Kuantan 153,"Fictional Lot 153, Jalan Demo 13, Kuantan, Pahang, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-154,Cempaka Demo Kota Bharu 154,"Fictional Lot 154, Jalan Demo 14, Kota Bharu, Kelantan, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-155,Cempaka Demo Kuching 155,"Fictional Lot 155, Jalan Demo 15, Kuching, Sarawak, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-156,Cempaka Demo Kota Kinabalu 156,"Fictional Lot 156, Jalan Demo 16, Kota Kinabalu, Sabah, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-157,Cempaka Demo Kuala Lumpur 157,"Fictional Lot 157, Jalan Demo 17, Kuala Lumpur, Wilayah Persekutuan, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-158,Cempaka Demo Petaling Jaya 158,"Fictional Lot 158, Jalan Demo 18, Petaling Jaya, Selangor, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-159,Cempaka Demo Shah Alam 159,"Fictional Lot 159, Jalan Demo 19, Shah Alam, Selangor, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-160,Cempaka Demo George Town 160,"Fictional Lot 160, Jalan Demo 20, George Town, Pulau Pinang, Malaysia (synthetic)",Inactive,false
+DEMO_CEMPAKA-161,Cempaka Demo Ipoh 161,"Fictional Lot 161, Jalan Demo 1, Ipoh, Perak, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-162,Cempaka Demo Johor Bahru 162,"Fictional Lot 162, Jalan Demo 2, Johor Bahru, Johor, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-163,Cempaka Demo Melaka 163,"Fictional Lot 163, Jalan Demo 3, Melaka, Melaka, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-164,Cempaka Demo Seremban 164,"Fictional Lot 164, Jalan Demo 4, Seremban, Negeri Sembilan, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-165,Cempaka Demo Kuantan 165,"Fictional Lot 165, Jalan Demo 5, Kuantan, Pahang, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-166,Cempaka Demo Kota Bharu 166,"Fictional Lot 166, Jalan Demo 6, Kota Bharu, Kelantan, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-167,Cempaka Demo Kuching 167,"Fictional Lot 167, Jalan Demo 7, Kuching, Sarawak, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-168,Cempaka Demo Kota Kinabalu 168,"Fictional Lot 168, Jalan Demo 8, Kota Kinabalu, Sabah, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-169,Cempaka Demo Kuala Lumpur 169,"Fictional Lot 169, Jalan Demo 9, Kuala Lumpur, Wilayah Persekutuan, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-170,Cempaka Demo Petaling Jaya 170,"Fictional Lot 170, Jalan Demo 10, Petaling Jaya, Selangor, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-171,Cempaka Demo Shah Alam 171,"Fictional Lot 171, Jalan Demo 11, Shah Alam, Selangor, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-172,Cempaka Demo George Town 172,"Fictional Lot 172, Jalan Demo 12, George Town, Pulau Pinang, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-173,Cempaka Demo Ipoh 173,"Fictional Lot 173, Jalan Demo 13, Ipoh, Perak, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-174,Cempaka Demo Johor Bahru 174,"Fictional Lot 174, Jalan Demo 14, Johor Bahru, Johor, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-175,Cempaka Demo Melaka 175,"Fictional Lot 175, Jalan Demo 15, Melaka, Melaka, Malaysia (synthetic)",Active,true
+DEMO_CEMPAKA-176,Cempaka Demo Seremban 176,"Fictional Lot 176, Jalan Demo 16, Seremban, Negeri Sembilan, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-177,Cempaka Demo Kuantan 177,"Fictional Lot 177, Jalan Demo 17, Kuantan, Pahang, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-178,Cempaka Demo Kota Bharu 178,"Fictional Lot 178, Jalan Demo 18, Kota Bharu, Kelantan, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-179,Cempaka Demo Kuching 179,"Fictional Lot 179, Jalan Demo 19, Kuching, Sarawak, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-180,Cempaka Demo Kota Kinabalu 180,"Fictional Lot 180, Jalan Demo 20, Kota Kinabalu, Sabah, Malaysia (synthetic)",Inactive,false
+DEMO_CEMPAKA-181,Cempaka Demo Kuala Lumpur 181,"Fictional Lot 181, Jalan Demo 1, Kuala Lumpur, Wilayah Persekutuan, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-182,Cempaka Demo Petaling Jaya 182,"Fictional Lot 182, Jalan Demo 2, Petaling Jaya, Selangor, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-183,Cempaka Demo Shah Alam 183,"Fictional Lot 183, Jalan Demo 3, Shah Alam, Selangor, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-184,Cempaka Demo George Town 184,"Fictional Lot 184, Jalan Demo 4, George Town, Pulau Pinang, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-185,Cempaka Demo Ipoh 185,"Fictional Lot 185, Jalan Demo 5, Ipoh, Perak, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-186,Cempaka Demo Johor Bahru 186,"Fictional Lot 186, Jalan Demo 6, Johor Bahru, Johor, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-187,Cempaka Demo Melaka 187,"Fictional Lot 187, Jalan Demo 7, Melaka, Melaka, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-188,Cempaka Demo Seremban 188,"Fictional Lot 188, Jalan Demo 8, Seremban, Negeri Sembilan, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-189,Cempaka Demo Kuantan 189,"Fictional Lot 189, Jalan Demo 9, Kuantan, Pahang, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-190,Cempaka Demo Kota Bharu 190,"Fictional Lot 190, Jalan Demo 10, Kota Bharu, Kelantan, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-191,Cempaka Demo Kuching 191,"Fictional Lot 191, Jalan Demo 11, Kuching, Sarawak, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-192,Cempaka Demo Kota Kinabalu 192,"Fictional Lot 192, Jalan Demo 12, Kota Kinabalu, Sabah, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-193,Cempaka Demo Kuala Lumpur 193,"Fictional Lot 193, Jalan Demo 13, Kuala Lumpur, Wilayah Persekutuan, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-194,Cempaka Demo Petaling Jaya 194,"Fictional Lot 194, Jalan Demo 14, Petaling Jaya, Selangor, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-195,Cempaka Demo Shah Alam 195,"Fictional Lot 195, Jalan Demo 15, Shah Alam, Selangor, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-196,Cempaka Demo George Town 196,"Fictional Lot 196, Jalan Demo 16, George Town, Pulau Pinang, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-197,Cempaka Demo Ipoh 197,"Fictional Lot 197, Jalan Demo 17, Ipoh, Perak, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-198,Cempaka Demo Johor Bahru 198,"Fictional Lot 198, Jalan Demo 18, Johor Bahru, Johor, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-199,Cempaka Demo Melaka 199,"Fictional Lot 199, Jalan Demo 19, Melaka, Melaka, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-200,Cempaka Demo Seremban 200,"Fictional Lot 200, Jalan Demo 20, Seremban, Negeri Sembilan, Malaysia (synthetic)",Inactive,true
+DEMO_CEMPAKA-201,Cempaka Demo Kuantan 201,"Fictional Lot 201, Jalan Demo 1, Kuantan, Pahang, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-202,Cempaka Demo Kota Bharu 202,"Fictional Lot 202, Jalan Demo 2, Kota Bharu, Kelantan, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-203,Cempaka Demo Kuching 203,"Fictional Lot 203, Jalan Demo 3, Kuching, Sarawak, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-204,Cempaka Demo Kota Kinabalu 204,"Fictional Lot 204, Jalan Demo 4, Kota Kinabalu, Sabah, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-205,Cempaka Demo Kuala Lumpur 205,"Fictional Lot 205, Jalan Demo 5, Kuala Lumpur, Wilayah Persekutuan, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-206,Cempaka Demo Petaling Jaya 206,"Fictional Lot 206, Jalan Demo 6, Petaling Jaya, Selangor, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-207,Cempaka Demo Shah Alam 207,"Fictional Lot 207, Jalan Demo 7, Shah Alam, Selangor, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-208,Cempaka Demo George Town 208,"Fictional Lot 208, Jalan Demo 8, George Town, Pulau Pinang, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-209,Cempaka Demo Ipoh 209,"Fictional Lot 209, Jalan Demo 9, Ipoh, Perak, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-210,Cempaka Demo Johor Bahru 210,"Fictional Lot 210, Jalan Demo 10, Johor Bahru, Johor, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-211,Cempaka Demo Melaka 211,"Fictional Lot 211, Jalan Demo 11, Melaka, Melaka, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-212,Cempaka Demo Seremban 212,"Fictional Lot 212, Jalan Demo 12, Seremban, Negeri Sembilan, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-213,Cempaka Demo Kuantan 213,"Fictional Lot 213, Jalan Demo 13, Kuantan, Pahang, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-214,Cempaka Demo Kota Bharu 214,"Fictional Lot 214, Jalan Demo 14, Kota Bharu, Kelantan, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-215,Cempaka Demo Kuching 215,"Fictional Lot 215, Jalan Demo 15, Kuching, Sarawak, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-216,Cempaka Demo Kota Kinabalu 216,"Fictional Lot 216, Jalan Demo 16, Kota Kinabalu, Sabah, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-217,Cempaka Demo Kuala Lumpur 217,"Fictional Lot 217, Jalan Demo 17, Kuala Lumpur, Wilayah Persekutuan, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-218,Cempaka Demo Petaling Jaya 218,"Fictional Lot 218, Jalan Demo 18, Petaling Jaya, Selangor, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-219,Cempaka Demo Shah Alam 219,"Fictional Lot 219, Jalan Demo 19, Shah Alam, Selangor, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-220,Cempaka Demo George Town 220,"Fictional Lot 220, Jalan Demo 20, George Town, Pulau Pinang, Malaysia (synthetic)",Inactive,false
+DEMO_CEMPAKA-221,Cempaka Demo Ipoh 221,"Fictional Lot 221, Jalan Demo 1, Ipoh, Perak, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-222,Cempaka Demo Johor Bahru 222,"Fictional Lot 222, Jalan Demo 2, Johor Bahru, Johor, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-223,Cempaka Demo Melaka 223,"Fictional Lot 223, Jalan Demo 3, Melaka, Melaka, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-224,Cempaka Demo Seremban 224,"Fictional Lot 224, Jalan Demo 4, Seremban, Negeri Sembilan, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-225,Cempaka Demo Kuantan 225,"Fictional Lot 225, Jalan Demo 5, Kuantan, Pahang, Malaysia (synthetic)",Active,true
+DEMO_CEMPAKA-226,Cempaka Demo Kota Bharu 226,"Fictional Lot 226, Jalan Demo 6, Kota Bharu, Kelantan, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-227,Cempaka Demo Kuching 227,"Fictional Lot 227, Jalan Demo 7, Kuching, Sarawak, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-228,Cempaka Demo Kota Kinabalu 228,"Fictional Lot 228, Jalan Demo 8, Kota Kinabalu, Sabah, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-229,Cempaka Demo Kuala Lumpur 229,"Fictional Lot 229, Jalan Demo 9, Kuala Lumpur, Wilayah Persekutuan, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-230,Cempaka Demo Petaling Jaya 230,"Fictional Lot 230, Jalan Demo 10, Petaling Jaya, Selangor, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-231,Cempaka Demo Shah Alam 231,"Fictional Lot 231, Jalan Demo 11, Shah Alam, Selangor, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-232,Cempaka Demo George Town 232,"Fictional Lot 232, Jalan Demo 12, George Town, Pulau Pinang, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-233,Cempaka Demo Ipoh 233,"Fictional Lot 233, Jalan Demo 13, Ipoh, Perak, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-234,Cempaka Demo Johor Bahru 234,"Fictional Lot 234, Jalan Demo 14, Johor Bahru, Johor, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-235,Cempaka Demo Melaka 235,"Fictional Lot 235, Jalan Demo 15, Melaka, Melaka, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-236,Cempaka Demo Seremban 236,"Fictional Lot 236, Jalan Demo 16, Seremban, Negeri Sembilan, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-237,Cempaka Demo Kuantan 237,"Fictional Lot 237, Jalan Demo 17, Kuantan, Pahang, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-238,Cempaka Demo Kota Bharu 238,"Fictional Lot 238, Jalan Demo 18, Kota Bharu, Kelantan, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-239,Cempaka Demo Kuching 239,"Fictional Lot 239, Jalan Demo 19, Kuching, Sarawak, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-240,Cempaka Demo Kota Kinabalu 240,"Fictional Lot 240, Jalan Demo 20, Kota Kinabalu, Sabah, Malaysia (synthetic)",Inactive,false
+DEMO_CEMPAKA-241,Cempaka Demo Kuala Lumpur 241,"Fictional Lot 241, Jalan Demo 1, Kuala Lumpur, Wilayah Persekutuan, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-242,Cempaka Demo Petaling Jaya 242,"Fictional Lot 242, Jalan Demo 2, Petaling Jaya, Selangor, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-243,Cempaka Demo Shah Alam 243,"Fictional Lot 243, Jalan Demo 3, Shah Alam, Selangor, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-244,Cempaka Demo George Town 244,"Fictional Lot 244, Jalan Demo 4, George Town, Pulau Pinang, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-245,Cempaka Demo Ipoh 245,"Fictional Lot 245, Jalan Demo 5, Ipoh, Perak, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-246,Cempaka Demo Johor Bahru 246,"Fictional Lot 246, Jalan Demo 6, Johor Bahru, Johor, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-247,Cempaka Demo Melaka 247,"Fictional Lot 247, Jalan Demo 7, Melaka, Melaka, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-248,Cempaka Demo Seremban 248,"Fictional Lot 248, Jalan Demo 8, Seremban, Negeri Sembilan, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-249,Cempaka Demo Kuantan 249,"Fictional Lot 249, Jalan Demo 9, Kuantan, Pahang, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-250,Cempaka Demo Kota Bharu 250,"Fictional Lot 250, Jalan Demo 10, Kota Bharu, Kelantan, Malaysia (synthetic)",Active,true
+DEMO_CEMPAKA-251,Cempaka Demo Kuching 251,"Fictional Lot 251, Jalan Demo 11, Kuching, Sarawak, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-252,Cempaka Demo Kota Kinabalu 252,"Fictional Lot 252, Jalan Demo 12, Kota Kinabalu, Sabah, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-253,Cempaka Demo Kuala Lumpur 253,"Fictional Lot 253, Jalan Demo 13, Kuala Lumpur, Wilayah Persekutuan, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-254,Cempaka Demo Petaling Jaya 254,"Fictional Lot 254, Jalan Demo 14, Petaling Jaya, Selangor, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-255,Cempaka Demo Shah Alam 255,"Fictional Lot 255, Jalan Demo 15, Shah Alam, Selangor, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-256,Cempaka Demo George Town 256,"Fictional Lot 256, Jalan Demo 16, George Town, Pulau Pinang, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-257,Cempaka Demo Ipoh 257,"Fictional Lot 257, Jalan Demo 17, Ipoh, Perak, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-258,Cempaka Demo Johor Bahru 258,"Fictional Lot 258, Jalan Demo 18, Johor Bahru, Johor, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-259,Cempaka Demo Melaka 259,"Fictional Lot 259, Jalan Demo 19, Melaka, Melaka, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-260,Cempaka Demo Seremban 260,"Fictional Lot 260, Jalan Demo 20, Seremban, Negeri Sembilan, Malaysia (synthetic)",Inactive,false
+DEMO_CEMPAKA-261,Cempaka Demo Kuantan 261,"Fictional Lot 261, Jalan Demo 1, Kuantan, Pahang, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-262,Cempaka Demo Kota Bharu 262,"Fictional Lot 262, Jalan Demo 2, Kota Bharu, Kelantan, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-263,Cempaka Demo Kuching 263,"Fictional Lot 263, Jalan Demo 3, Kuching, Sarawak, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-264,Cempaka Demo Kota Kinabalu 264,"Fictional Lot 264, Jalan Demo 4, Kota Kinabalu, Sabah, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-265,Cempaka Demo Kuala Lumpur 265,"Fictional Lot 265, Jalan Demo 5, Kuala Lumpur, Wilayah Persekutuan, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-266,Cempaka Demo Petaling Jaya 266,"Fictional Lot 266, Jalan Demo 6, Petaling Jaya, Selangor, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-267,Cempaka Demo Shah Alam 267,"Fictional Lot 267, Jalan Demo 7, Shah Alam, Selangor, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-268,Cempaka Demo George Town 268,"Fictional Lot 268, Jalan Demo 8, George Town, Pulau Pinang, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-269,Cempaka Demo Ipoh 269,"Fictional Lot 269, Jalan Demo 9, Ipoh, Perak, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-270,Cempaka Demo Johor Bahru 270,"Fictional Lot 270, Jalan Demo 10, Johor Bahru, Johor, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-271,Cempaka Demo Melaka 271,"Fictional Lot 271, Jalan Demo 11, Melaka, Melaka, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-272,Cempaka Demo Seremban 272,"Fictional Lot 272, Jalan Demo 12, Seremban, Negeri Sembilan, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-273,Cempaka Demo Kuantan 273,"Fictional Lot 273, Jalan Demo 13, Kuantan, Pahang, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-274,Cempaka Demo Kota Bharu 274,"Fictional Lot 274, Jalan Demo 14, Kota Bharu, Kelantan, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-275,Cempaka Demo Kuching 275,"Fictional Lot 275, Jalan Demo 15, Kuching, Sarawak, Malaysia (synthetic)",Active,true
+DEMO_CEMPAKA-276,Cempaka Demo Kota Kinabalu 276,"Fictional Lot 276, Jalan Demo 16, Kota Kinabalu, Sabah, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-277,Cempaka Demo Kuala Lumpur 277,"Fictional Lot 277, Jalan Demo 17, Kuala Lumpur, Wilayah Persekutuan, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-278,Cempaka Demo Petaling Jaya 278,"Fictional Lot 278, Jalan Demo 18, Petaling Jaya, Selangor, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-279,Cempaka Demo Shah Alam 279,"Fictional Lot 279, Jalan Demo 19, Shah Alam, Selangor, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-280,Cempaka Demo George Town 280,"Fictional Lot 280, Jalan Demo 20, George Town, Pulau Pinang, Malaysia (synthetic)",Inactive,false
+DEMO_CEMPAKA-281,Cempaka Demo Ipoh 281,"Fictional Lot 281, Jalan Demo 1, Ipoh, Perak, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-282,Cempaka Demo Johor Bahru 282,"Fictional Lot 282, Jalan Demo 2, Johor Bahru, Johor, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-283,Cempaka Demo Melaka 283,"Fictional Lot 283, Jalan Demo 3, Melaka, Melaka, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-284,Cempaka Demo Seremban 284,"Fictional Lot 284, Jalan Demo 4, Seremban, Negeri Sembilan, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-285,Cempaka Demo Kuantan 285,"Fictional Lot 285, Jalan Demo 5, Kuantan, Pahang, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-286,Cempaka Demo Kota Bharu 286,"Fictional Lot 286, Jalan Demo 6, Kota Bharu, Kelantan, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-287,Cempaka Demo Kuching 287,"Fictional Lot 287, Jalan Demo 7, Kuching, Sarawak, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-288,Cempaka Demo Kota Kinabalu 288,"Fictional Lot 288, Jalan Demo 8, Kota Kinabalu, Sabah, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-289,Cempaka Demo Kuala Lumpur 289,"Fictional Lot 289, Jalan Demo 9, Kuala Lumpur, Wilayah Persekutuan, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-290,Cempaka Demo Petaling Jaya 290,"Fictional Lot 290, Jalan Demo 10, Petaling Jaya, Selangor, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-291,Cempaka Demo Shah Alam 291,"Fictional Lot 291, Jalan Demo 11, Shah Alam, Selangor, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-292,Cempaka Demo George Town 292,"Fictional Lot 292, Jalan Demo 12, George Town, Pulau Pinang, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-293,Cempaka Demo Ipoh 293,"Fictional Lot 293, Jalan Demo 13, Ipoh, Perak, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-294,Cempaka Demo Johor Bahru 294,"Fictional Lot 294, Jalan Demo 14, Johor Bahru, Johor, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-295,Cempaka Demo Melaka 295,"Fictional Lot 295, Jalan Demo 15, Melaka, Melaka, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-296,Cempaka Demo Seremban 296,"Fictional Lot 296, Jalan Demo 16, Seremban, Negeri Sembilan, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-297,Cempaka Demo Kuantan 297,"Fictional Lot 297, Jalan Demo 17, Kuantan, Pahang, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-298,Cempaka Demo Kota Bharu 298,"Fictional Lot 298, Jalan Demo 18, Kota Bharu, Kelantan, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-299,Cempaka Demo Kuching 299,"Fictional Lot 299, Jalan Demo 19, Kuching, Sarawak, Malaysia (synthetic)",Active,false
+DEMO_CEMPAKA-300,Cempaka Demo Kota Kinabalu 300,"Fictional Lot 300, Jalan Demo 20, Kota Kinabalu, Sabah, Malaysia (synthetic)",Inactive,true

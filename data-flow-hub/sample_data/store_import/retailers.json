@@ -1,0 +1,94 @@
+{
+  "synthetic": true,
+  "description": "Fictional Malaysian retailers and addresses for DataFlow Hub development; no real businesses or personal information.",
+  "retailerCount": 4,
+  "storesPerRetailer": 300,
+  "totalStores": 1200,
+  "importColumns": [
+    "store_id",
+    "store_name",
+    "address",
+    "status",
+    "exception"
+  ],
+  "retailers": [
+    {
+      "name": "Aurora Demo Grocer",
+      "key": "DEMO_AURORA",
+      "serviceType": "SM",
+      "senderEmail": "dataflow.aurora@example.com",
+      "retailerEmail": "retailer.aurora@example.com",
+      "storesFile": "demo_aurora_stores.csv",
+      "storeCount": 300,
+      "activeStores": 285,
+      "inactiveStores": 15,
+      "exceptionStores": 12
+    },
+    {
+      "name": "Bayu Demo Hypermarket",
+      "key": "DEMO_BAYU",
+      "serviceType": "HM",
+      "senderEmail": "dataflow.bayu@example.com",
+      "retailerEmail": "retailer.bayu@example.com",
+      "storesFile": "demo_bayu_stores.csv",
+      "storeCount": 300,
+      "activeStores": 285,
+      "inactiveStores": 15,
+      "exceptionStores": 12
+    },
+    {
+      "name": "Cempaka Demo Market",
+      "key": "DEMO_CEMPAKA",
+      "serviceType": "MM",
+      "senderEmail": "dataflow.cempaka@example.com",
+      "retailerEmail": "retailer.cempaka@example.com",
+      "storesFile": "demo_cempaka_stores.csv",
+      "storeCount": 300,
+      "activeStores": 285,
+      "inactiveStores": 15,
+      "exceptionStores": 12
+    },
+    {
+      "name": "Damai Demo Retail",
+      "key": "DEMO_DAMAI",
+      "serviceType": "SM",
+      "senderEmail": "dataflow.damai@example.com",
+      "retailerEmail": "retailer.damai@example.com",
+      "storesFile": "demo_damai_stores.csv",
+      "storeCount": 300,
+      "activeStores": 285,
+      "inactiveStores": 15,
+      "exceptionStores": 12
+    }
+  ],
+  "fixtures": {
+    "invalid_stores.csv": {
+      "dataRows": 5,
+      "expectedInvalidRows": 5,
+      "expectedCanConfirm": false,
+      "errorsByCsvLine": {
+        "2": "Duplicate store_id (case-insensitive match with line 3)",
+        "3": "Duplicate store_id (case-insensitive match with line 2)",
+        "4": "Missing store_name",
+        "5": "Invalid status",
+        "6": "Invalid exception"
+      }
+    },
+    "aurora_update_existing_store.csv": {
+      "mode": "upsert",
+      "requires": "Import demo_aurora_stores.csv first",
+      "expectedAdded": 0,
+      "expectedUpdated": 1,
+      "expectedStoreCountAfter": 300,
+      "expectedIdAndSuiteCodePreserved": true
+    }
+  },
+  "sha256": {
+    "aurora_update_existing_store.csv": "c7cf08c73e5e5794aa462d6babe713c9befeef98846d891a724561047e0495d1",
+    "demo_aurora_stores.csv": "c2e0be547e7881da89ebf966c3eef0ed337e442fb6dee6a01c07cfeaac9c187e",
+    "demo_bayu_stores.csv": "d5fafa37178654ef5c6ef1ccb95999316660cdf30cbcdb25399cca8814872233",
+    "demo_cempaka_stores.csv": "b92e0cc45a9862ee5515e2e38e3d35573814c51df30e6eb6cf8c4548b7aa6e5a",
+    "demo_damai_stores.csv": "93b0796fb9b613f436182102cff56442c9eb0b82068d4242c967de35fe3fb10b",
+    "invalid_stores.csv": "482473116c53151cdc4be1af6aea49d021b55b213c3fd113432a4d74d8dcdd85"
+  }
+}

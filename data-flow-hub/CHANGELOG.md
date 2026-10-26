@@ -1,5 +1,9 @@
 # Unreleased
 
+- Add preview/confirm CSV and XLSX store imports with templates, validation reports, and identity-preserving updates.
+- Add searchable, sortable, filtered, paginated retailer store management.
+- Add four reproducible synthetic retailer datasets with 300 stores each and an opt-in additive demo loader.
+
 - Use local PostgreSQL through Docker Compose for normal development.
 - Add verified, read-only SQLite import with destination protection.
 - Preserve generated IDs, store codes, audit evidence and processing history.

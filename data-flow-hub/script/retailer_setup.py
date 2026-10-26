@@ -278,6 +278,8 @@ def register_retailer_routes(app, parse_upload, error):
         initialize_history(db)
 
     register_archive_routes(app,error)
+    from store_import import register_store_import_routes
+    register_store_import_routes(app,error)
 
     @app.route('/api/v1/retailers', methods=['GET','POST'])
     def retailers():
@@ -330,7 +332,7 @@ def register_retailer_routes(app, parse_upload, error):
             begin_write(db)
             if db.execute(f'SELECT COUNT(*) FROM retailer_configs WHERE id IN ({marks})',ids).fetchone()[0]!=len(ids):return error('A selected retailer no longer exists. Refresh Client.',404)
             if db.execute(f'SELECT id FROM batch_attempts WHERE retailer_id IN ({marks}) LIMIT 1',ids).fetchone():return error('Wait for or cancel running jobs before deleting these retailers.',409)
-            for table in ['input_file_samples','input_file_secrets']:
+            for table in ['input_file_samples','input_file_secrets','store_import_previews']:
                 db.execute(f'DELETE FROM {table} WHERE retailer_id IN ({marks})',ids)
             db.execute(f'DELETE FROM retailer_samples WHERE retailer_id IN ({marks})',ids)
             db.execute(f'DELETE FROM retailer_configs WHERE id IN ({marks})',ids)

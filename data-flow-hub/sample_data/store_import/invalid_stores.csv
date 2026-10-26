@@ -1,0 +1,6 @@
+store_id,store_name,address,status,exception
+DEMO_INVALID-001,Duplicate example one,Synthetic address,Active,false
+demo_invalid-001,Duplicate example two,Synthetic address,Active,false
+DEMO_INVALID-002,,Synthetic address,Active,false
+DEMO_INVALID-003,Invalid status example,Synthetic address,Unknown,false
+DEMO_INVALID-004,Invalid exception example,Synthetic address,Active,maybe

@@ -1,0 +1,301 @@
+store_id,store_name,address,status,exception
+DEMO_AURORA-001,Aurora Demo Kuala Lumpur 001,"Fictional Lot 001, Jalan Demo 1, Kuala Lumpur, Wilayah Persekutuan, Malaysia (synthetic)",Active,false
+DEMO_AURORA-002,Aurora Demo Petaling Jaya 002,"Fictional Lot 002, Jalan Demo 2, Petaling Jaya, Selangor, Malaysia (synthetic)",Active,false
+DEMO_AURORA-003,Aurora Demo Shah Alam 003,"Fictional Lot 003, Jalan Demo 3, Shah Alam, Selangor, Malaysia (synthetic)",Active,false
+DEMO_AURORA-004,Aurora Demo George Town 004,"Fictional Lot 004, Jalan Demo 4, George Town, Pulau Pinang, Malaysia (synthetic)",Active,false
+DEMO_AURORA-005,Aurora Demo Ipoh 005,"Fictional Lot 005, Jalan Demo 5, Ipoh, Perak, Malaysia (synthetic)",Active,false
+DEMO_AURORA-006,Aurora Demo Johor Bahru 006,"Fictional Lot 006, Jalan Demo 6, Johor Bahru, Johor, Malaysia (synthetic)",Active,false
+DEMO_AURORA-007,Aurora Demo Melaka 007,"Fictional Lot 007, Jalan Demo 7, Melaka, Melaka, Malaysia (synthetic)",Active,false
+DEMO_AURORA-008,Aurora Demo Seremban 008,"Fictional Lot 008, Jalan Demo 8, Seremban, Negeri Sembilan, Malaysia (synthetic)",Active,false
+DEMO_AURORA-009,Aurora Demo Kuantan 009,"Fictional Lot 009, Jalan Demo 9, Kuantan, Pahang, Malaysia (synthetic)",Active,false
+DEMO_AURORA-010,Aurora Demo Kota Bharu 010,"Fictional Lot 010, Jalan Demo 10, Kota Bharu, Kelantan, Malaysia (synthetic)",Active,false
+DEMO_AURORA-011,Aurora Demo Kuching 011,"Fictional Lot 011, Jalan Demo 11, Kuching, Sarawak, Malaysia (synthetic)",Active,false
+DEMO_AURORA-012,Aurora Demo Kota Kinabalu 012,"Fictional Lot 012, Jalan Demo 12, Kota Kinabalu, Sabah, Malaysia (synthetic)",Active,false
+DEMO_AURORA-013,Aurora Demo Kuala Lumpur 013,"Fictional Lot 013, Jalan Demo 13, Kuala Lumpur, Wilayah Persekutuan, Malaysia (synthetic)",Active,false
+DEMO_AURORA-014,Aurora Demo Petaling Jaya 014,"Fictional Lot 014, Jalan Demo 14, Petaling Jaya, Selangor, Malaysia (synthetic)",Active,false
+DEMO_AURORA-015,Aurora Demo Shah Alam 015,"Fictional Lot 015, Jalan Demo 15, Shah Alam, Selangor, Malaysia (synthetic)",Active,false
+DEMO_AURORA-016,Aurora Demo George Town 016,"Fictional Lot 016, Jalan Demo 16, George Town, Pulau Pinang, Malaysia (synthetic)",Active,false
+DEMO_AURORA-017,Aurora Demo Ipoh 017,"Fictional Lot 017, Jalan Demo 17, Ipoh, Perak, Malaysia (synthetic)",Active,false
+DEMO_AURORA-018,Aurora Demo Johor Bahru 018,"Fictional Lot 018, Jalan Demo 18, Johor Bahru, Johor, Malaysia (synthetic)",Active,false
+DEMO_AURORA-019,Aurora Demo Melaka 019,"Fictional Lot 019, Jalan Demo 19, Melaka, Melaka, Malaysia (synthetic)",Active,false
+DEMO_AURORA-020,Aurora Demo Seremban 020,"Fictional Lot 020, Jalan Demo 20, Seremban, Negeri Sembilan, Malaysia (synthetic)",Inactive,false
+DEMO_AURORA-021,Aurora Demo Kuantan 021,"Fictional Lot 021, Jalan Demo 1, Kuantan, Pahang, Malaysia (synthetic)",Active,false
+DEMO_AURORA-022,Aurora Demo Kota Bharu 022,"Fictional Lot 022, Jalan Demo 2, Kota Bharu, Kelantan, Malaysia (synthetic)",Active,false
+DEMO_AURORA-023,Aurora Demo Kuching 023,"Fictional Lot 023, Jalan Demo 3, Kuching, Sarawak, Malaysia (synthetic)",Active,false
+DEMO_AURORA-024,Aurora Demo Kota Kinabalu 024,"Fictional Lot 024, Jalan Demo 4, Kota Kinabalu, Sabah, Malaysia (synthetic)",Active,false
+DEMO_AURORA-025,Aurora Demo Kuala Lumpur 025,"Fictional Lot 025, Jalan Demo 5, Kuala Lumpur, Wilayah Persekutuan, Malaysia (synthetic)",Active,true
+DEMO_AURORA-026,Aurora Demo Petaling Jaya 026,"Fictional Lot 026, Jalan Demo 6, Petaling Jaya, Selangor, Malaysia (synthetic)",Active,false
+DEMO_AURORA-027,Aurora Demo Shah Alam 027,"Fictional Lot 027, Jalan Demo 7, Shah Alam, Selangor, Malaysia (synthetic)",Active,false
+DEMO_AURORA-028,Aurora Demo George Town 028,"Fictional Lot 028, Jalan Demo 8, George Town, Pulau Pinang, Malaysia (synthetic)",Active,false
+DEMO_AURORA-029,Aurora Demo Ipoh 029,"Fictional Lot 029, Jalan Demo 9, Ipoh, Perak, Malaysia (synthetic)",Active,false
+DEMO_AURORA-030,Aurora Demo Johor Bahru 030,"Fictional Lot 030, Jalan Demo 10, Johor Bahru, Johor, Malaysia (synthetic)",Active,false
+DEMO_AURORA-031,Aurora Demo Melaka 031,"Fictional Lot 031, Jalan Demo 11, Melaka, Melaka, Malaysia (synthetic)",Active,false
+DEMO_AURORA-032,Aurora Demo Seremban 032,"Fictional Lot 032, Jalan Demo 12, Seremban, Negeri Sembilan, Malaysia (synthetic)",Active,false
+DEMO_AURORA-033,Aurora Demo Kuantan 033,"Fictional Lot 033, Jalan Demo 13, Kuantan, Pahang, Malaysia (synthetic)",Active,false
+DEMO_AURORA-034,Aurora Demo Kota Bharu 034,"Fictional Lot 034, Jalan Demo 14, Kota Bharu, Kelantan, Malaysia (synthetic)",Active,false
+DEMO_AURORA-035,Aurora Demo Kuching 035,"Fictional Lot 035, Jalan Demo 15, Kuching, Sarawak, Malaysia (synthetic)",Active,false
+DEMO_AURORA-036,Aurora Demo Kota Kinabalu 036,"Fictional Lot 036, Jalan Demo 16, Kota Kinabalu, Sabah, Malaysia (synthetic)",Active,false
+DEMO_AURORA-037,Aurora Demo Kuala Lumpur 037,"Fictional Lot 037, Jalan Demo 17, Kuala Lumpur, Wilayah Persekutuan, Malaysia (synthetic)",Active,false
+DEMO_AURORA-038,Aurora Demo Petaling Jaya 038,"Fictional Lot 038, Jalan Demo 18, Petaling Jaya, Selangor, Malaysia (synthetic)",Active,false
+DEMO_AURORA-039,Aurora Demo Shah Alam 039,"Fictional Lot 039, Jalan Demo 19, Shah Alam, Selangor, Malaysia (synthetic)",Active,false
+DEMO_AURORA-040,Aurora Demo George Town 040,"Fictional Lot 040, Jalan Demo 20, George Town, Pulau Pinang, Malaysia (synthetic)",Inactive,false
+DEMO_AURORA-041,Aurora Demo Ipoh 041,"Fictional Lot 041, Jalan Demo 1, Ipoh, Perak, Malaysia (synthetic)",Active,false
+DEMO_AURORA-042,Aurora Demo Johor Bahru 042,"Fictional Lot 042, Jalan Demo 2, Johor Bahru, Johor, Malaysia (synthetic)",Active,false
+DEMO_AURORA-043,Aurora Demo Melaka 043,"Fictional Lot 043, Jalan Demo 3, Melaka, Melaka, Malaysia (synthetic)",Active,false
+DEMO_AURORA-044,Aurora Demo Seremban 044,"Fictional Lot 044, Jalan Demo 4, Seremban, Negeri Sembilan, Malaysia (synthetic)",Active,false
+DEMO_AURORA-045,Aurora Demo Kuantan 045,"Fictional Lot 045, Jalan Demo 5, Kuantan, Pahang, Malaysia (synthetic)",Active,false
+DEMO_AURORA-046,Aurora Demo Kota Bharu 046,"Fictional Lot 046, Jalan Demo 6, Kota Bharu, Kelantan, Malaysia (synthetic)",Active,false
+DEMO_AURORA-047,Aurora Demo Kuching 047,"Fictional Lot 047, Jalan Demo 7, Kuching, Sarawak, Malaysia (synthetic)",Active,false
+DEMO_AURORA-048,Aurora Demo Kota Kinabalu 048,"Fictional Lot 048, Jalan Demo 8, Kota Kinabalu, Sabah, Malaysia (synthetic)",Active,false
+DEMO_AURORA-049,Aurora Demo Kuala Lumpur 049,"Fictional Lot 049, Jalan Demo 9, Kuala Lumpur, Wilayah Persekutuan, Malaysia (synthetic)",Active,false
+DEMO_AURORA-050,Aurora Demo Petaling Jaya 050,"Fictional Lot 050, Jalan Demo 10, Petaling Jaya, Selangor, Malaysia (synthetic)",Active,true
+DEMO_AURORA-051,Aurora Demo Shah Alam 051,"Fictional Lot 051, Jalan Demo 11, Shah Alam, Selangor, Malaysia (synthetic)",Active,false
+DEMO_AURORA-052,Aurora Demo George Town 052,"Fictional Lot 052, Jalan Demo 12, George Town, Pulau Pinang, Malaysia (synthetic)",Active,false
+DEMO_AURORA-053,Aurora Demo Ipoh 053,"Fictional Lot 053, Jalan Demo 13, Ipoh, Perak, Malaysia (synthetic)",Active,false
+DEMO_AURORA-054,Aurora Demo Johor Bahru 054,"Fictional Lot 054, Jalan Demo 14, Johor Bahru, Johor, Malaysia (synthetic)",Active,false
+DEMO_AURORA-055,Aurora Demo Melaka 055,"Fictional Lot 055, Jalan Demo 15, Melaka, Melaka, Malaysia (synthetic)",Active,false
+DEMO_AURORA-056,Aurora Demo Seremban 056,"Fictional Lot 056, Jalan Demo 16, Seremban, Negeri Sembilan, Malaysia (synthetic)",Active,false
+DEMO_AURORA-057,Aurora Demo Kuantan 057,"Fictional Lot 057, Jalan Demo 17, Kuantan, Pahang, Malaysia (synthetic)",Active,false
+DEMO_AURORA-058,Aurora Demo Kota Bharu 058,"Fictional Lot 058, Jalan Demo 18, Kota Bharu, Kelantan, Malaysia (synthetic)",Active,false
+DEMO_AURORA-059,Aurora Demo Kuching 059,"Fictional Lot 059, Jalan Demo 19, Kuching, Sarawak, Malaysia (synthetic)",Active,false
+DEMO_AURORA-060,Aurora Demo Kota Kinabalu 060,"Fictional Lot 060, Jalan Demo 20, Kota Kinabalu, Sabah, Malaysia (synthetic)",Inactive,false
+DEMO_AURORA-061,Aurora Demo Kuala Lumpur 061,"Fictional Lot 061, Jalan Demo 1, Kuala Lumpur, Wilayah Persekutuan, Malaysia (synthetic)",Active,false
+DEMO_AURORA-062,Aurora Demo Petaling Jaya 062,"Fictional Lot 062, Jalan Demo 2, Petaling Jaya, Selangor, Malaysia (synthetic)",Active,false
+DEMO_AURORA-063,Aurora Demo Shah Alam 063,"Fictional Lot 063, Jalan Demo 3, Shah Alam, Selangor, Malaysia (synthetic)",Active,false
+DEMO_AURORA-064,Aurora Demo George Town 064,"Fictional Lot 064, Jalan Demo 4, George Town, Pulau Pinang, Malaysia (synthetic)",Active,false
+DEMO_AURORA-065,Aurora Demo Ipoh 065,"Fictional Lot 065, Jalan Demo 5, Ipoh, Perak, Malaysia (synthetic)",Active,false
+DEMO_AURORA-066,Aurora Demo Johor Bahru 066,"Fictional Lot 066, Jalan Demo 6, Johor Bahru, Johor, Malaysia (synthetic)",Active,false
+DEMO_AURORA-067,Aurora Demo Melaka 067,"Fictional Lot 067, Jalan Demo 7, Melaka, Melaka, Malaysia (synthetic)",Active,false
+DEMO_AURORA-068,Aurora Demo Seremban 068,"Fictional Lot 068, Jalan Demo 8, Seremban, Negeri Sembilan, Malaysia (synthetic)",Active,false
+DEMO_AURORA-069,Aurora Demo Kuantan 069,"Fictional Lot 069, Jalan Demo 9, Kuantan, Pahang, Malaysia (synthetic)",Active,false
+DEMO_AURORA-070,Aurora Demo Kota Bharu 070,"Fictional Lot 070, Jalan Demo 10, Kota Bharu, Kelantan, Malaysia (synthetic)",Active,false
+DEMO_AURORA-071,Aurora Demo Kuching 071,"Fictional Lot 071, Jalan Demo 11, Kuching, Sarawak, Malaysia (synthetic)",Active,false
+DEMO_AURORA-072,Aurora Demo Kota Kinabalu 072,"Fictional Lot 072, Jalan Demo 12, Kota Kinabalu, Sabah, Malaysia (synthetic)",Active,false
+DEMO_AURORA-073,Aurora Demo Kuala Lumpur 073,"Fictional Lot 073, Jalan Demo 13, Kuala Lumpur, Wilayah Persekutuan, Malaysia (synthetic)",Active,false
+DEMO_AURORA-074,Aurora Demo Petaling Jaya 074,"Fictional Lot 074, Jalan Demo 14, Petaling Jaya, Selangor, Malaysia (synthetic)",Active,false
+DEMO_AURORA-075,Aurora Demo Shah Alam 075,"Fictional Lot 075, Jalan Demo 15, Shah Alam, Selangor, Malaysia (synthetic)",Active,true
+DEMO_AURORA-076,Aurora Demo George Town 076,"Fictional Lot 076, Jalan Demo 16, George Town, Pulau Pinang, Malaysia (synthetic)",Active,false
+DEMO_AURORA-077,Aurora Demo Ipoh 077,"Fictional Lot 077, Jalan Demo 17, Ipoh, Perak, Malaysia (synthetic)",Active,false
+DEMO_AURORA-078,Aurora Demo Johor Bahru 078,"Fictional Lot 078, Jalan Demo 18, Johor Bahru, Johor, Malaysia (synthetic)",Active,false
+DEMO_AURORA-079,Aurora Demo Melaka 079,"Fictional Lot 079, Jalan Demo 19, Melaka, Melaka, Malaysia (synthetic)",Active,false
+DEMO_AURORA-080,Aurora Demo Seremban 080,"Fictional Lot 080, Jalan Demo 20, Seremban, Negeri Sembilan, Malaysia (synthetic)",Inactive,false
+DEMO_AURORA-081,Aurora Demo Kuantan 081,"Fictional Lot 081, Jalan Demo 1, Kuantan, Pahang, Malaysia (synthetic)",Active,false
+DEMO_AURORA-082,Aurora Demo Kota Bharu 082,"Fictional Lot 082, Jalan Demo 2, Kota Bharu, Kelantan, Malaysia (synthetic)",Active,false
+DEMO_AURORA-083,Aurora Demo Kuching 083,"Fictional Lot 083, Jalan Demo 3, Kuching, Sarawak, Malaysia (synthetic)",Active,false
+DEMO_AURORA-084,Aurora Demo Kota Kinabalu 084,"Fictional Lot 084, Jalan Demo 4, Kota Kinabalu, Sabah, Malaysia (synthetic)",Active,false
+DEMO_AURORA-085,Aurora Demo Kuala Lumpur 085,"Fictional Lot 085, Jalan Demo 5, Kuala Lumpur, Wilayah Persekutuan, Malaysia (synthetic)",Active,false
+DEMO_AURORA-086,Aurora Demo Petaling Jaya 086,"Fictional Lot 086, Jalan Demo 6, Petaling Jaya, Selangor, Malaysia (synthetic)",Active,false
+DEMO_AURORA-087,Aurora Demo Shah Alam 087,"Fictional Lot 087, Jalan Demo 7, Shah Alam, Selangor, Malaysia (synthetic)",Active,false
+DEMO_AURORA-088,Aurora Demo George Town 088,"Fictional Lot 088, Jalan Demo 8, George Town, Pulau Pinang, Malaysia (synthetic)",Active,false
+DEMO_AURORA-089,Aurora Demo Ipoh 089,"Fictional Lot 089, Jalan Demo 9, Ipoh, Perak, Malaysia (synthetic)",Active,false
+DEMO_AURORA-090,Aurora Demo Johor Bahru 090,"Fictional Lot 090, Jalan Demo 10, Johor Bahru, Johor, Malaysia (synthetic)",Active,false
+DEMO_AURORA-091,Aurora Demo Melaka 091,"Fictional Lot 091, Jalan Demo 11, Melaka, Melaka, Malaysia (synthetic)",Active,false
+DEMO_AURORA-092,Aurora Demo Seremban 092,"Fictional Lot 092, Jalan Demo 12, Seremban, Negeri Sembilan, Malaysia (synthetic)",Active,false
+DEMO_AURORA-093,Aurora Demo Kuantan 093,"Fictional Lot 093, Jalan Demo 13, Kuantan, Pahang, Malaysia (synthetic)",Active,false
+DEMO_AURORA-094,Aurora Demo Kota Bharu 094,"Fictional Lot 094, Jalan Demo 14, Kota Bharu, Kelantan, Malaysia (synthetic)",Active,false
+DEMO_AURORA-095,Aurora Demo Kuching 095,"Fictional Lot 095, Jalan Demo 15, Kuching, Sarawak, Malaysia (synthetic)",Active,false
+DEMO_AURORA-096,Aurora Demo Kota Kinabalu 096,"Fictional Lot 096, Jalan Demo 16, Kota Kinabalu, Sabah, Malaysia (synthetic)",Active,false
+DEMO_AURORA-097,Aurora Demo Kuala Lumpur 097,"Fictional Lot 097, Jalan Demo 17, Kuala Lumpur, Wilayah Persekutuan, Malaysia (synthetic)",Active,false
+DEMO_AURORA-098,Aurora Demo Petaling Jaya 098,"Fictional Lot 098, Jalan Demo 18, Petaling Jaya, Selangor, Malaysia (synthetic)",Active,false
+DEMO_AURORA-099,Aurora Demo Shah Alam 099,"Fictional Lot 099, Jalan Demo 19, Shah Alam, Selangor, Malaysia (synthetic)",Active,false
+DEMO_AURORA-100,Aurora Demo George Town 100,"Fictional Lot 100, Jalan Demo 20, George Town, Pulau Pinang, Malaysia (synthetic)",Inactive,true
+DEMO_AURORA-101,Aurora Demo Ipoh 101,"Fictional Lot 101, Jalan Demo 1, Ipoh, Perak, Malaysia (synthetic)",Active,false
+DEMO_AURORA-102,Aurora Demo Johor Bahru 102,"Fictional Lot 102, Jalan Demo 2, Johor Bahru, Johor, Malaysia (synthetic)",Active,false
+DEMO_AURORA-103,Aurora Demo Melaka 103,"Fictional Lot 103, Jalan Demo 3, Melaka, Melaka, Malaysia (synthetic)",Active,false
+DEMO_AURORA-104,Aurora Demo Seremban 104,"Fictional Lot 104, Jalan Demo 4, Seremban, Negeri Sembilan, Malaysia (synthetic)",Active,false
+DEMO_AURORA-105,Aurora Demo Kuantan 105,"Fictional Lot 105, Jalan Demo 5, Kuantan, Pahang, Malaysia (synthetic)",Active,false
+DEMO_AURORA-106,Aurora Demo Kota Bharu 106,"Fictional Lot 106, Jalan Demo 6, Kota Bharu, Kelantan, Malaysia (synthetic)",Active,false
+DEMO_AURORA-107,Aurora Demo Kuching 107,"Fictional Lot 107, Jalan Demo 7, Kuching, Sarawak, Malaysia (synthetic)",Active,false
+DEMO_AURORA-108,Aurora Demo Kota Kinabalu 108,"Fictional Lot 108, Jalan Demo 8, Kota Kinabalu, Sabah, Malaysia (synthetic)",Active,false
+DEMO_AURORA-109,Aurora Demo Kuala Lumpur 109,"Fictional Lot 109, Jalan Demo 9, Kuala Lumpur, Wilayah Persekutuan, Malaysia (synthetic)",Active,false
+DEMO_AURORA-110,Aurora Demo Petaling Jaya 110,"Fictional Lot 110, Jalan Demo 10, Petaling Jaya, Selangor, Malaysia (synthetic)",Active,false
+DEMO_AURORA-111,Aurora Demo Shah Alam 111,"Fictional Lot 111, Jalan Demo 11, Shah Alam, Selangor, Malaysia (synthetic)",Active,false
+DEMO_AURORA-112,Aurora Demo George Town 112,"Fictional Lot 112, Jalan Demo 12, George Town, Pulau Pinang, Malaysia (synthetic)",Active,false
+DEMO_AURORA-113,Aurora Demo Ipoh 113,"Fictional Lot 113, Jalan Demo 13, Ipoh, Perak, Malaysia (synthetic)",Active,false
+DEMO_AURORA-114,Aurora Demo Johor Bahru 114,"Fictional Lot 114, Jalan Demo 14, Johor Bahru, Johor, Malaysia (synthetic)",Active,false
+DEMO_AURORA-115,Aurora Demo Melaka 115,"Fictional Lot 115, Jalan Demo 15, Melaka, Melaka, Malaysia (synthetic)",Active,false
+DEMO_AURORA-116,Aurora Demo Seremban 116,"Fictional Lot 116, Jalan Demo 16, Seremban, Negeri Sembilan, Malaysia (synthetic)",Active,false
+DEMO_AURORA-117,Aurora Demo Kuantan 117,"Fictional Lot 117, Jalan Demo 17, Kuantan, Pahang, Malaysia (synthetic)",Active,false
+DEMO_AURORA-118,Aurora Demo Kota Bharu 118,"Fictional Lot 118, Jalan Demo 18, Kota Bharu, Kelantan, Malaysia (synthetic)",Active,false
+DEMO_AURORA-119,Aurora Demo Kuching 119,"Fictional Lot 119, Jalan Demo 19, Kuching, Sarawak, Malaysia (synthetic)",Active,false
+DEMO_AURORA-120,Aurora Demo Kota Kinabalu 120,"Fictional Lot 120, Jalan Demo 20, Kota Kinabalu, Sabah, Malaysia (synthetic)",Inactive,false
+DEMO_AURORA-121,Aurora Demo Kuala Lumpur 121,"Fictional Lot 121, Jalan Demo 1, Kuala Lumpur, Wilayah Persekutuan, Malaysia (synthetic)",Active,false
+DEMO_AURORA-122,Aurora Demo Petaling Jaya 122,"Fictional Lot 122, Jalan Demo 2, Petaling Jaya, Selangor, Malaysia (synthetic)",Active,false
+DEMO_AURORA-123,Aurora Demo Shah Alam 123,"Fictional Lot 123, Jalan Demo 3, Shah Alam, Selangor, Malaysia (synthetic)",Active,false
+DEMO_AURORA-124,Aurora Demo George Town 124,"Fictional Lot 124, Jalan Demo 4, George Town, Pulau Pinang, Malaysia (synthetic)",Active,false
+DEMO_AURORA-125,Aurora Demo Ipoh 125,"Fictional Lot 125, Jalan Demo 5, Ipoh, Perak, Malaysia (synthetic)",Active,true
+DEMO_AURORA-126,Aurora Demo Johor Bahru 126,"Fictional Lot 126, Jalan Demo 6, Johor Bahru, Johor, Malaysia (synthetic)",Active,false
+DEMO_AURORA-127,Aurora Demo Melaka 127,"Fictional Lot 127, Jalan Demo 7, Melaka, Melaka, Malaysia (synthetic)",Active,false
+DEMO_AURORA-128,Aurora Demo Seremban 128,"Fictional Lot 128, Jalan Demo 8, Seremban, Negeri Sembilan, Malaysia (synthetic)",Active,false
+DEMO_AURORA-129,Aurora Demo Kuantan 129,"Fictional Lot 129, Jalan Demo 9, Kuantan, Pahang, Malaysia (synthetic)",Active,false
+DEMO_AURORA-130,Aurora Demo Kota Bharu 130,"Fictional Lot 130, Jalan Demo 10, Kota Bharu, Kelantan, Malaysia (synthetic)",Active,false
+DEMO_AURORA-131,Aurora Demo Kuching 131,"Fictional Lot 131, Jalan Demo 11, Kuching, Sarawak, Malaysia (synthetic)",Active,false
+DEMO_AURORA-132,Aurora Demo Kota Kinabalu 132,"Fictional Lot 132, Jalan Demo 12, Kota Kinabalu, Sabah, Malaysia (synthetic)",Active,false
+DEMO_AURORA-133,Aurora Demo Kuala Lumpur 133,"Fictional Lot 133, Jalan Demo 13, Kuala Lumpur, Wilayah Persekutuan, Malaysia (synthetic)",Active,false
+DEMO_AURORA-134,Aurora Demo Petaling Jaya 134,"Fictional Lot 134, Jalan Demo 14, Petaling Jaya, Selangor, Malaysia (synthetic)",Active,false
+DEMO_AURORA-135,Aurora Demo Shah Alam 135,"Fictional Lot 135, Jalan Demo 15, Shah Alam, Selangor, Malaysia (synthetic)",Active,false
+DEMO_AURORA-136,Aurora Demo George Town 136,"Fictional Lot 136, Jalan Demo 16, George Town, Pulau Pinang, Malaysia (synthetic)",Active,false
+DEMO_AURORA-137,Aurora Demo Ipoh 137,"Fictional Lot 137, Jalan Demo 17, Ipoh, Perak, Malaysia (synthetic)",Active,false
+DEMO_AURORA-138,Aurora Demo Johor Bahru 138,"Fictional Lot 138, Jalan Demo 18, Johor Bahru, Johor, Malaysia (synthetic)",Active,false
+DEMO_AURORA-139,Aurora Demo Melaka 139,"Fictional Lot 139, Jalan Demo 19, Melaka, Melaka, Malaysia (synthetic)",Active,false
+DEMO_AURORA-140,Aurora Demo Seremban 140,"Fictional Lot 140, Jalan Demo 20, Seremban, Negeri Sembilan, Malaysia (synthetic)",Inactive,false
+DEMO_AURORA-141,Aurora Demo Kuantan 141,"Fictional Lot 141, Jalan Demo 1, Kuantan, Pahang, Malaysia (synthetic)",Active,false
+DEMO_AURORA-142,Aurora Demo Kota Bharu 142,"Fictional Lot 142, Jalan Demo 2, Kota Bharu, Kelantan, Malaysia (synthetic)",Active,false
+DEMO_AURORA-143,Aurora Demo Kuching 143,"Fictional Lot 143, Jalan Demo 3, Kuching, Sarawak, Malaysia (synthetic)",Active,false
+DEMO_AURORA-144,Aurora Demo Kota Kinabalu 144,"Fictional Lot 144, Jalan Demo 4, Kota Kinabalu, Sabah, Malaysia (synthetic)",Active,false
+DEMO_AURORA-145,Aurora Demo Kuala Lumpur 145,"Fictional Lot 145, Jalan Demo 5, Kuala Lumpur, Wilayah Persekutuan, Malaysia (synthetic)",Active,false
+DEMO_AURORA-146,Aurora Demo Petaling Jaya 146,"Fictional Lot 146, Jalan Demo 6, Petaling Jaya, Selangor, Malaysia (synthetic)",Active,false
+DEMO_AURORA-147,Aurora Demo Shah Alam 147,"Fictional Lot 147, Jalan Demo 7, Shah Alam, Selangor, Malaysia (synthetic)",Active,false
+DEMO_AURORA-148,Aurora Demo George Town 148,"Fictional Lot 148, Jalan Demo 8, George Town, Pulau Pinang, Malaysia (synthetic)",Active,false
+DEMO_AURORA-149,Aurora Demo Ipoh 149,"Fictional Lot 149, Jalan Demo 9, Ipoh, Perak, Malaysia (synthetic)",Active,false
+DEMO_AURORA-150,Aurora Demo Johor Bahru 150,"Fictional Lot 150, Jalan Demo 10, Johor Bahru, Johor, Malaysia (synthetic)",Active,true
+DEMO_AURORA-151,Aurora Demo Melaka 151,"Fictional Lot 151, Jalan Demo 11, Melaka, Melaka, Malaysia (synthetic)",Active,false
+DEMO_AURORA-152,Aurora Demo Seremban 152,"Fictional Lot 152, Jalan Demo 12, Seremban, Negeri Sembilan, Malaysia (synthetic)",Active,false
+DEMO_AURORA-153,Aurora Demo Kuantan 153,"Fictional Lot 153, Jalan Demo 13, Kuantan, Pahang, Malaysia (synthetic)",Active,false
+DEMO_AURORA-154,Aurora Demo Kota Bharu 154,"Fictional Lot 154, Jalan Demo 14, Kota Bharu, Kelantan, Malaysia (synthetic)",Active,false
+DEMO_AURORA-155,Aurora Demo Kuching 155,"Fictional Lot 155, Jalan Demo 15, Kuching, Sarawak, Malaysia (synthetic)",Active,false
+DEMO_AURORA-156,Aurora Demo Kota Kinabalu 156,"Fictional Lot 156, Jalan Demo 16, Kota Kinabalu, Sabah, Malaysia (synthetic)",Active,false
+DEMO_AURORA-157,Aurora Demo Kuala Lumpur 157,"Fictional Lot 157, Jalan Demo 17, Kuala Lumpur, Wilayah Persekutuan, Malaysia (synthetic)",Active,false
+DEMO_AURORA-158,Aurora Demo Petaling Jaya 158,"Fictional Lot 158, Jalan Demo 18, Petaling Jaya, Selangor, Malaysia (synthetic)",Active,false
+DEMO_AURORA-159,Aurora Demo Shah Alam 159,"Fictional Lot 159, Jalan Demo 19, Shah Alam, Selangor, Malaysia (synthetic)",Active,false
+DEMO_AURORA-160,Aurora Demo George Town 160,"Fictional Lot 160, Jalan Demo 20, George Town, Pulau Pinang, Malaysia (synthetic)",Inactive,false
+DEMO_AURORA-161,Aurora Demo Ipoh 161,"Fictional Lot 161, Jalan Demo 1, Ipoh, Perak, Malaysia (synthetic)",Active,false
+DEMO_AURORA-162,Aurora Demo Johor Bahru 162,"Fictional Lot 162, Jalan Demo 2, Johor Bahru, Johor, Malaysia (synthetic)",Active,false
+DEMO_AURORA-163,Aurora Demo Melaka 163,"Fictional Lot 163, Jalan Demo 3, Melaka, Melaka, Malaysia (synthetic)",Active,false
+DEMO_AURORA-164,Aurora Demo Seremban 164,"Fictional Lot 164, Jalan Demo 4, Seremban, Negeri Sembilan, Malaysia (synthetic)",Active,false
+DEMO_AURORA-165,Aurora Demo Kuantan 165,"Fictional Lot 165, Jalan Demo 5, Kuantan, Pahang, Malaysia (synthetic)",Active,false
+DEMO_AURORA-166,Aurora Demo Kota Bharu 166,"Fictional Lot 166, Jalan Demo 6, Kota Bharu, Kelantan, Malaysia (synthetic)",Active,false
+DEMO_AURORA-167,Aurora Demo Kuching 167,"Fictional Lot 167, Jalan Demo 7, Kuching, Sarawak, Malaysia (synthetic)",Active,false
+DEMO_AURORA-168,Aurora Demo Kota Kinabalu 168,"Fictional Lot 168, Jalan Demo 8, Kota Kinabalu, Sabah, Malaysia (synthetic)",Active,false
+DEMO_AURORA-169,Aurora Demo Kuala Lumpur 169,"Fictional Lot 169, Jalan Demo 9, Kuala Lumpur, Wilayah Persekutuan, Malaysia (synthetic)",Active,false
+DEMO_AURORA-170,Aurora Demo Petaling Jaya 170,"Fictional Lot 170, Jalan Demo 10, Petaling Jaya, Selangor, Malaysia (synthetic)",Active,false
+DEMO_AURORA-171,Aurora Demo Shah Alam 171,"Fictional Lot 171, Jalan Demo 11, Shah Alam, Selangor, Malaysia (synthetic)",Active,false
+DEMO_AURORA-172,Aurora Demo George Town 172,"Fictional Lot 172, Jalan Demo 12, George Town, Pulau Pinang, Malaysia (synthetic)",Active,false
+DEMO_AURORA-173,Aurora Demo Ipoh 173,"Fictional Lot 173, Jalan Demo 13, Ipoh, Perak, Malaysia (synthetic)",Active,false
+DEMO_AURORA-174,Aurora Demo Johor Bahru 174,"Fictional Lot 174, Jalan Demo 14, Johor Bahru, Johor, Malaysia (synthetic)",Active,false
+DEMO_AURORA-175,Aurora Demo Melaka 175,"Fictional Lot 175, Jalan Demo 15, Melaka, Melaka, Malaysia (synthetic)",Active,true
+DEMO_AURORA-176,Aurora Demo Seremban 176,"Fictional Lot 176, Jalan Demo 16, Seremban, Negeri Sembilan, Malaysia (synthetic)",Active,false
+DEMO_AURORA-177,Aurora Demo Kuantan 177,"Fictional Lot 177, Jalan Demo 17, Kuantan, Pahang, Malaysia (synthetic)",Active,false
+DEMO_AURORA-178,Aurora Demo Kota Bharu 178,"Fictional Lot 178, Jalan Demo 18, Kota Bharu, Kelantan, Malaysia (synthetic)",Active,false
+DEMO_AURORA-179,Aurora Demo Kuching 179,"Fictional Lot 179, Jalan Demo 19, Kuching, Sarawak, Malaysia (synthetic)",Active,false
+DEMO_AURORA-180,Aurora Demo Kota Kinabalu 180,"Fictional Lot 180, Jalan Demo 20, Kota Kinabalu, Sabah, Malaysia (synthetic)",Inactive,false
+DEMO_AURORA-181,Aurora Demo Kuala Lumpur 181,"Fictional Lot 181, Jalan Demo 1, Kuala Lumpur, Wilayah Persekutuan, Malaysia (synthetic)",Active,false
+DEMO_AURORA-182,Aurora Demo Petaling Jaya 182,"Fictional Lot 182, Jalan Demo 2, Petaling Jaya, Selangor, Malaysia (synthetic)",Active,false
+DEMO_AURORA-183,Aurora Demo Shah Alam 183,"Fictional Lot 183, Jalan Demo 3, Shah Alam, Selangor, Malaysia (synthetic)",Active,false
+DEMO_AURORA-184,Aurora Demo George Town 184,"Fictional Lot 184, Jalan Demo 4, George Town, Pulau Pinang, Malaysia (synthetic)",Active,false
+DEMO_AURORA-185,Aurora Demo Ipoh 185,"Fictional Lot 185, Jalan Demo 5, Ipoh, Perak, Malaysia (synthetic)",Active,false
+DEMO_AURORA-186,Aurora Demo Johor Bahru 186,"Fictional Lot 186, Jalan Demo 6, Johor Bahru, Johor, Malaysia (synthetic)",Active,false
+DEMO_AURORA-187,Aurora Demo Melaka 187,"Fictional Lot 187, Jalan Demo 7, Melaka, Melaka, Malaysia (synthetic)",Active,false
+DEMO_AURORA-188,Aurora Demo Seremban 188,"Fictional Lot 188, Jalan Demo 8, Seremban, Negeri Sembilan, Malaysia (synthetic)",Active,false
+DEMO_AURORA-189,Aurora Demo Kuantan 189,"Fictional Lot 189, Jalan Demo 9, Kuantan, Pahang, Malaysia (synthetic)",Active,false
+DEMO_AURORA-190,Aurora Demo Kota Bharu 190,"Fictional Lot 190, Jalan Demo 10, Kota Bharu, Kelantan, Malaysia (synthetic)",Active,false
+DEMO_AURORA-191,Aurora Demo Kuching 191,"Fictional Lot 191, Jalan Demo 11, Kuching, Sarawak, Malaysia (synthetic)",Active,false
+DEMO_AURORA-192,Aurora Demo Kota Kinabalu 192,"Fictional Lot 192, Jalan Demo 12, Kota Kinabalu, Sabah, Malaysia (synthetic)",Active,false
+DEMO_AURORA-193,Aurora Demo Kuala Lumpur 193,"Fictional Lot 193, Jalan Demo 13, Kuala Lumpur, Wilayah Persekutuan, Malaysia (synthetic)",Active,false
+DEMO_AURORA-194,Aurora Demo Petaling Jaya 194,"Fictional Lot 194, Jalan Demo 14, Petaling Jaya, Selangor, Malaysia (synthetic)",Active,false
+DEMO_AURORA-195,Aurora Demo Shah Alam 195,"Fictional Lot 195, Jalan Demo 15, Shah Alam, Selangor, Malaysia (synthetic)",Active,false
+DEMO_AURORA-196,Aurora Demo George Town 196,"Fictional Lot 196, Jalan Demo 16, George Town, Pulau Pinang, Malaysia (synthetic)",Active,false
+DEMO_AURORA-197,Aurora Demo Ipoh 197,"Fictional Lot 197, Jalan Demo 17, Ipoh, Perak, Malaysia (synthetic)",Active,false
+DEMO_AURORA-198,Aurora Demo Johor Bahru 198,"Fictional Lot 198, Jalan Demo 18, Johor Bahru, Johor, Malaysia (synthetic)",Active,false
+DEMO_AURORA-199,Aurora Demo Melaka 199,"Fictional Lot 199, Jalan Demo 19, Melaka, Melaka, Malaysia (synthetic)",Active,false
+DEMO_AURORA-200,Aurora Demo Seremban 200,"Fictional Lot 200, Jalan Demo 20, Seremban, Negeri Sembilan, Malaysia (synthetic)",Inactive,true
+DEMO_AURORA-201,Aurora Demo Kuantan 201,"Fictional Lot 201, Jalan Demo 1, Kuantan, Pahang, Malaysia (synthetic)",Active,false
+DEMO_AURORA-202,Aurora Demo Kota Bharu 202,"Fictional Lot 202, Jalan Demo 2, Kota Bharu, Kelantan, Malaysia (synthetic)",Active,false
+DEMO_AURORA-203,Aurora Demo Kuching 203,"Fictional Lot 203, Jalan Demo 3, Kuching, Sarawak, Malaysia (synthetic)",Active,false
+DEMO_AURORA-204,Aurora Demo Kota Kinabalu 204,"Fictional Lot 204, Jalan Demo 4, Kota Kinabalu, Sabah, Malaysia (synthetic)",Active,false
+DEMO_AURORA-205,Aurora Demo Kuala Lumpur 205,"Fictional Lot 205, Jalan Demo 5, Kuala Lumpur, Wilayah Persekutuan, Malaysia (synthetic)",Active,false
+DEMO_AURORA-206,Aurora Demo Petaling Jaya 206,"Fictional Lot 206, Jalan Demo 6, Petaling Jaya, Selangor, Malaysia (synthetic)",Active,false
+DEMO_AURORA-207,Aurora Demo Shah Alam 207,"Fictional Lot 207, Jalan Demo 7, Shah Alam, Selangor, Malaysia (synthetic)",Active,false
+DEMO_AURORA-208,Aurora Demo George Town 208,"Fictional Lot 208, Jalan Demo 8, George Town, Pulau Pinang, Malaysia (synthetic)",Active,false
+DEMO_AURORA-209,Aurora Demo Ipoh 209,"Fictional Lot 209, Jalan Demo 9, Ipoh, Perak, Malaysia (synthetic)",Active,false
+DEMO_AURORA-210,Aurora Demo Johor Bahru 210,"Fictional Lot 210, Jalan Demo 10, Johor Bahru, Johor, Malaysia (synthetic)",Active,false
+DEMO_AURORA-211,Aurora Demo Melaka 211,"Fictional Lot 211, Jalan Demo 11, Melaka, Melaka, Malaysia (synthetic)",Active,false
+DEMO_AURORA-212,Aurora Demo Seremban 212,"Fictional Lot 212, Jalan Demo 12, Seremban, Negeri Sembilan, Malaysia (synthetic)",Active,false
+DEMO_AURORA-213,Aurora Demo Kuantan 213,"Fictional Lot 213, Jalan Demo 13, Kuantan, Pahang, Malaysia (synthetic)",Active,false
+DEMO_AURORA-214,Aurora Demo Kota Bharu 214,"Fictional Lot 214, Jalan Demo 14, Kota Bharu, Kelantan, Malaysia (synthetic)",Active,false
+DEMO_AURORA-215,Aurora Demo Kuching 215,"Fictional Lot 215, Jalan Demo 15, Kuching, Sarawak, Malaysia (synthetic)",Active,false
+DEMO_AURORA-216,Aurora Demo Kota Kinabalu 216,"Fictional Lot 216, Jalan Demo 16, Kota Kinabalu, Sabah, Malaysia (synthetic)",Active,false
+DEMO_AURORA-217,Aurora Demo Kuala Lumpur 217,"Fictional Lot 217, Jalan Demo 17, Kuala Lumpur, Wilayah Persekutuan, Malaysia (synthetic)",Active,false
+DEMO_AURORA-218,Aurora Demo Petaling Jaya 218,"Fictional Lot 218, Jalan Demo 18, Petaling Jaya, Selangor, Malaysia (synthetic)",Active,false
+DEMO_AURORA-219,Aurora Demo Shah Alam 219,"Fictional Lot 219, Jalan Demo 19, Shah Alam, Selangor, Malaysia (synthetic)",Active,false
+DEMO_AURORA-220,Aurora Demo George Town 220,"Fictional Lot 220, Jalan Demo 20, George Town, Pulau Pinang, Malaysia (synthetic)",Inactive,false
+DEMO_AURORA-221,Aurora Demo Ipoh 221,"Fictional Lot 221, Jalan Demo 1, Ipoh, Perak, Malaysia (synthetic)",Active,false
+DEMO_AURORA-222,Aurora Demo Johor Bahru 222,"Fictional Lot 222, Jalan Demo 2, Johor Bahru, Johor, Malaysia (synthetic)",Active,false
+DEMO_AURORA-223,Aurora Demo Melaka 223,"Fictional Lot 223, Jalan Demo 3, Melaka, Melaka, Malaysia (synthetic)",Active,false
+DEMO_AURORA-224,Aurora Demo Seremban 224,"Fictional Lot 224, Jalan Demo 4, Seremban, Negeri Sembilan, Malaysia (synthetic)",Active,false
+DEMO_AURORA-225,Aurora Demo Kuantan 225,"Fictional Lot 225, Jalan Demo 5, Kuantan, Pahang, Malaysia (synthetic)",Active,true
+DEMO_AURORA-226,Aurora Demo Kota Bharu 226,"Fictional Lot 226, Jalan Demo 6, Kota Bharu, Kelantan, Malaysia (synthetic)",Active,false
+DEMO_AURORA-227,Aurora Demo Kuching 227,"Fictional Lot 227, Jalan Demo 7, Kuching, Sarawak, Malaysia (synthetic)",Active,false
+DEMO_AURORA-228,Aurora Demo Kota Kinabalu 228,"Fictional Lot 228, Jalan Demo 8, Kota Kinabalu, Sabah, Malaysia (synthetic)",Active,false
+DEMO_AURORA-229,Aurora Demo Kuala Lumpur 229,"Fictional Lot 229, Jalan Demo 9, Kuala Lumpur, Wilayah Persekutuan, Malaysia (synthetic)",Active,false
+DEMO_AURORA-230,Aurora Demo Petaling Jaya 230,"Fictional Lot 230, Jalan Demo 10, Petaling Jaya, Selangor, Malaysia (synthetic)",Active,false
+DEMO_AURORA-231,Aurora Demo Shah Alam 231,"Fictional Lot 231, Jalan Demo 11, Shah Alam, Selangor, Malaysia (synthetic)",Active,false
+DEMO_AURORA-232,Aurora Demo George Town 232,"Fictional Lot 232, Jalan Demo 12, George Town, Pulau Pinang, Malaysia (synthetic)",Active,false
+DEMO_AURORA-233,Aurora Demo Ipoh 233,"Fictional Lot 233, Jalan Demo 13, Ipoh, Perak, Malaysia (synthetic)",Active,false
+DEMO_AURORA-234,Aurora Demo Johor Bahru 234,"Fictional Lot 234, Jalan Demo 14, Johor Bahru, Johor, Malaysia (synthetic)",Active,false
+DEMO_AURORA-235,Aurora Demo Melaka 235,"Fictional Lot 235, Jalan Demo 15, Melaka, Melaka, Malaysia (synthetic)",Active,false
+DEMO_AURORA-236,Aurora Demo Seremban 236,"Fictional Lot 236, Jalan Demo 16, Seremban, Negeri Sembilan, Malaysia (synthetic)",Active,false
+DEMO_AURORA-237,Aurora Demo Kuantan 237,"Fictional Lot 237, Jalan Demo 17, Kuantan, Pahang, Malaysia (synthetic)",Active,false
+DEMO_AURORA-238,Aurora Demo Kota Bharu 238,"Fictional Lot 238, Jalan Demo 18, Kota Bharu, Kelantan, Malaysia (synthetic)",Active,false
+DEMO_AURORA-239,Aurora Demo Kuching 239,"Fictional Lot 239, Jalan Demo 19, Kuching, Sarawak, Malaysia (synthetic)",Active,false
+DEMO_AURORA-240,Aurora Demo Kota Kinabalu 240,"Fictional Lot 240, Jalan Demo 20, Kota Kinabalu, Sabah, Malaysia (synthetic)",Inactive,false
+DEMO_AURORA-241,Aurora Demo Kuala Lumpur 241,"Fictional Lot 241, Jalan Demo 1, Kuala Lumpur, Wilayah Persekutuan, Malaysia (synthetic)",Active,false
+DEMO_AURORA-242,Aurora Demo Petaling Jaya 242,"Fictional Lot 242, Jalan Demo 2, Petaling Jaya, Selangor, Malaysia (synthetic)",Active,false
+DEMO_AURORA-243,Aurora Demo Shah Alam 243,"Fictional Lot 243, Jalan Demo 3, Shah Alam, Selangor, Malaysia (synthetic)",Active,false
+DEMO_AURORA-244,Aurora Demo George Town 244,"Fictional Lot 244, Jalan Demo 4, George Town, Pulau Pinang, Malaysia (synthetic)",Active,false
+DEMO_AURORA-245,Aurora Demo Ipoh 245,"Fictional Lot 245, Jalan Demo 5, Ipoh, Perak, Malaysia (synthetic)",Active,false
+DEMO_AURORA-246,Aurora Demo Johor Bahru 246,"Fictional Lot 246, Jalan Demo 6, Johor Bahru, Johor, Malaysia (synthetic)",Active,false
+DEMO_AURORA-247,Aurora Demo Melaka 247,"Fictional Lot 247, Jalan Demo 7, Melaka, Melaka, Malaysia (synthetic)",Active,false
+DEMO_AURORA-248,Aurora Demo Seremban 248,"Fictional Lot 248, Jalan Demo 8, Seremban, Negeri Sembilan, Malaysia (synthetic)",Active,false
+DEMO_AURORA-249,Aurora Demo Kuantan 249,"Fictional Lot 249, Jalan Demo 9, Kuantan, Pahang, Malaysia (synthetic)",Active,false
+DEMO_AURORA-250,Aurora Demo Kota Bharu 250,"Fictional Lot 250, Jalan Demo 10, Kota Bharu, Kelantan, Malaysia (synthetic)",Active,true
+DEMO_AURORA-251,Aurora Demo Kuching 251,"Fictional Lot 251, Jalan Demo 11, Kuching, Sarawak, Malaysia (synthetic)",Active,false
+DEMO_AURORA-252,Aurora Demo Kota Kinabalu 252,"Fictional Lot 252, Jalan Demo 12, Kota Kinabalu, Sabah, Malaysia (synthetic)",Active,false
+DEMO_AURORA-253,Aurora Demo Kuala Lumpur 253,"Fictional Lot 253, Jalan Demo 13, Kuala Lumpur, Wilayah Persekutuan, Malaysia (synthetic)",Active,false
+DEMO_AURORA-254,Aurora Demo Petaling Jaya 254,"Fictional Lot 254, Jalan Demo 14, Petaling Jaya, Selangor, Malaysia (synthetic)",Active,false
+DEMO_AURORA-255,Aurora Demo Shah Alam 255,"Fictional Lot 255, Jalan Demo 15, Shah Alam, Selangor, Malaysia (synthetic)",Active,false
+DEMO_AURORA-256,Aurora Demo George Town 256,"Fictional Lot 256, Jalan Demo 16, George Town, Pulau Pinang, Malaysia (synthetic)",Active,false
+DEMO_AURORA-257,Aurora Demo Ipoh 257,"Fictional Lot 257, Jalan Demo 17, Ipoh, Perak, Malaysia (synthetic)",Active,false
+DEMO_AURORA-258,Aurora Demo Johor Bahru 258,"Fictional Lot 258, Jalan Demo 18, Johor Bahru, Johor, Malaysia (synthetic)",Active,false
+DEMO_AURORA-259,Aurora Demo Melaka 259,"Fictional Lot 259, Jalan Demo 19, Melaka, Melaka, Malaysia (synthetic)",Active,false
+DEMO_AURORA-260,Aurora Demo Seremban 260,"Fictional Lot 260, Jalan Demo 20, Seremban, Negeri Sembilan, Malaysia (synthetic)",Inactive,false
+DEMO_AURORA-261,Aurora Demo Kuantan 261,"Fictional Lot 261, Jalan Demo 1, Kuantan, Pahang, Malaysia (synthetic)",Active,false
+DEMO_AURORA-262,Aurora Demo Kota Bharu 262,"Fictional Lot 262, Jalan Demo 2, Kota Bharu, Kelantan, Malaysia (synthetic)",Active,false
+DEMO_AURORA-263,Aurora Demo Kuching 263,"Fictional Lot 263, Jalan Demo 3, Kuching, Sarawak, Malaysia (synthetic)",Active,false
+DEMO_AURORA-264,Aurora Demo Kota Kinabalu 264,"Fictional Lot 264, Jalan Demo 4, Kota Kinabalu, Sabah, Malaysia (synthetic)",Active,false
+DEMO_AURORA-265,Aurora Demo Kuala Lumpur 265,"Fictional Lot 265, Jalan Demo 5, Kuala Lumpur, Wilayah Persekutuan, Malaysia (synthetic)",Active,false
+DEMO_AURORA-266,Aurora Demo Petaling Jaya 266,"Fictional Lot 266, Jalan Demo 6, Petaling Jaya, Selangor, Malaysia (synthetic)",Active,false
+DEMO_AURORA-267,Aurora Demo Shah Alam 267,"Fictional Lot 267, Jalan Demo 7, Shah Alam, Selangor, Malaysia (synthetic)",Active,false
+DEMO_AURORA-268,Aurora Demo George Town 268,"Fictional Lot 268, Jalan Demo 8, George Town, Pulau Pinang, Malaysia (synthetic)",Active,false
+DEMO_AURORA-269,Aurora Demo Ipoh 269,"Fictional Lot 269, Jalan Demo 9, Ipoh, Perak, Malaysia (synthetic)",Active,false
+DEMO_AURORA-270,Aurora Demo Johor Bahru 270,"Fictional Lot 270, Jalan Demo 10, Johor Bahru, Johor, Malaysia (synthetic)",Active,false
+DEMO_AURORA-271,Aurora Demo Melaka 271,"Fictional Lot 271, Jalan Demo 11, Melaka, Melaka, Malaysia (synthetic)",Active,false
+DEMO_AURORA-272,Aurora Demo Seremban 272,"Fictional Lot 272, Jalan Demo 12, Seremban, Negeri Sembilan, Malaysia (synthetic)",Active,false
+DEMO_AURORA-273,Aurora Demo Kuantan 273,"Fictional Lot 273, Jalan Demo 13, Kuantan, Pahang, Malaysia (synthetic)",Active,false
+DEMO_AURORA-274,Aurora Demo Kota Bharu 274,"Fictional Lot 274, Jalan Demo 14, Kota Bharu, Kelantan, Malaysia (synthetic)",Active,false
+DEMO_AURORA-275,Aurora Demo Kuching 275,"Fictional Lot 275, Jalan Demo 15, Kuching, Sarawak, Malaysia (synthetic)",Active,true
+DEMO_AURORA-276,Aurora Demo Kota Kinabalu 276,"Fictional Lot 276, Jalan Demo 16, Kota Kinabalu, Sabah, Malaysia (synthetic)",Active,false
+DEMO_AURORA-277,Aurora Demo Kuala Lumpur 277,"Fictional Lot 277, Jalan Demo 17, Kuala Lumpur, Wilayah Persekutuan, Malaysia (synthetic)",Active,false
+DEMO_AURORA-278,Aurora Demo Petaling Jaya 278,"Fictional Lot 278, Jalan Demo 18, Petaling Jaya, Selangor, Malaysia (synthetic)",Active,false
+DEMO_AURORA-279,Aurora Demo Shah Alam 279,"Fictional Lot 279, Jalan Demo 19, Shah Alam, Selangor, Malaysia (synthetic)",Active,false
+DEMO_AURORA-280,Aurora Demo George Town 280,"Fictional Lot 280, Jalan Demo 20, George Town, Pulau Pinang, Malaysia (synthetic)",Inactive,false
+DEMO_AURORA-281,Aurora Demo Ipoh 281,"Fictional Lot 281, Jalan Demo 1, Ipoh, Perak, Malaysia (synthetic)",Active,false
+DEMO_AURORA-282,Aurora Demo Johor Bahru 282,"Fictional Lot 282, Jalan Demo 2, Johor Bahru, Johor, Malaysia (synthetic)",Active,false
+DEMO_AURORA-283,Aurora Demo Melaka 283,"Fictional Lot 283, Jalan Demo 3, Melaka, Melaka, Malaysia (synthetic)",Active,false
+DEMO_AURORA-284,Aurora Demo Seremban 284,"Fictional Lot 284, Jalan Demo 4, Seremban, Negeri Sembilan, Malaysia (synthetic)",Active,false
+DEMO_AURORA-285,Aurora Demo Kuantan 285,"Fictional Lot 285, Jalan Demo 5, Kuantan, Pahang, Malaysia (synthetic)",Active,false
+DEMO_AURORA-286,Aurora Demo Kota Bharu 286,"Fictional Lot 286, Jalan Demo 6, Kota Bharu, Kelantan, Malaysia (synthetic)",Active,false
+DEMO_AURORA-287,Aurora Demo Kuching 287,"Fictional Lot 287, Jalan Demo 7, Kuching, Sarawak, Malaysia (synthetic)",Active,false
+DEMO_AURORA-288,Aurora Demo Kota Kinabalu 288,"Fictional Lot 288, Jalan Demo 8, Kota Kinabalu, Sabah, Malaysia (synthetic)",Active,false
+DEMO_AURORA-289,Aurora Demo Kuala Lumpur 289,"Fictional Lot 289, Jalan Demo 9, Kuala Lumpur, Wilayah Persekutuan, Malaysia (synthetic)",Active,false
+DEMO_AURORA-290,Aurora Demo Petaling Jaya 290,"Fictional Lot 290, Jalan Demo 10, Petaling Jaya, Selangor, Malaysia (synthetic)",Active,false
+DEMO_AURORA-291,Aurora Demo Shah Alam 291,"Fictional Lot 291, Jalan Demo 11, Shah Alam, Selangor, Malaysia (synthetic)",Active,false
+DEMO_AURORA-292,Aurora Demo George Town 292,"Fictional Lot 292, Jalan Demo 12, George Town, Pulau Pinang, Malaysia (synthetic)",Active,false
+DEMO_AURORA-293,Aurora Demo Ipoh 293,"Fictional Lot 293, Jalan Demo 13, Ipoh, Perak, Malaysia (synthetic)",Active,false
+DEMO_AURORA-294,Aurora Demo Johor Bahru 294,"Fictional Lot 294, Jalan Demo 14, Johor Bahru, Johor, Malaysia (synthetic)",Active,false
+DEMO_AURORA-295,Aurora Demo Melaka 295,"Fictional Lot 295, Jalan Demo 15, Melaka, Melaka, Malaysia (synthetic)",Active,false
+DEMO_AURORA-296,Aurora Demo Seremban 296,"Fictional Lot 296, Jalan Demo 16, Seremban, Negeri Sembilan, Malaysia (synthetic)",Active,false
+DEMO_AURORA-297,Aurora Demo Kuantan 297,"Fictional Lot 297, Jalan Demo 17, Kuantan, Pahang, Malaysia (synthetic)",Active,false
+DEMO_AURORA-298,Aurora Demo Kota Bharu 298,"Fictional Lot 298, Jalan Demo 18, Kota Bharu, Kelantan, Malaysia (synthetic)",Active,false
+DEMO_AURORA-299,Aurora Demo Kuching 299,"Fictional Lot 299, Jalan Demo 19, Kuching, Sarawak, Malaysia (synthetic)",Active,false
+DEMO_AURORA-300,Aurora Demo Kota Kinabalu 300,"Fictional Lot 300, Jalan Demo 20, Kota Kinabalu, Sabah, Malaysia (synthetic)",Inactive,true

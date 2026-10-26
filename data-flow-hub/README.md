@@ -154,19 +154,62 @@ Paths and symlinks that resolve outside this boundary are rejected.
 
 Open **http://localhost:5000**.
 
-### Try the Sample Dataset
+### Bulk store import and store management
 
-Upload [`sample_data/retail.csv`](./sample_data/retail.csv) and configure:
+Open **Client**, create or edit a retailer, then use **Store management → Import stores**.
 
-| Setting | Value |
-| :--- | :--- |
-| Numeric fields | `sales, quantity` |
-| Required fields | `store_id, sales` |
-| Date field | `date` |
-| Input date format | `%d/%m/%Y` |
-| Trim whitespace | Enabled |
+1. Save any pending retailer configuration changes.
+2. Download the CSV or Excel template.
+3. Fill in required `store_id` and `store_name` columns. Optional fields are
+   `address`, `status` (Active/Inactive), and `exception` (true/false).
+   Keep identifiers as text in Excel to preserve leading zeroes.
+4. Select **Add new stores only** or **Add new and update matching stores**.
+   Matching is case-insensitive within the selected retailer.
+5. Upload a UTF-8 CSV or unencrypted XLSX, then select **Validate and preview**.
+6. Review every proposed change. Download the error CSV if validation fails.
+   Invalid rows block the whole import; nothing is silently skipped.
+7. Select **Confirm import** to save the entire valid import in one transaction.
 
-Run processing, inspect the reported changes and issues, then download the output and audit evidence.
+Existing internal identities and SUITE store codes are retained on update.
+Stores absent from an update file remain unchanged. Omitted optional columns
+retain their existing values; an explicitly blank address clears it, while blank
+status/exception retains its previous value (or defaults for a new store).
+Previews expire after 30 minutes and must be regenerated after configuration changes.
+Each file supports up to 1,000 stores and 2 MiB; these limits apply per retailer.
+
+The store table supports search by ID, name, internal code or address; Active/Inactive
+filtering; sortable columns; and 25/50/100-row pages. Edit works on the selected
+store's identity, including when viewing later pages or filtered results.
+
+### Four-retailer demo: 300 stores each
+
+The demo contains **four fictional Malaysian retailers with 300 stores each**
+(1,200 total across retailers), not one retailer with 1,200 stores.
+Each has 285 Active and 15 Inactive stores. All names, addresses and contacts
+are synthetic.
+
+See [the demo guide](sample_data/store_import/README.md) for the four separate
+CSV files, exact retailer setup values, expected results, and invalid/update examples.
+
+With PostgreSQL running, inspect the optional loader plan:
+
+```sh
+.venv/bin/python script/load_store_demo.py
+```
+
+Then add the four demo retailers and stores through the same validated import API:
+
+```sh
+.venv/bin/python script/load_store_demo.py --apply
+```
+
+On Windows use `.venv\Scripts\python.exe` in place of `.venv/bin/python`.
+Rerunning a complete, unchanged demo adds no records or configuration versions.
+The loader preserves unrelated retailers and refuses conflicting demo records;
+it does not reset application data. Loading is resumable per retailer rather than
+one transaction across all four retailers.
+
+---
 
 ## 📌 Scope and Limitations
 
