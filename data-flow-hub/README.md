@@ -116,19 +116,30 @@ These are intended benefits of the workflow, rather than measured claims of time
 
 - Python 3.11 or 3.12
 - Node.js 20.19+ or 22.12+
-- Docker with Compose v2 for local PostgreSQL
+- PostgreSQL installed directly on Windows; Docker Compose is an alternative for Linux/cloud development
 - Internet access for the initial dependency installation
 
 Run the following steps from the **DataFlow Hub project folder**.
 
-### Windows
+### Windows — no Docker Desktop required
 
-1. Run `Setup_Windows.bat` to install dependencies and build the frontend.
-2. Run `Start_DataFlow.bat`.
-3. Open **http://localhost:5000** in your browser.
-4. Keep the terminal open while using the application.
+Follow [the complete Windows setup guide](docs/WINDOWS_SETUP.md).
 
-### Linux / macOS
+1. Install PostgreSQL 17 and create a `dataflow` login and database using pgAdmin.
+2. Run `Setup_Windows.bat`. It installs dependencies, checks your connection and
+   builds the frontend. On first setup it asks for the database details and a
+   hidden password, then writes an ignored `.env` file without overwriting
+   existing settings.
+3. Optionally migrate the existing SQLite history before the first app launch.
+4. Load the four-retailer demo with
+   `.venv\Scripts\python.exe script\load_store_demo.py --apply`.
+5. Run `Start_DataFlow.bat` and open **http://localhost:5000**.
+6. Keep the terminal open while using the application.
+
+The Windows launchers connect directly to PostgreSQL. They do not require Docker
+or manage your Windows PostgreSQL service.
+
+### Linux / macOS — Docker Compose option
 
 ```sh
 python3 -m venv .venv
@@ -223,11 +234,15 @@ DataFlow Hub is a **local portfolio application** demonstrating data preparation
 - Audit records provide traceability but are not tamper-proof.
 - Optional AI assistance requires your own API credentials and connectivity.
 
-PostgreSQL runs locally through Docker Compose, bound to `127.0.0.1:55432`.
+On Windows, native PostgreSQL normally uses `127.0.0.1:5432` and stores data in
+the directory chosen during installation. See [the Windows guide](docs/WINDOWS_SETUP.md)
+for connection configuration and native backup instructions.
+
+For the Docker Compose option, PostgreSQL binds to `127.0.0.1:55432`.
 Its data is retained in the `dataflow-postgres` Docker volume. Normal
 `docker compose down` preserves data; `docker compose down -v` deletes it.
 
-`script/dev_database.py` creates a private, ignored `.env` with a random local
+For Docker Compose, `script/dev_database.py` creates a private, ignored `.env` with a random local
 password and `DATABASE_URL`; existing settings are never overwritten. Use
 `.env.example` as a template if configuring PostgreSQL yourself. Keep credentials
 and private operational data out of Git. A new empty database starts with demo

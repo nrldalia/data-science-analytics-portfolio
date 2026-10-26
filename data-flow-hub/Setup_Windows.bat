@@ -4,14 +4,12 @@ where py >nul 2>&1
 if errorlevel 1 goto python_missing
 where npm.cmd >nul 2>&1
 if errorlevel 1 goto node_missing
-where docker >nul 2>&1
-if errorlevel 1 goto docker_missing
 if not exist .venv\Scripts\python.exe py -m venv .venv
+if errorlevel 1 goto failed
+if not exist .venv\Scripts\python.exe goto failed
 .venv\Scripts\python.exe -m pip install -r script\requirements.txt
 if errorlevel 1 goto failed
-.venv\Scripts\python.exe script\dev_database.py
-if errorlevel 1 goto failed
-docker compose up -d --wait
+.venv\Scripts\python.exe script\configure_native_database.py
 if errorlevel 1 goto failed
 call npm.cmd ci
 if errorlevel 1 goto failed
@@ -28,11 +26,7 @@ exit /b 1
 echo Install Node.js 20.19+ or 22.12+ first. Reopen this launcher after installation.
 pause
 exit /b 1
-:docker_missing
-echo Install and start Docker Desktop with Compose v2 first.
-pause
-exit /b 1
 :failed
-echo Setup failed. Review the error above and check your internet connection.
+echo Setup failed. Review the message above and the Windows PostgreSQL instructions in README.md.
 pause
 exit /b 1

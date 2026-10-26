@@ -1,5 +1,7 @@
 # Unreleased
 
+- Support native PostgreSQL on Windows without Docker Desktop; add connection setup and a step-by-step pgAdmin guide.
+
 - Add preview/confirm CSV and XLSX store imports with templates, validation reports, and identity-preserving updates.
 - Add searchable, sortable, filtered, paginated retailer store management.
 - Add four reproducible synthetic retailer datasets with 300 stores each and an opt-in additive demo loader.

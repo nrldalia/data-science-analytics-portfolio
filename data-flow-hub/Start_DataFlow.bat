@@ -5,11 +5,13 @@ if not exist .venv\Scripts\python.exe (
   pause
   exit /b 1
 )
-docker compose up -d --wait
+.venv\Scripts\python.exe script\configure_native_database.py --check
 if errorlevel 1 (
-  echo PostgreSQL did not start. Check Docker Desktop.
+  echo PostgreSQL is not ready. Check its Windows service and README.md.
   pause
   exit /b 1
 )
 .venv\Scripts\python.exe script\app.py
+set "dataflow_exit=%errorlevel%"
 pause
+exit /b %dataflow_exit%

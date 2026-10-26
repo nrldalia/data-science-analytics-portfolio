@@ -45,3 +45,15 @@ migration unit tests intentionally exercise in-memory SQLite fixtures.
 
 Live AI calls, Windows launchers, production deployment and restoration in a newly
 published cloud task were not tested.
+
+## Native Windows database setup
+
+- Seven focused configuration tests pass: credential encoding and dotenv roundtrip,
+  preservation of existing files, no-prompt checking, connection failure without
+  credential disclosure or file creation, validated setup/reuse, local host/port
+  validation, and environment-variable precedence.
+- The connection helper's noninteractive check passed against the running local
+  PostgreSQL server using only SELECT 1. This is protocol-level validation on Linux,
+  not proof that a native Windows PostgreSQL service has been installed or tested.
+- Windows launchers no longer invoke Docker and use the native connection helper.
+  Windows batch execution and the pgAdmin installation steps remain untested here.
