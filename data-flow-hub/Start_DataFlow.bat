@@ -11,7 +11,7 @@ if errorlevel 1 (
   pause
   exit /b 1
 )
-.venv\Scripts\python.exe script\app.py
+.venv\Scripts\python.exe script\app.py --open-browser
 set "dataflow_exit=%errorlevel%"
 pause
 exit /b %dataflow_exit%

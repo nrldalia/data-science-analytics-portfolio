@@ -95,6 +95,8 @@ def public_record(row):
     return {k:row[k] for k in ['id','retailer_id','retailer_name','period','filename','status','start_time']} | {
         'inputFile':metrics.get('inputFile'),'kpi':metrics.get('kpi'),'approvedAt':metrics.get('approvedAt')}
 def register_kpi_routes(app,error):
+    from operational_trends import register_operational_routes
+    register_operational_routes(app,error)
     @app.route('/api/v1/kpi-records')
     def records():
         with get_db_connection() as db:

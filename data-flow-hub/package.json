@@ -12,7 +12,7 @@
     "tailwindcss": "4.1.16",
     "vite": "7.1.12"
   },
-  "version": "1.0.0",
+  "version": "1.0.0-rc.1",
   "scripts": {
     "dev": "vite",
     "build": "vite build --outDir frontend-github/dist",

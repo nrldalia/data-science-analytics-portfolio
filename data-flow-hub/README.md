@@ -2,6 +2,11 @@
 
 ### Turning messy operational data into clear, traceable workflows.
 
+**Current build: 1.0.0-rc.1 — local, single-user release candidate.**
+The recommended go-live is 1.0.0 after the Windows acceptance walkthrough.
+See [the release scope and checklist](docs/RELEASE_1_0.md).
+Core workflow: **Upload → Configure → Process → Review → Export evidence**.
+
 DataFlow Hub is a data processing and quality review application designed to help users prepare operational datasets with greater consistency and visibility.
 
 Built with **Python, Flask, Pandas, PostgreSQL, and React**, it brings file uploads, configurable cleaning rules, quality checks, and processing history into one interface.
@@ -70,11 +75,12 @@ Each saved run also supports an audit ZIP containing:
 - Reported quality issues.
 - Run metadata and a source-file hash.
 
-### Optional AI Assistance
+### Release boundary
 
-With explicit consent, users can share a limited sample with an optional Gemini integration to receive explanations and suggested rules.
-
-AI supports interpretation; it does not automatically modify records. Core processing works independently of AI availability.
+This release focuses on deterministic preparation and human review. AI assistance,
+automatic email, public hosting and multi-user access are deferred. The app works
+without model credentials. Existing optional backend integrations are not part of
+the supported release workflow.
 
 ## 🔄 Workflow
 
@@ -221,6 +227,29 @@ it does not reset application data. Loading is resumable per retailer rather tha
 one transaction across all four retailers.
 
 ---
+
+## Processing reports and weekly operational trends
+
+In **Data Streams**, run preprocessing before starting a job. **Processing details**
+shows observed rule completion, elapsed time, retry lineage, row/store reconciliation,
+findings and a bounded sample of actual before/after changes. Use a review note to
+acknowledge findings; this never fixes records or approves a run automatically.
+A retry uses the retained source and keeps earlier run history.
+
+Download clean **CSV, JSON or Excel** directly from a completed run. Download
+**exceptions CSV** or an **evidence ZIP** containing original bytes, captured
+rules, available output and processing evidence. Failed/cancelled runs expose only
+the evidence actually retained; no successful output is invented.
+
+In **KPI Records**, weekly operational trends are separate from financial KPI
+snapshots. Coverage uses the captured active-store roster and one latest approved
+run per retailer/profile/week. Missing weeks remain gaps, revisions retain their
+source run IDs, and four-week rolling coverage requires complete published weeks.
+On-time coverage is unavailable until deadlines are captured.
+
+Try the [eight-week operational demo](sample_data/processing_demo/README.md),
+then review [the workflow and calculation rules](docs/PRIORITY4_WORKFLOW.md).
+Demo runs are never automatically approved or added to your business history.
 
 ## 📌 Scope and Limitations
 

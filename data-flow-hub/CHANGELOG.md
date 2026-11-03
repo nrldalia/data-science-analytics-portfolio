@@ -1,4 +1,4 @@
-# Unreleased
+# 1.0.0-rc.1 — local single-user release candidate
 
 - Fix demo fingerprint verification for Windows CRLF checkouts while retaining content verification and changed-file protection.
 
@@ -19,3 +19,16 @@
 Restored the original React + Vite + Tailwind / Flask + Pandas / SQLite stack and navigation. Improved the existing code rather than replacing the interface with a different framework. Reworked sample-only AI cleaning into full deterministic processing with optional Gemini assistance. Added explicit cleaning configuration, source-preserving previews, run-specific audits, full exports, saved history, persistent edits, genuine metrics, visible connectivity failures, Excel support and corrected setup instructions.
 
 Future passes can add client column mappings, reusable rule templates and the broader FlowTrade modules after review. No GitHub changes, commits or tags were published by this task.
+
+
+Release completion:
+- Add processing reports, captured before/after events, retained failure evidence,
+  explicit exception acknowledgement, reconciliation and CSV/ZIP exports.
+- Add approved-only weekly operational trends with frozen rosters, revisions,
+  genuine missing-week gaps and documented availability limits.
+- Preserve original sources/history and reject duplicate active retries.
+- Recover interrupted runs only on explicit server startup after acquiring an
+  exclusive server lock; ordinary CLI imports do not cancel active work.
+- Focus navigation on the core workflow and report the real database/version.
+- Preserve Windows-only encryption tests while explicitly testing rejection on
+  unsupported platforms; unencrypted inputs define the supported release path.

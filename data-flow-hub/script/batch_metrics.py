@@ -45,6 +45,7 @@ def received_metrics(metrics, records):
             name = str(row.get(names[0]) or key).strip() if names else key
             received[normalized] = {'key':key, 'name':name}
     registered = {key.casefold() for key in metrics['registeredStoreIds']}
+    metrics['receivedExpectedStoreIds'] = [s['key'] for s in metrics['expectedStores'] if s['key'].casefold() in received]
     metrics['storesReceived'] = len(received)
     metrics['newStores'] = [s for key, s in received.items() if key not in registered]
     metrics['missingStores'] = [s for s in metrics['expectedStores'] if s['key'].casefold() not in received]

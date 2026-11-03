@@ -1,4 +1,4 @@
-import io,json,tempfile,unittest,zipfile
+import io,json,os,tempfile,unittest,zipfile
 from pathlib import Path
 from unittest.mock import patch
 import test_batch_jobs as fixtures
@@ -32,6 +32,7 @@ class InputFileTests(unittest.TestCase):
         self.assertFalse(self.profiles()[1]['sample']['settingsMatch'])
         self.assertEqual(self.client.post(f'/api/v1/retailers/{self.retailer}/preview',json={'pipeline':[self.rule],'inputFileId':a['id']}).status_code,400)
 
+    @unittest.skipUnless(os.name == 'nt', 'Windows DPAPI encryption requires a Windows user context.')
     def test_sheet_secret_is_encrypted_and_not_in_history(self):
         password='PRIVATE-password-for-input'
         p=self.save(self.profile(fileType='Excel (.xlsx)',filename='book.xlsx',headerRow=1),passwordMode='set',password=password)
@@ -48,6 +49,26 @@ class InputFileTests(unittest.TestCase):
         response=self.sample(p,encrypted.getvalue(),'encrypted.xlsx');self.assertEqual(response.status_code,200,response.data)
         self.save(p,passwordMode='clear');self.assertFalse(self.profiles()[0]['hasPassword'])
         self.assertEqual(self.sample(p,encrypted.getvalue(),'encrypted.xlsx').status_code,400)
+
+    @unittest.skipUnless(os.name != 'nt', 'Unsupported-platform rejection applies outside Windows.')
+    def test_sheet_password_rejected_without_persisting_credentials_or_configuration(self):
+        password = 'private-linux-rejection-fixture'
+        before_profiles = self.profiles()
+        before_history = self.client.get(f'/api/v1/retailers/{self.retailer}/configuration-history').get_json()
+        response = self.client.post(
+            f'/api/v1/retailers/{self.retailer}/input-files',
+            json={'profile': self.profile(fileType='Excel (.xlsx)', filename='book.xlsx', headerRow=1),
+                  'passwordMode': 'set', 'password': password})
+        self.assertEqual(response.status_code, 400, response.data)
+        self.assertIn('Windows user encryption', response.get_json()['error'])
+        self.assertNotIn(password, response.get_data(as_text=True))
+        self.assertEqual(self.profiles(), before_profiles)
+        after_history = self.client.get(f'/api/v1/retailers/{self.retailer}/configuration-history').get_json()
+        self.assertEqual(after_history, before_history)
+        self.assertNotIn(password, json.dumps(after_history))
+        with get_db_connection() as db:
+            self.assertEqual(db.execute('SELECT COUNT(*) FROM input_file_secrets WHERE retailer_id=?',
+                                        (self.retailer,)).fetchone()[0], 0)
 
     def test_zip_validation_header_columns_and_json(self):
         p=self.save(self.profile(isZipFolder=True,filename='sales.txt',zipFolderName='sales.zip'))

@@ -41,8 +41,8 @@ class IsoWeekTests(unittest.TestCase):
         response=self.client.post('/api/v1/batches/'+original+'/reprocess',json={'period':'2026-W42'})
         aid=response.get_json()['attemptId']
         second=self.client.post('/api/v1/batches/'+original+'/reprocess',json={'period':'2026-W42'})
-        self.assertEqual(second.status_code,202)
-        self.finish(second.get_json()['attemptId'])
+        self.assertEqual(second.status_code,409)
+        self.assertEqual([r['id'] for r in self.client.get('/api/v1/batches').get_json()['active']],[aid])
         self.client.post('/api/v1/batches/'+aid+'/cancel')
-        self.assertEqual(len(self.jobs()),4)
+        self.assertEqual(len(self.jobs()),3)
         self.assertTrue({original,target}.issubset({j['id'] for j in self.jobs()}))

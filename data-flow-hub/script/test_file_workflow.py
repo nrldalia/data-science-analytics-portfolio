@@ -1,4 +1,4 @@
-import io,json,tempfile,unittest,zipfile
+import io,json,os,tempfile,unittest,zipfile
 from pathlib import Path
 from unittest.mock import patch
 import test_batch_jobs as fixtures
@@ -54,6 +54,7 @@ class WorkflowTests(unittest.TestCase):
             r=self.client.post(f'/api/v1/retailers/{self.retailer}/input-files',json={'profile':{**p,**override}});self.assertEqual(r.status_code,400)
         r=self.client.post(f'/api/v1/retailers/{self.retailer}/input-files',json={'profile':{**p,'headerRow':'','maxColumns':'','readMode':''}});self.assertEqual(r.status_code,200)
         self.assertEqual(r.get_json()['inputFile']['headerRow'],1);self.assertEqual(r.get_json()['inputFile']['maxColumns'],100)
+    @unittest.skipUnless(os.name == 'nt', 'Windows DPAPI encryption requires a Windows user context.')
     def test_password_yes_requires_secret_and_no_hides_and_clears(self):
         p=self.profile('book.xlsx',fileType='Excel (.xlsx)')
         base=f'/api/v1/retailers/{self.retailer}/input-files'
@@ -61,6 +62,33 @@ class WorkflowTests(unittest.TestCase):
         self.assertEqual(self.client.post(base,json={'profile':{**p,'hasSheetPassword':True},'passwordMode':'set','password':'private-test'}).status_code,200)
         self.assertEqual(self.client.post(base,json={'profile':{**p,'hasSheetPassword':False}}).status_code,200)
         with get_db_connection() as db:self.assertIsNone(db.execute('SELECT 1 FROM input_file_secrets WHERE retailer_id=?',(self.retailer,)).fetchone())
+    def test_password_yes_requires_existing_or_supplied_secret(self):
+        p = self.profile('book.xlsx', fileType='Excel (.xlsx)')
+        base = f'/api/v1/retailers/{self.retailer}/input-files'
+        response = self.client.post(base, json={'profile': {**p, 'hasSheetPassword': True}})
+        self.assertEqual(response.status_code, 400, response.data)
+        self.assertIn('Enter a password', response.get_json()['error'])
+        with get_db_connection() as db:
+            self.assertEqual(db.execute('SELECT COUNT(*) FROM input_file_secrets WHERE retailer_id=?',
+                                        (self.retailer,)).fetchone()[0], 0)
+
+    @unittest.skipUnless(os.name != 'nt', 'Unsupported-platform rejection applies outside Windows.')
+    def test_password_yes_rejected_and_no_remains_usable_without_encryption(self):
+        p = self.profile('book.xlsx', fileType='Excel (.xlsx)')
+        base = f'/api/v1/retailers/{self.retailer}/input-files'
+        denied = self.client.post(base, json={'profile': {**p, 'hasSheetPassword': True},
+                                            'passwordMode': 'set', 'password': 'private-test'})
+        self.assertEqual(denied.status_code, 400, denied.data)
+        self.assertIn('Windows user encryption', denied.get_json()['error'])
+        saved = self.client.post(base, json={'profile': {**p, 'hasSheetPassword': False}})
+        self.assertEqual(saved.status_code, 200, saved.data)
+        self.assertFalse(saved.get_json()['inputFile']['hasSheetPassword'])
+        reread = self.client.get(base).get_json()['inputFiles']
+        self.assertFalse(next(row for row in reread if row['id'] == p['id'])['hasPassword'])
+        with get_db_connection() as db:
+            self.assertEqual(db.execute('SELECT COUNT(*) FROM input_file_secrets WHERE retailer_id=?',
+                                        (self.retailer,)).fetchone()[0], 0)
+
     def test_sample_walkthrough_scoped_rules_link_layout_mapping_and_analytics(self):
         a=self.profile();b=self.profile('product.csv',purpose='Master Product')
         self.sample(a,b'sku,sales,store,qty\n x ,10,A,2\n');self.sample(b,b'sku,name\nx,apple\n')

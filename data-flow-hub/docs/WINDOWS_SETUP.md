@@ -155,3 +155,22 @@ mkdir backups
 The tool prompts for the application password. Keep backups private; the
 `backups/` directory is excluded from Git. Restore into an empty destination
 database using `pg_restore`, then verify records before switching the app.
+
+
+## If no Windows PostgreSQL service is registered
+
+Some installations have an initialized database but no registered service.
+For the PostgreSQL 18 installation used during troubleshooting, open PowerShell:
+
+    & "C:\Program Files\PostgreSQL\18\bin\pg_ctl.exe" status -D "C:\Program Files\PostgreSQL\18\data"
+
+If it reports no server running, start the existing database:
+
+    & "C:\Program Files\PostgreSQL\18\bin\pg_ctl.exe" start -D "C:\Program Files\PostgreSQL\18\data" -l "$env:TEMP\dataflow-postgres-start.log"
+
+Use your actual installation version/data directory. Do not run initdb, delete
+the data directory or change permissions to troubleshoot an existing database.
+If startup fails, inspect that log and preserve the error. Starting a server
+this way does not register an automatic Windows service, so repeat after reboot
+unless a service is separately configured. Start DataFlow Hub only once PostgreSQL
+accepts the existing dataflow login.

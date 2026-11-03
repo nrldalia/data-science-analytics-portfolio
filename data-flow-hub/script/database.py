@@ -175,3 +175,20 @@ def seed_db():
 if __name__ == "__main__":
     init_db()
     seed_db()
+
+def acquire_server_lock():
+    """Hold one PostgreSQL server session per database/schema, released on close."""
+    db = get_db_connection()
+    try:
+        if not is_postgres(db):
+            raise RuntimeError("The local release server requires PostgreSQL. SQLite remains available for legacy tests and migration.")
+        acquired = db.execute(
+            "SELECT pg_try_advisory_lock(hashtextextended('dataflow-server:' || current_database() || ':' || current_schema(),0))"
+        ).fetchone()[0]
+        if not acquired:
+            raise RuntimeError("DataFlow Hub is already running for this database. Reuse that instance or stop it before starting another.")
+        db.commit()
+        return db
+    except Exception:
+        db.close()
+        raise

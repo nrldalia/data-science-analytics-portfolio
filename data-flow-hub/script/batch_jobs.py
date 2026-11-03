@@ -8,6 +8,7 @@ from preprocessing import register_preprocessing_routes, preprocessing_report, p
 from store_review import register_store_review_routes
 from configuration_history import record_version, version_summary
 import io
+import hashlib
 import json
 import multiprocessing
 import threading
@@ -20,6 +21,7 @@ from database import get_db_connection, begin_write, column_names, IntegrityErro
 from retailer_setup import apply_pipeline, validate_pipeline, validate_retailer, assign_store_codes
 from batch_history import migrate_run_history
 from batch_metrics import input_metrics, received_metrics, public_metrics, previous_period
+from processing_review import register_processing_routes, capture_step, capture_audit, finalize_operational, report_for
 
 FINDING_CODES={'numeric':'RULE_NUMERIC_INVALID','date':'RULE_DATE_INVALID','required':'VALIDATION_REQUIRED',
                'range':'VALIDATION_RANGE','pattern':'VALIDATION_PATTERN','unique':'VALIDATION_DUPLICATE'}
@@ -37,7 +39,10 @@ def decode(value, default): return json.loads(value) if value else default
 def execute_step(records, rule, queue):
     try:
         output, steps, issues, trace = apply_pipeline(records, [rule])
-        queue.put({'output':output, 'issueCount':len(issues), 'changedCells':len(trace)})
+        queue.put({'output':output, 'issueCount':len(issues), 'changedCells':len(trace),
+                   'issues':issues[:5000], 'issueRows':sorted({i['row'] for i in issues}),
+                   'findingsTruncated':len(issues)>5000,
+                   'trace':trace[:5000], 'traceTruncated':len(trace)>5000})
     except (ValueError, TypeError, KeyError) as exc:
         message=str(exc)
         code='RULE_FIELD_MISSING' if 'does not exist' in message else 'RULE_TARGET_EXISTS' if 'already exists' in message else 'RULE_CONFIG_INVALID'
@@ -84,6 +89,7 @@ def register_batch_routes(app, parse_upload, error):
     with get_db_connection() as db:
         migrate_run_history(db)
         db.execute('CREATE TABLE IF NOT EXISTS batch_input_records(id TEXT PRIMARY KEY,records TEXT NOT NULL)')
+    register_processing_routes(app,error)
 
     def finalize(aid, status, output=None, audit=None, codes=None):
         with get_db_connection() as db:
@@ -99,7 +105,13 @@ def register_batch_routes(app, parse_upload, error):
                 metrics['cancellationDetails']={'reason':CANCELLATION_REASONS[stop_code],'errorCode':stop_code,
                     'sequence':progress.get('sequence'),'ruleName':progress.get('ruleName'),
                     'attempt':progress.get('attempt')}
+            finished=now()
+            finalize_operational(metrics,status,attempt['start_time'],finished,output if not cancelled else None)
             saved_metrics=json.dumps(metrics)
+            if audit is not None:
+                # Persist final mapping/KPI events too; cancelled legacy audit
+                # visibility must not erase the private execution evidence.
+                capture_audit(db,aid,audit)
             db.execute('INSERT INTO batch_jobs VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',
                 (aid,attempt['retailer_id'],attempt['retailer_name'],attempt['period'],attempt['start_time'],ended,status,
                  attempt['filename'],attempt['source'],attempt['pipeline'],None if cancelled else json.dumps(output),
@@ -157,6 +169,11 @@ def register_batch_routes(app, parse_upload, error):
         metrics=decode(attempt['metrics'],{})
         received_metrics(metrics,records)
         pipeline=decode(attempt['pipeline'],[])
+        quality_rows=set()
+        quality_known=not any(r.get('operation')=='join' or r.get('inputFileId') or r.get('stage')=='Layout' for r in pipeline)
+        metrics['qualityRowsChecked']=len(records) if quality_known else None
+        metrics['qualityIssueRows']=0 if quality_known else None
+        metrics['ruleRetryCount']=0
         # Cleaning count is the output at the last Cleaning step, before later transformations.
         metrics['rowsAfterCleaning']=len(records) if not any(r['category']=='Cleaning' for r in pipeline) else None
         with get_db_connection() as db:db.execute('UPDATE batch_attempts SET metrics=? WHERE id=?',(json.dumps(metrics),aid))
@@ -190,6 +207,22 @@ def register_batch_routes(app, parse_upload, error):
                 if time.time()>=attempt['deadline']:
                     finalize(aid,'Cancelled Job',codes=['JOB_TIMEOUT']);return
                 findings=result.get('issueCount',0)
+                if retry>1:metrics['ruleRetryCount']+=1
+                if quality_known and findings:
+                    row_indices=result.get('issueRows')
+                    if row_indices is None and 'issues' in result:
+                        row_indices=[item.get('row') for item in result['issues']]
+                    if row_indices is None or any(not isinstance(n,int) or isinstance(n,bool) or n<1 for n in row_indices):
+                        quality_known=False
+                    else:quality_rows.update(row_indices)
+                metrics['qualityRowsChecked']=metrics.get('rowsReceived') if quality_known else None
+                metrics['qualityIssueRows']=len(quality_rows) if quality_known else None
+                with get_db_connection() as db:
+                    begin_write(db)
+                    if not db.execute('SELECT id FROM batch_attempts WHERE id=?',(aid,)).fetchone():return
+                    capture_step(db,aid,result,rule,sequence,retry)
+                    db.execute('UPDATE batch_attempts SET metrics=? WHERE id=?',(json.dumps(metrics),aid))
+
                 failed=bool(result.get('errorCode')) or findings>0
                 code=result.get('errorCode') or (FINDING_CODES.get(rule['operation'],'RULE_VALIDATION_FAILED') if findings else None)
                 reason=result.get('message') or (f"{findings} {FINDING_REASONS.get(rule['operation'],'data validation findings')} in field {rule.get('field','(unspecified)')}." if findings else 'Rule executed successfully.')
@@ -198,6 +231,7 @@ def register_batch_routes(app, parse_upload, error):
                               'executionCode':'908' if failed else '909',
                               'errorCode':code,'message':reason,
                               'issueCount':findings,'changedCells':result.get('changedCells',0)})
+                with get_db_connection() as db:capture_audit(db,aid,audit)
                 if failed:
                     detail={'sequence':sequence,'ruleId':rule['id'],'ruleName':rule.get('name',rule['operation']),
                         'category':rule['category'],'field':rule.get('field',''),'attempt':retry,'maxAttempts':3,
@@ -247,7 +281,7 @@ def register_batch_routes(app, parse_upload, error):
         if time.time()>=attempt['deadline']:finalize(aid,'Cancelled Job',codes=['JOB_TIMEOUT']);return
         finalize(aid,'Completed with Interruption' if interrupted else 'Completed',records,audit,codes)
 
-    def launch(retailer_id,period,filename,source,store_field='',expected_hash=None,input_file_id=None):
+    def launch(retailer_id,period,filename,source,store_field='',expected_hash=None,input_file_id=None,reprocess_of=None):
         try:
             year,week=period.split('-W');datetime.fromisocalendar(int(year),int(week),1)
             if period!=f'{int(year):04d}-W{int(week):02d}':raise ValueError()
@@ -274,6 +308,8 @@ def register_batch_routes(app, parse_upload, error):
             if not retailer:return error('Retailer not found.',404)
             if archive_state(db,retailer_id)['archived']:return error('Archived retailers cannot start or reprocess jobs. Restore the retailer first.',409)
             config=json.loads(retailer['payload']);pipeline=config.get('pipeline',[])
+            if reprocess_of and db.execute('SELECT id FROM batch_attempts WHERE retailer_id=? AND period=? LIMIT 1',(retailer_id,period)).fetchone():
+                return error('Wait for or cancel the current run for this retailer and week before retrying.',409)
             if state is not None and config!=captured:return error('Setup changed while reading linked files. Check again.',409)
             if profile is not None and next((p for p in config.get('inputFiles',[]) if p['id']==input_file_id),None)!=profile:return error('Input settings changed. Check the input again.',409)
             report=check_configuration(config,checked_records,period,filename,source,store_field)
@@ -292,6 +328,21 @@ def register_batch_routes(app, parse_upload, error):
             metrics['preprocessing']={k:report[k] for k in ['checkedAt','configurationHash','fileSha256','warnings']}
             metrics['configurationVersion']=version_summary(record_version(db,retailer_id,config,'Configuration captured at launch'))
             aid='BATCH-'+uuid.uuid4().hex[:12]
+            metrics['processingReportVersion']=1
+            metrics['sourceSha256']=hashlib.sha256(source).hexdigest()
+            metrics['receivedAt']=now()
+            metrics['lineage']={'rootJobId':aid,'reprocessOf':None,'attemptNumber':1}
+            if reprocess_of:
+                parent=db.execute('SELECT * FROM batch_jobs WHERE id=? AND retailer_id=?',(reprocess_of,retailer_id)).fetchone()
+                if not parent:return error('Original run is unavailable for reprocessing.',409)
+                parent_lineage=decode(parent['metrics'],{}).get('lineage',{})
+                root=parent_lineage.get('rootJobId') or parent['id']
+                numbers=[parent_lineage.get('attemptNumber',1)]
+                for table in ('batch_jobs','batch_attempts'):
+                    for related in db.execute(f'SELECT metrics FROM {table} WHERE retailer_id=?',(retailer_id,)):
+                        lineage=decode(related['metrics'],{}).get('lineage',{})
+                        if lineage.get('rootJobId')==root:numbers.append(lineage.get('attemptNumber',1))
+                metrics['lineage']={'rootJobId':root,'reprocessOf':parent['id'],'attemptNumber':max(numbers)+1}
             deadline=time.time()+float(app.config.get('BATCH_TIMEOUT_SECONDS',300))
             try:
                 db.execute('INSERT INTO batch_attempts VALUES(?,?,?,?,?,?,?,?,?,?,?)',(aid,retailer_id,config['name'],period,now(),filename,source,json.dumps(pipeline),deadline,'{}',json.dumps(metrics)))
@@ -356,7 +407,7 @@ def register_batch_routes(app, parse_upload, error):
         if body is None:body={}
         if not isinstance(body,dict):return error('Invalid reprocessing request.')
         if decode(job['metrics'],{}).get('historyRecoveryNote'):return error('Original input was not retained for this recovered run. Upload the file as a new batch.')
-        return launch(job['retailer_id'],body.get('period',job['period']),job['filename'],job['source'],decode(job['metrics'],{}).get('storeIdField',''),body.get('expectedConfigurationHash'),decode(job['metrics'],{}).get('inputFile',{}).get('id'))
+        return launch(job['retailer_id'],body.get('period',job['period']),job['filename'],job['source'],decode(job['metrics'],{}).get('storeIdField',''),body.get('expectedConfigurationHash'),decode(job['metrics'],{}).get('inputFile',{}).get('id'),job['id'])
 
     @app.route('/api/v1/batches/<jid>/approve',methods=['POST'])
     def approve(jid):
@@ -365,6 +416,7 @@ def register_batch_routes(app, parse_upload, error):
             if not job:return error('Job not found.',404)
             if db.execute('SELECT id FROM batch_attempts WHERE retailer_id=? AND period=?',(job['retailer_id'],job['period'])).fetchone():return error('Wait for or cancel the reprocessing attempt before approving.',409)
             if job['status'] not in ['Completed','Completed with Interruption']:return error('Only completed jobs can be approved.',409)
+            if archive_state(db,job['retailer_id'])['archived']:return error('Restore this retailer before approving its jobs.',409)
             metrics=decode(job['metrics'],{})
             if metrics.get('kpi',{}).get('flagged') and not metrics['kpi'].get('review'):return error('Record a manual KPI check before approving this job.',409)
             entries=decode(job['audit'],[])
@@ -382,15 +434,32 @@ def register_batch_routes(app, parse_upload, error):
             if not job:return error('Job not found.',404)
             if db.execute('SELECT id FROM batch_attempts WHERE retailer_id=? AND period=?',(job['retailer_id'],job['period'])).fetchone():return error('Cancel the active reprocessing attempt using its Cancel Job button.',409)
             metrics=decode(job['metrics'],{})
-            metrics['cancellationDetails']={'reason':CANCELLATION_REASONS['JOB_CANCELLED_BY_USER'],'errorCode':'JOB_CANCELLED_BY_USER'}
+            cancelled_at=now()
+            metrics['cancellationDetails']={'reason':CANCELLATION_REASONS['JOB_CANCELLED_BY_USER'],'errorCode':'JOB_CANCELLED_BY_USER','cancelledAt':cancelled_at}
+            if job['audit']:
+                retained=decode(job['audit'],[])
+                retained.append({'sequence':None,'ruleName':'Job cancellation','category':'Action','attempt':1,
+                    'startTime':cancelled_at,'endTime':cancelled_at,'durationMs':0,
+                    'result':'Cancelled','errorCode':'JOB_CANCELLED_BY_USER',
+                    'message':'Cancelled by operator action; prior execution and approval evidence retained.'})
+                capture_audit(db,jid,retained)
             db.execute('UPDATE batch_jobs SET metrics=? WHERE id=?',(json.dumps(metrics),jid))
             db.execute('UPDATE batch_jobs SET status=?,end_time=NULL,audit=NULL,output=NULL,error_codes=? WHERE id=?',('Cancelled Job',json.dumps(['JOB_CANCELLED_BY_USER']),jid))
         return jsonify(success=True)
 
-    # Spawned rule processes import the main module on Windows; recovery runs only in the server.
-    if multiprocessing.current_process().name=='MainProcess':
-        with get_db_connection() as db:stale=[r['id'] for r in db.execute('SELECT id FROM batch_attempts')]
-        for aid in stale:finalize(aid,'Cancelled Job',codes=['JOB_SERVER_RESTARTED'])
+    # Importing the application from a CLI or spawned worker must never cancel
+    # another process's active jobs. The actual single-user server invokes this
+    # only after acquiring its exclusive server-session lock.
+    def recover():
+        with get_db_connection() as db:
+            stale=[r['id'] for r in db.execute('SELECT id FROM batch_attempts')]
+        recovered=0
+        for aid in stale:
+            if finalize(aid,'Cancelled Job',codes=['JOB_SERVER_RESTARTED']):
+                recovered+=1
+        return recovered
+
+    app.extensions['batch_recover']=recover
     app.extensions['batch_launch']=launch
     app.extensions['batch_run']=run
     app.extensions['batch_finalize']=finalize

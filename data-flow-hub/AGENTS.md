@@ -45,5 +45,10 @@ Each agent reports:
 - Any decision or action needed from another agent or the Product Owner.
 
 ## Development context
-The app uses React/Vite, Flask, and local PostgreSQL. Read `README.md` and `VALIDATION.md` for setup and existing limitations. Priorities discussed include bulk store import, templates, searchable store management, synthetic demo data, cross-platform password storage, and optional AI assistance. These are a backlog, not features already completed.
-
+The app uses React/Vite, Flask and local PostgreSQL. The current release candidate
+is scoped in docs/RELEASE_1_0.md: a local single-user upload/configure/process/
+review/export workflow. Read README.md and VALIDATION.md for current capabilities
+and actual checks. Preserve original data and existing history. Do not expand
+the release into AI, public hosting, multi-user access or broader analytics
+without a new user request. Historical backlog discussions are not evidence
+that a feature remains unfinished or belongs in the release.

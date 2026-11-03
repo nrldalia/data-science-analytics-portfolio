@@ -4,7 +4,8 @@ from datetime import datetime, timezone
 import pandas as pd
 from flask import Flask, request, jsonify, send_file, send_from_directory
 from flask_cors import CORS
-from database import get_db_connection, init_db, seed_db
+from database import get_db_connection, init_db, seed_db, acquire_server_lock
+from release_version import VERSION, DEPLOYMENT
 
 app=Flask(__name__,static_folder="../frontend-github/dist/assets",static_url_path="/assets")
 app.json.sort_keys=False
@@ -21,7 +22,14 @@ def too_large(e): return error('File exceeds the 50 MB upload limit.',413)
 @app.route('/')
 def homepage(): return send_from_directory(os.path.join(os.path.dirname(__file__),'..','frontend-github','dist'),'index.html')
 @app.route('/api/v1/health')
-def health(): return jsonify(success=True,aiConfigured=bool(os.getenv('GEMINI_API_KEY')),version='1.14.A2')
+def health():
+ try:
+  with get_db_connection() as connection:
+   connection.execute('SELECT 1')
+   engine=connection.dialect
+  return jsonify(success=True,version=VERSION,database=engine,deployment=DEPLOYMENT,aiConfigured=bool(os.getenv('GEMINI_API_KEY')))
+ except Exception:
+  return jsonify(success=False,error='Database connection unavailable.',version=VERSION,deployment=DEPLOYMENT),503
 @app.route('/api/v1/stores')
 def get_stores():
  with get_db_connection() as c:
@@ -184,7 +192,7 @@ def print_log(rid):
  run,rows=cleaning_log(rid)
  if run is None: return error('Run not found.',404)
  body=''.join('<tr>'+''.join('<td>'+escape(str(r[k]))+'</td>' for k in ['row','field','status','before','after','action'])+'</tr>' for r in rows)
- return '<!doctype html><html><head><title>Cleaning log</title><style>body{font:12px Arial}table{border-collapse:collapse;width:100%}td,th{border:1px solid #aaa;padding:6px;overflow-wrap:anywhere}thead{display:table-header-group}@media print{button{display:none}}</style></head><body><button onclick="window.print()">Print / Save as PDF</button><h1>DataFlow V1.14.A2 cleaning log</h1><p>'+escape(run['filename'])+' | '+escape(rid)+' | '+str(len(rows))+' entries</p><table><thead><tr><th>Row</th><th>Field</th><th>Status</th><th>Before</th><th>After</th><th>Action / detection</th></tr></thead><tbody>'+body+'</tbody></table></body></html>'
+ return '<!doctype html><html><head><title>Cleaning log</title><style>body{font:12px Arial}table{border-collapse:collapse;width:100%}td,th{border:1px solid #aaa;padding:6px;overflow-wrap:anywhere}thead{display:table-header-group}@media print{button{display:none}}</style></head><body><button onclick="window.print()">Print / Save as PDF</button><h1>DataFlow cleaning log</h1><p>'+escape(run['filename'])+' | '+escape(rid)+' | '+str(len(rows))+' entries</p><table><thead><tr><th>Row</th><th>Field</th><th>Status</th><th>Before</th><th>After</th><th>Action / detection</th></tr></thead><tbody>'+body+'</tbody></table></body></html>'
 
 from retailer_setup import register_retailer_routes
 register_retailer_routes(app, parse_upload, error)
@@ -195,14 +203,33 @@ register_input_routes(app,error)
 
 if __name__=='__main__':
  import sys
+ from werkzeug.serving import make_server
  port=int(os.getenv('DATAFLOW_PORT','5000'))
- if '--open-browser' in sys.argv:
-  import threading, time, urllib.request, webbrowser
-  def open_when_ready():
-   for _ in range(60):
-    try:
-     urllib.request.urlopen(f'http://127.0.0.1:{port}/api/v1/health',timeout=1).close()
-     webbrowser.open(f'http://127.0.0.1:{port}');return
-    except Exception: time.sleep(1)
-  threading.Thread(target=open_when_ready,daemon=True).start()
- app.run(host='127.0.0.1',port=port,debug=False)
+ # Bind first, so an occupied port cannot trigger recovery of another server's jobs.
+ server=make_server('127.0.0.1',port,app,threaded=True)
+ server_lock=None
+ try:
+  server_lock=acquire_server_lock()
+  recovered=app.extensions['batch_recover']()
+  if recovered: print(f'Recovered {recovered} interrupted run(s); original input and history were retained.')
+  print(f'DataFlow Hub {VERSION} — local single-user release',flush=True)
+  print(f'Running on http://127.0.0.1:{port}',flush=True)
+  print('Keep this window open. Press Ctrl+C to stop.',flush=True)
+  if '--open-browser' in sys.argv:
+   import threading, time, urllib.request, webbrowser
+   def open_when_ready():
+    for _ in range(60):
+     try:
+      urllib.request.urlopen(f'http://127.0.0.1:{port}/api/v1/health',timeout=1).close()
+      webbrowser.open(f'http://127.0.0.1:{port}');return
+     except Exception: time.sleep(1)
+   threading.Thread(target=open_when_ready,daemon=True).start()
+  server.serve_forever()
+ except KeyboardInterrupt:
+  pass
+ except RuntimeError as exc:
+  print(str(exc),file=sys.stderr)
+  sys.exit(1)
+ finally:
+  server.server_close()
+  if server_lock is not None:server_lock.close()
