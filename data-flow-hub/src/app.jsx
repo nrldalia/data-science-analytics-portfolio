@@ -1,3 +1,4 @@
+import RunWorkspace, { API } from './RunWorkspace';
 import { applyTheme, preferredTheme } from './theme.js';
 import KPIRecords from './KPIRecords';
 import BatchLogs from './BatchLogs';
@@ -9,7 +10,6 @@ import {
   Mail, Edit2, ShieldAlert, Cpu, Check, FileText, Sun, Moon
 } from 'lucide-react';
 
-const API = import.meta.env.VITE_API_URL || '/api/v1';
 export default function App() {
   const [theme, setTheme] = useState(preferredTheme);
   const chooseTheme = value => { applyTheme(value, true); setTheme(value); };
@@ -20,6 +20,7 @@ export default function App() {
   const [selectedFile, setSelectedFile] = useState(null);
   const [runs, setRuns] = useState([]);
   const [trim, setTrim] = useState(true);
+  const [flagDuplicates, setFlagDuplicates] = useState(true);
   const [numericFields, setNumericFields] = useState('');
   const [dateFields, setDateFields] = useState('');
   const [dateFormat, setDateFormat] = useState('%d/%m/%Y');
@@ -76,44 +77,49 @@ export default function App() {
     const file = e.target.files[0]; if (!file) return;
     setBatchFile(file); setActiveTab('Data Streams'); e.target.value='';
   };
+  const openRunUpload = event => {
+    const file = event.target.files[0];
+    if (!file) return;
+    setSelectedFile(file);
+    setCleanResult(null);
+    setConnectionError('');
+    setIsModalOpen(true);
+    event.target.value = '';
+  };
   const runCleaning = async () => {
     if (!selectedFile) return;
     setLoading(true); setCleanResult(null); setAssistance(null); setConnectionError('');
     const formData = new FormData(); formData.append('file',selectedFile);
-    formData.append('rules',JSON.stringify({trim,numericFields:splitFields(numericFields),dateFields:splitFields(dateFields),dateFormat,requiredFields:splitFields(requiredFields),flagDuplicates:true}));
+    formData.append('rules',JSON.stringify({trim,numericFields:splitFields(numericFields),dateFields:splitFields(dateFields),dateFormat,requiredFields:splitFields(requiredFields),flagDuplicates}));
     try {
       const res=await fetch(`${API}/upload-and-clean`,{method:'POST',body:formData}); const data=await res.json();
       if(!res.ok || !data.success) throw new Error(data.error || 'Processing failed.');
-      setCleanResult(data); refreshRuns(); fetchStores();
+      setCleanResult(data); setSelectedFile(null); refreshRuns(); fetchStores();
     } catch(e) {setConnectionError(e.message || 'Cannot reach the backend.');} finally {setLoading(false);}
   };
 
-  const handleExport = async () => {
+  const handleExport = async (format) => {
     if (!cleanResult?.cleanedSample) return;
 
-    try {
-      const res = await fetch(`${API}/export`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          runId: cleanResult.runId,
-          fileType: cleanResult.fileType || 'csv'
-        })
-      });
+    const res = await fetch(`${API}/export`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        runId: cleanResult.runId,
+        fileType: format
+      })
+    });
 
-      if (!res.ok) { const data = await res.json(); throw new Error(data.error || "Export failed"); }
-      const blob = await res.blob();
-      const url = window.URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = `cleaned_dataset.${cleanResult.fileType || 'csv'}`;
-      document.body.appendChild(a);
-      a.click();
-      a.remove();
-      window.URL.revokeObjectURL(url);
-    } catch (err) {
-      alert("Export failed: " + err.message);
-    }
+    if (!res.ok) { const data = await res.json(); throw new Error(data.error || "Export failed"); }
+    const blob = await res.blob();
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `${cleanResult.runId}_cleaned.${format}`;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    window.URL.revokeObjectURL(url);
   };
 
   // Edit Store Handlers
@@ -194,7 +200,7 @@ export default function App() {
       <main className="flex-1 flex flex-col overflow-y-auto">
         <header className="h-16 border-b border-slate-800 flex items-center justify-between px-8 bg-[var(--app-background)] shrink-0">
           <h1 className="text-xl font-bold text-slate-100">DataFlow Hub — Data Operations Suite</h1>
-          <div className="flex items-center gap-3 shrink-0"><div className="theme-switch" role="group" aria-label="Colour theme"><button type="button" aria-pressed={theme==='light'} onClick={()=>chooseTheme('light')}><Sun size={14} aria-hidden="true"/>Light</button><button type="button" aria-pressed={theme==='dark'} onClick={()=>chooseTheme('dark')}><Moon size={14} aria-hidden="true"/>Dark</button></div><span className="text-xs bg-slate-900 text-cyan-400 px-2.5 py-1 rounded-full border border-slate-700">V1.14.A2</span></div>
+          <div className="flex items-center gap-3 shrink-0"><div className="theme-switch" role="group" aria-label="Colour theme"><button type="button" aria-pressed={theme==='light'} onClick={()=>chooseTheme('light')}><Sun size={14} aria-hidden="true"/>Light</button><button type="button" aria-pressed={theme==='dark'} onClick={()=>chooseTheme('dark')}><Moon size={14} aria-hidden="true"/>Dark</button></div><span className="text-xs bg-slate-900 text-cyan-400 px-2.5 py-1 rounded-full border border-slate-700">V2.0</span></div>
         </header>
 
         <div className="p-8 space-y-6 flex-1">
@@ -209,7 +215,13 @@ export default function App() {
           {/* TAB 3: QUALITY ANALYTICS MODULE */}
           {activeTab === 'Quality Analytics' && (
             <div className="space-y-6">
-              <h2 className="text-2xl font-bold tracking-tight">Data Quality & Validation Rules</h2>
+              <div className="flex flex-wrap items-center justify-between gap-3">
+                <h2 className="text-2xl font-bold tracking-tight">Data Quality & Validation Rules</h2>
+                <label className="flex items-center gap-2 rounded-md border border-slate-600 px-3 py-2 text-sm">
+                  Process a dataset
+                  <input type="file" accept=".csv,.json,.xlsx" onChange={openRunUpload} />
+                </label>
+              </div>
               <div className="bg-[var(--panel-background)] rounded-xl p-5 space-y-3"><h3 className="font-bold">Measured processing results</h3>
                 <p className="text-xs text-slate-400">Issue rows count distinct records failing the configured checks. These checks do not certify business accuracy.</p>
                 {runs.length === 0 && <p className="text-sm">Process a file to view quality results.</p>}
@@ -351,7 +363,7 @@ export default function App() {
             <div className="flex items-center justify-between p-4 border-b border-slate-700">
               <h3 className="font-bold text-slate-100 flex items-center gap-2">
                 <RefreshCw className={`w-4 h-4 text-cyan-400 ${loading ? 'animate-spin' : ''}`} />
-                Data Cleansing Configuration & Trace Preview
+                Data Cleansing & Run Workspace
               </h3>
               <button onClick={() => setIsModalOpen(false)} className="text-slate-400 hover:text-slate-200">
                 <X className="w-5 h-5" />
@@ -362,7 +374,8 @@ export default function App() {
               {connectionError && <p role="alert" className="text-rose-300 text-sm">{connectionError}</p>}
               {selectedFile && !loading && <div className="space-y-3 text-sm">
                 <p className="text-cyan-300">Selected: {selectedFile.name}. Configure rules, then run processing.</p>
-                <label className="flex gap-2"><input type="checkbox" checked={trim} onChange={e => setTrim(e.target.checked)} /> Trim whitespace · duplicates are flagged and retained</label>
+                <label className="flex gap-2"><input type="checkbox" checked={trim} onChange={e => setTrim(e.target.checked)} /> Trim whitespace</label>
+                <label className="flex gap-2"><input type="checkbox" checked={flagDuplicates} onChange={e => setFlagDuplicates(e.target.checked)} /> Flag duplicate rows</label>
                 <div className="grid grid-cols-2 gap-3">
                   <label>Numeric fields (comma-separated)<input className="block w-full bg-slate-950 p-2 rounded" value={numericFields} onChange={e => setNumericFields(e.target.value)} placeholder="sales, quantity" /></label>
                   <label>Required fields<input className="block w-full bg-slate-950 p-2 rounded" value={requiredFields} onChange={e => setRequiredFields(e.target.value)} placeholder="store_id, sku" /></label>
@@ -370,42 +383,28 @@ export default function App() {
                   <label>Input date format<input className="block w-full bg-slate-950 p-2 rounded" value={dateFormat} onChange={e => setDateFormat(e.target.value)} /></label>
                 </div><p className="text-xs text-slate-400">Use exact source headers. Invalid values are retained and flagged; missing business values are never invented.</p>
               </div>}
-              {cleanResult && <div className="space-y-3 text-sm">
-                <p>{cleanResult.totalRows} input rows · {cleanResult.outputRows} output rows · {cleanResult.changedCells} changed cells · {cleanResult.issueRows} rows require review</p>
-                <a className="text-cyan-300 underline" href={`${API}/runs/${cleanResult.runId}/audit`}>Download original file, rules and audit evidence</a>
-
-              </div>}
               {loading ? (
                 <div className="py-12 flex flex-col items-center justify-center space-y-3">
                   <RefreshCw className="w-8 h-8 text-cyan-400 animate-spin" />
                   <p className="text-sm text-slate-400">Processing every row and saving transformation evidence...</p>
                 </div>
               ) : cleanResult ? (
-                <>
+                <RunWorkspace key={cleanResult.runId} run={cleanResult} onExport={handleExport} quality={<>
                   <CleaningLog result={cleanResult} />
                   <DataPreview title="Original data (up to 25 rows)" rows={cleanResult.rawSample} />
                   <DataPreview title="Cleaned data (up to 25 rows)" rows={cleanResult.cleanedSample} />
-                </>
+                </>} />
               ) : null}
             </div>
 
             <div className="p-4 border-t border-slate-700 bg-slate-900/50 flex items-center justify-between">
               <div className="flex items-center gap-2">
                 <span className="text-xs text-slate-400">Processing actions:</span>
-                <button onClick={runCleaning} disabled={!selectedFile || loading} className="disabled:opacity-40 bg-cyan-600 hover:bg-cyan-500 text-slate-950 text-xs font-semibold px-3 py-1.5 rounded-md flex items-center gap-1.5">
+                <button onClick={runCleaning} disabled={!selectedFile || loading || !!cleanResult} className="disabled:opacity-40 bg-cyan-600 hover:bg-cyan-500 text-slate-950 text-xs font-semibold px-3 py-1.5 rounded-md flex items-center gap-1.5">
                   <Play className="w-3.5 h-3.5" /> Run Full-Dataset Cleaning
                 </button>
               </div>
 
-              {cleanResult && (
-                <button 
-                  onClick={handleExport}
-                  className="bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-xs px-4 py-2 rounded-md flex items-center gap-2 transition-colors"
-                >
-                  <Download className="w-4 h-4" />
-                  Export Cleaned Dataset (.{cleanResult.fileType?.toUpperCase() || 'CSV'})
-                </button>
-              )}
             </div>
 
           </div>
