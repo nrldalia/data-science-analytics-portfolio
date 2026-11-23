@@ -7,7 +7,8 @@ from database import get_db_connection
 from input_file_io import validate_profiles,read_records,parse_hash,protect_password,reveal_password,LIMIT
 from retailer_archive import archive_state
 SAMPLE_LIMIT=1000000
-CODEx_ROOT=next(p for p in Path(__file__).resolve().parents if p.name.lower()=='codex')
+APP_ROOT=Path(__file__).resolve().parents[1]
+CODEx_ROOT=next((p for p in APP_ROOT.parents if p.name.lower()=='codex'), APP_ROOT)
 def now():return datetime.now(timezone.utc).isoformat()
 def current_week():
     d=datetime.now(timezone(timedelta(hours=8))).isocalendar();return f'{d.year:04d}-W{d.week:02d}'
@@ -30,7 +31,7 @@ def scoped_files(profile):
     if not profile['filePath'].strip():raise ValueError('Save a file path before reading it.')
     path=Path(profile['filePath']).resolve()
     root=CODEx_ROOT.resolve()
-    if not path.is_relative_to(root):raise ValueError('File path must stay inside the Codex folder.')
+    if not path.is_relative_to(root):raise ValueError('File path must stay inside the configured workspace folder.')
     pattern=profile.get('zipFolderName') if profile['isZipFolder'] and profile.get('settingsVersion')==2 else profile['filename']
     if path.is_file():
         if not fnmatch.fnmatch(path.name,pattern):raise ValueError('File path name does not match Filename.')

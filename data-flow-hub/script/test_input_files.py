@@ -1,4 +1,4 @@
-import io,json,tempfile,unittest,zipfile
+import io,json,os,tempfile,unittest,zipfile
 from pathlib import Path
 from unittest.mock import patch
 import test_batch_jobs as fixtures
@@ -32,6 +32,7 @@ class InputFileTests(unittest.TestCase):
         self.assertFalse(self.profiles()[1]['sample']['settingsMatch'])
         self.assertEqual(self.client.post(f'/api/v1/retailers/{self.retailer}/preview',json={'pipeline':[self.rule],'inputFileId':a['id']}).status_code,400)
 
+    @unittest.skipUnless(os.name == "nt", "Requires Windows user encryption")
     def test_sheet_secret_is_encrypted_and_not_in_history(self):
         password='PRIVATE-password-for-input'
         p=self.save(self.profile(fileType='Excel (.xlsx)',filename='book.xlsx',headerRow=1),passwordMode='set',password=password)
@@ -81,7 +82,7 @@ class InputFileTests(unittest.TestCase):
         self.finish(retry.get_json()['attemptId']);self.assertEqual(len(self.jobs()),2)
 
     def test_path_manual_and_watcher_stability_dedup_and_archive(self):
-        with tempfile.TemporaryDirectory() as td:
+        with tempfile.TemporaryDirectory(dir=CODEx_ROOT) as td:
             path=Path(td)/'sales.txt';path.write_bytes(b'note\nsku|name\nx|y\n')
             p=self.save(self.profile(filePath=str(path.parent),readMode='Automatic'))
             poll=fixtures.app.app.extensions['input_poll_once']
@@ -103,7 +104,7 @@ class InputFileTests(unittest.TestCase):
     def test_path_scope_and_bad_settings(self):
         from input_files import scoped_files
         p=self.profile(id='INPUT-probe',filePath=str(CODEx_ROOT.parent/'outside-inputs'))
-        with self.assertRaisesRegex(ValueError,'inside the Codex'):scoped_files(p)
+        with self.assertRaisesRegex(ValueError,'inside the configured workspace'):scoped_files(p)
         for key,value in [('maxColumns',0),('headerRow',0),('encoding','bad-codec')]:
             response=self.client.post(f'/api/v1/retailers/{self.retailer}/input-files',json={'profile':self.profile(**{key:value})});self.assertEqual(response.status_code,400)
         p=self.save(self.profile());self.sample(p)

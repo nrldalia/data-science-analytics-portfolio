@@ -1,4 +1,4 @@
-# DataFlow Hub
+# DataFlow Hub 2.0
 
 ### Turning messy operational data into clear, traceable workflows.
 
@@ -78,13 +78,48 @@ AI supports interpretation; it does not automatically modify records. Core proce
 
 ## 🔄 Workflow
 
-**Upload → Configure Rules → Process → Review → Export**
+**Upload → Configure Rules → Process → Review → Explore → Export**
 
-1. **Upload** a supported dataset.
+1. In **Quality Analytics**, select **Process a dataset** and choose a CSV, JSON, or Excel file up to 50 MB.
 2. **Configure** the fields and preparation rules.
 3. **Process** the full dataset.
 4. **Review** previews, changes, and unresolved issues.
-5. **Export** the processed data and supporting evidence.
+5. **Explore** the same run in Guided Explorer, SQL Studio, or Insights.
+6. **Export** processed data and audit evidence. Select any saved run in Quality Analytics to reopen its workspace.
+
+### Run workspace
+
+| View | Use it to |
+| :--- | :--- |
+| Quality Review | Compare original and processed previews, inspect the cleaning log, and mark issues open, reviewed, or resolved. Review statuses record decisions without editing the snapshot. |
+| Guided Explorer | Apply column filters with AND or OR, inspect flagged or missing-required rows, and run saved reports. The SQL preview shows placeholders and bound values. |
+| SQL Studio | Insert table and column names from the schema sidebar, query or join processed runs, and run SQL with Ctrl/Command + Enter. Save a query as a guided report and export results as CSV or JSON. |
+| Insights | Review completeness, invalid values, duplicates, and resolution coverage. Compare against the immediately preceding run, inspect column profiles and group summaries, and open affected rows from recommended actions. |
+| Audit & Export | Download complete CSV, JSON, or XLSX output, or a ZIP with source, processed rows, rules, transformations, issues, review statuses, metadata, and the source hash. |
+
+The **Data Streams** workspace continues to handle retailer batch jobs and its existing review and approval workflow.
+
+### Architecture and API
+
+Flask runs the cleaning rules and commits the processing record, audit evidence, and queryable SQLite snapshot in one transaction. Previously saved single-file runs are materialized from their stored processed rows when the workspace needs them. The API exposes the canonical names of the snapshot and columns, including disambiguated names when source headers collide. The reserved columns `__dataflow_row`, `__dataflow_flagged` and `__dataflow_missing_required` record row numbers and issue flags.
+
+SQL Studio and saved reports execute against a read-only SQLite connection with an authorizer restricted to processed run tables and supported functions. Queries accept a single SELECT or WITH statement, have a 3-second execution budget, and preview up to 1,000 rows or 4 MiB. Guided Explorer binds filter values as parameters. SQLite records execution mode, statement, returned row count, and elapsed time in `query_logs`. Saved reports reference their original run and SQL statement.
+
+| Method and path | Description |
+| :--- | :--- |
+| `POST /api/process` | Multipart upload with `file` and optional JSON `rules` |
+| `GET /api/runs/<run_id>/schema` | Active run table and available join schemas |
+| `POST /api/runs/<run_id>/query` | Run a read-only statement in `{"sql":"…"}` |
+| `POST /api/runs/<run_id>/filter` | Apply `filters`, `logic`, an optional `preset`, and `limit` |
+| `GET, POST /api/saved-queries` | List or save reusable reports |
+| `POST, DELETE /api/saved-queries/<id>` | Run or remove a saved report |
+| `GET /api/runs/<run_id>/insights` | Processing health, profiles, segments, and recommendations |
+| `GET /api/runs/<run_id>/issue-reviews` | Read current issue-review statuses |
+| `PUT /api/runs/<run_id>/issues/<index>` | Record a review status by zero-based issue index |
+
+The existing `/api/v1` upload, history, export, and audit routes remain available. Set `DATAFLOW_DB` to use a separate SQLite file. Configured file reads and monitoring stay inside the enclosing Codex folder when present, or the DataFlow Hub folder in a standard GitHub checkout.
+
+To enable the optional Insights narrative, set `DATAFLOW_AI_ENABLED=true` and `GEMINI_API_KEY`. The request runs only when a user selects the Gemini button or explicitly adds `?narrative=true` to the Insights request. It sends aggregate metrics and keeps deterministic results available independently.
 
 ## 📊 Intended Outcomes
 
@@ -141,7 +176,15 @@ Open **http://localhost:5000**.
 
 ### Try the Sample Dataset
 
-Upload [`sample_data/retail.csv`](./sample_data/retail.csv) and configure:
+Save the following as `retail.csv`, upload it in **Quality Analytics**, and configure the rules below.
+
+```csv
+store_id,sales,quantity,date
+KL01,120.5,3,30/10/2026
+KL02,bad,2,31/10/2026
+KL03,,1,01/11/2026
+KL03,,1,01/11/2026
+```
 
 | Setting | Value |
 | :--- | :--- |
@@ -152,6 +195,15 @@ Upload [`sample_data/retail.csv`](./sample_data/retail.csv) and configure:
 | Trim whitespace | Enabled |
 
 Run processing, inspect the reported changes and issues, then download the output and audit evidence.
+
+### Run the backend tests
+
+After building the frontend, install pytest in the same Python environment and run the API and workspace regression tests.
+
+```sh
+python -m pip install pytest
+python -m pytest -q script/test_app.py script/test_run_workspace.py
+```
 
 ## 📌 Scope and Limitations
 

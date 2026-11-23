@@ -5,13 +5,18 @@ import pandas as pd
 from flask import Flask, request, jsonify, send_file, send_from_directory
 from flask_cors import CORS
 from database import get_db_connection, init_db, seed_db
+from run_workspace import SCHEMA, persist_run, workspace
+import run_insights  # Registers the insights endpoint on the workspace blueprint.
 
 app=Flask(__name__,static_folder="../frontend-github/dist/assets",static_url_path="/assets")
 app.json.sort_keys=False
-app.config['MAX_CONTENT_LENGTH']=50*1024*1024
+MAX_UPLOAD_BYTES = 50*1024*1024
+app.config['MAX_CONTENT_LENGTH']=MAX_UPLOAD_BYTES + 1024*1024
 CORS(app,origins=['http://localhost:5173','http://127.0.0.1:5173'])
 init_db();seed_db()
+app.register_blueprint(workspace)
 with get_db_connection() as c:
+ c.executescript(SCHEMA)
  c.execute('CREATE TABLE IF NOT EXISTS run_evidence(run_id TEXT PRIMARY KEY,payload_id INTEGER,source BLOB,trace TEXT)')
  c.execute('CREATE TABLE IF NOT EXISTS processing_runs(id TEXT PRIMARY KEY,created_at TEXT,filename TEXT,file_type TEXT,input_rows INTEGER,result TEXT,source_hash TEXT,rules TEXT,output TEXT,raw_preview TEXT,issues TEXT)')
 
@@ -21,7 +26,7 @@ def too_large(e): return error('File exceeds the 50 MB upload limit.',413)
 @app.route('/')
 def homepage(): return send_from_directory(os.path.join(os.path.dirname(__file__),'..','frontend-github','dist'),'index.html')
 @app.route('/api/v1/health')
-def health(): return jsonify(success=True,aiConfigured=bool(os.getenv('GEMINI_API_KEY')),version='1.14.A2')
+def health(): return jsonify(success=True,aiConfigured=bool(os.getenv('GEMINI_API_KEY')),version='2.0')
 @app.route('/api/v1/stores')
 def get_stores():
  with get_db_connection() as c:
@@ -42,7 +47,8 @@ def update_store(store_id):
  return jsonify(success=True)
 
 def parse_upload(file):
- name=file.filename.lower(); content=file.read()
+ name=file.filename.lower(); content=file.read(MAX_UPLOAD_BYTES+1)
+ if len(content)>MAX_UPLOAD_BYTES: raise ValueError('File exceeds the 50 MB upload limit.')
  if name.endswith('.csv'):
   df=pd.read_csv(io.BytesIO(content),dtype=str,keep_default_na=False); records=df.to_dict('records'); kind='csv'
  elif name.endswith('.xlsx'):
@@ -90,6 +96,7 @@ def clean(records,rules):
   for rows in seen.values():
    if len(rows)>1: issues.extend({'row':i,'field':'record','issue':'Duplicate record; retained'} for i in rows)
  return out,trace,issues
+@app.route('/api/process',methods=['POST'])
 @app.route('/api/v1/upload-and-clean',methods=['POST'])
 def upload_and_clean():
  file=request.files.get('file')
@@ -105,6 +112,7 @@ def upload_and_clean():
    for t in trace: c.execute('INSERT INTO transformation_traces(payload_id,step_number,field_name,action_taken,cleaned_json_payload) VALUES(?,?,?,?,?)',(payload_id,t['step'],t['field'],json.dumps(t),None))
    c.execute('INSERT INTO run_evidence VALUES(?,?,?,?)',(rid,payload_id,content,json.dumps(trace)))
    c.execute('INSERT INTO processing_runs VALUES(?,?,?,?,?,?,?,?,?,?,?)',(rid,created,file.filename,kind,len(records),'Completed',hashlib.sha256(content).hexdigest(),json.dumps(rules),json.dumps(output),json.dumps(records[:25]),json.dumps(issues)))
+   persist_run(c,rid,output,issues,rules)
   return jsonify(success=True,runId=rid,filename=file.filename,fileType=kind,totalRows=len(records),outputRows=len(output),rawSample=records[:25],cleanedSample=output[:25],transformationTrace=trace,issues=issues,changedCells=len(trace),issueRows=len({i['row'] for i in issues}))
  except (ValueError,UnicodeDecodeError,TypeError) as e: return error(str(e))
  except Exception: app.logger.exception('Upload processing failed'); return error('Processing failed. Check the backend terminal for details.',500)
@@ -130,11 +138,13 @@ def audit_export(rid):
  with get_db_connection() as c:
   r=c.execute('SELECT * FROM processing_runs WHERE id=?',(rid,)).fetchone()
   e=c.execute('SELECT source,trace FROM run_evidence WHERE run_id=?',(rid,)).fetchone()
+  reviews=dict(c.execute('SELECT issue_index,status FROM run_issue_reviews WHERE run_id=?',(rid,)))
  if not r or not e: return error('Run not found.',404)
  b=io.BytesIO()
  with zipfile.ZipFile(b,'w',zipfile.ZIP_DEFLATED) as z:
   z.writestr('original.'+r['file_type'],e['source'])
   z.writestr('cleaned.json',r['output']);z.writestr('changes.json',e['trace']);z.writestr('issues.json',r['issues']);z.writestr('rules.json',r['rules'])
+  z.writestr('issue_reviews.json',json.dumps(reviews))
   z.writestr('metadata.json',json.dumps({k:r[k] for k in ['id','created_at','filename','input_rows','source_hash']},indent=2))
  b.seek(0);return send_file(b,mimetype='application/zip',as_attachment=True,download_name=rid+'_audit.zip')
 @app.route('/api/v1/export',methods=['POST'])

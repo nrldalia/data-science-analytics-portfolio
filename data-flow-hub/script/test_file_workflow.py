@@ -1,4 +1,4 @@
-import io,json,tempfile,unittest,zipfile
+import io,json,os,tempfile,unittest,zipfile
 from pathlib import Path
 from unittest.mock import patch
 import test_batch_jobs as fixtures
@@ -44,7 +44,7 @@ class WorkflowTests(unittest.TestCase):
         source=io.BytesIO()
         with zipfile.ZipFile(source,'w') as z:z.writestr('nested/sales.csv','sku,sales\nx,10\n');z.writestr('nested/other.csv','other\ny\n')
         self.assertEqual(read_records(source.getvalue(),'delivery.zip',p)[0]['sales'],'10')
-        with tempfile.TemporaryDirectory(dir=Path(__file__).resolve().parents[3]/'work/tmp') as folder:
+        with tempfile.TemporaryDirectory(dir=CODEx_ROOT) as folder:
             path=Path(folder)/'delivery.zip';path.write_bytes(source.getvalue())
             self.assertEqual(scoped_files({**p,'filePath':folder}),[path.resolve()])
         with self.assertRaisesRegex(ValueError,'exactly one'):read_records(source.getvalue(),'delivery.zip',{**p,'filename':'missing.csv'})
@@ -54,6 +54,7 @@ class WorkflowTests(unittest.TestCase):
             r=self.client.post(f'/api/v1/retailers/{self.retailer}/input-files',json={'profile':{**p,**override}});self.assertEqual(r.status_code,400)
         r=self.client.post(f'/api/v1/retailers/{self.retailer}/input-files',json={'profile':{**p,'headerRow':'','maxColumns':'','readMode':''}});self.assertEqual(r.status_code,200)
         self.assertEqual(r.get_json()['inputFile']['headerRow'],1);self.assertEqual(r.get_json()['inputFile']['maxColumns'],100)
+    @unittest.skipUnless(os.name == "nt", "Requires Windows user encryption")
     def test_password_yes_requires_secret_and_no_hides_and_clears(self):
         p=self.profile('book.xlsx',fileType='Excel (.xlsx)')
         base=f'/api/v1/retailers/{self.retailer}/input-files'
@@ -84,7 +85,7 @@ class WorkflowTests(unittest.TestCase):
         for extra in [{'columnMapping':[{'source':'sku','name':'X'},{'source':'sales','name':'X'}]},{'columnMapping':[{'source':'sku','name':'Code'}],'analyticsColumns':['sales']},{'analyticsColumns':['sku','sku']}]:
             with self.assertRaises(ValueError):validate_output({**self.config,**extra})
     def test_linked_batch_captures_companion_before_path_changes(self):
-        with tempfile.TemporaryDirectory(dir=Path(__file__).resolve().parents[3]/'work/tmp') as folder:
+        with tempfile.TemporaryDirectory(dir=CODEx_ROOT) as folder:
             companion=Path(folder)/'product.csv';companion.write_text('sku,name\nx,apple\n')
             a=self.profile();b=self.profile('product.csv',purpose='Master Product',filePath=str(companion))
             pipeline=[self.link(a['id'],b['id']),{'id':'upper','name':'Upper product','description':'Normalise.','operation':'uppercase','category':'Cleaning','field':'name','stage':'Layout'}]
@@ -109,7 +110,7 @@ class WorkflowTests(unittest.TestCase):
         pipeline=[self.link('a','b','Inner'),{'id':'upper','name':'Upper','description':'Names','operation':'uppercase','category':'Cleaning','field':'name','stage':'Layout'}]
         output,preview=walkthrough(state,{'inputFiles':[{'id':'a'},{'id':'b'}],'primaryInputId':'a','pipeline':pipeline});self.assertEqual(output,[]);self.assertEqual(preview['totalRows'],0)
     def test_validation_failure_after_link_is_logged_after_three_attempts(self):
-        with tempfile.TemporaryDirectory(dir=Path(__file__).resolve().parents[3]/'work/tmp') as folder:
+        with tempfile.TemporaryDirectory(dir=CODEx_ROOT) as folder:
             companion=Path(folder)/'product.csv';companion.write_text('sku,name\nx,\n')
             a=self.profile();b=self.profile('product.csv',purpose='Master Product',filePath=str(companion))
             self.configure([a,b],[self.link(a['id'],b['id']),{'id':'required','name':'Required product name','description':'Require name','operation':'required','category':'Validation','field':'name','stage':'Layout'}])
